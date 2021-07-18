@@ -4,13 +4,27 @@
   
     
     <entry>
-      <title>Ranking</title>
+      <title>pat-Ranking</title>
       <link href="/2021/07/18/Ranking/"/>
       <url>/2021/07/18/Ranking/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>排名问题（同分数排名处理）</p><span id="more"></span><details>  <summary>问题描述</summary>  Content</details>]]></content>
       
       
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> PAT甲级 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -21,7 +35,7 @@
       <link href="/2021/07/18/demo/"/>
       <url>/2021/07/18/demo/</url>
       
-        <content type="html"><![CDATA[<p>测试一下咯</p><span id="more"></span><h3 id="你好呀"><a href="#你好呀" class="headerlink" title="你好呀"></a>你好呀</h3><h4 id="helloworld1"><a href="#helloworld1" class="headerlink" title="helloworld1"></a>helloworld1</h4><pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;bits&#x2F;stdc++.h&gt;int main()&#123;    cout&lt;&lt;&quot;hello world&quot;;&#125;</code></pre><p>over</p>]]></content>
+        <content type="html"><![CDATA[<p>测试一下咯</p><span id="more"></span><h3 id="你好呀"><a href="#你好呀" class="headerlink" title="你好呀"></a>你好呀</h3><h4 id="helloworld1"><a href="#helloworld1" class="headerlink" title="helloworld1"></a>helloworld1</h4><pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;bits&#x2F;stdc++.h&gt;int main()&#123;    cout&lt;&lt;&quot;hello world&quot;;&#125;</code></pre><details>  <summary>Summary</summary> <div class="warning"><blockquote><p>Warning</p></blockquote></div></details>> Primary<div class="success"><blockquote><p>Success</p></blockquote></div><div class="warning"><blockquote><p>Warning</p></blockquote></div><div class="danger"><blockquote><p>Danger</p></blockquote></div><div class="info"><blockquote><p>Info</p></blockquote></div>]]></content>
       
       
       <categories>
