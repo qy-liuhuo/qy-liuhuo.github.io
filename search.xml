@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>灰色理论</title>
+      <link href="/2021/08/06/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/"/>
+      <url>/2021/08/06/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/</url>
+      
+        <content type="html"><![CDATA[<p>灰色预测模型是通过少量的、不完全的信息，建立数学模型做出预测的一种预测方法。其基于客观事物的过去和现在的发展规律，借助于科学的方法对未来的发展趋势和状况进行描述和分析，并形成科学的假设和判断。</p><p>优势为：</p><ul><li>所需建模信息少</li><li>运算方便</li><li>建模精度高</li><li>可以客服传统回归分析等方法存在的需求数据量大，计算量大，可能出现反常情况等的弊端。<span id="more"></span></li></ul><h2 id="常用预测模型"><a href="#常用预测模型" class="headerlink" title="常用预测模型"></a>常用预测模型</h2><ul><li>微分方程</li><li>差分方程</li><li>马尔科夫预测方程</li><li>灰色预测法</li><li>时间序列</li><li>插值拟合</li><li>神经元拟合</li></ul><blockquote><p>warning<br>没有万能的方法，需要根据实际场景选用合适的模型！！</p></blockquote><h2 id="什么是灰色系统"><a href="#什么是灰色系统" class="headerlink" title="什么是灰色系统"></a>什么是灰色系统</h2><p>灰色是指，我们的数据并不是完全确定的，既含有已知信息又含有未知信息的系统称为灰色系统。</p><h3 id="白色系统"><a href="#白色系统" class="headerlink" title="白色系统"></a>白色系统</h3><blockquote><p>系统内部特征完全已知，即系统的信息是完全充分的</p></blockquote><h3 id="黑色系统"><a href="#黑色系统" class="headerlink" title="黑色系统"></a>黑色系统</h3><blockquote><p>内部特征完全未知，只可以通过与外界的联系来加一观测研究</p></blockquote><h3 id="灰色系统"><a href="#灰色系统" class="headerlink" title="灰色系统"></a>灰色系统</h3><blockquote><p>部分信息已知，对一定范围内变化的与时间有关的灰色过程进行预测</p></blockquote><h2 id="灰色预测模型适用场景"><a href="#灰色预测模型适用场景" class="headerlink" title="灰色预测模型适用场景"></a>灰色预测模型适用场景</h2><p>比如：根据前几天的降雨量，预测明天的降雨量；根据近几年河水污染程度，预测未来污染走势。</p><p>应用范畴：</p><ul><li>灰色关联分析</li><li>灰色预测：人口预测，灾难预测等</li><li>灰色决策</li><li>灰色预测控制</li></ul><h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>鉴别系统因素之间发展趋势的相异程度，进行关联分析，找出规律，生成有较强规律性的数据序列，然后建立相应的微分方程模型，从而预测事物未来发展趋势的状况</p><p>利用等时距观测到的反应预测对象特征的一系列数量值构造模型</p><h2 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h2><ul><li>灰色时间序列预测</li><li>畸变预测（通过已有异常值出现时间预测未来异常值出现的时间）</li><li>系统预测</li><li>拓扑预测（将原始数据做成曲线，在曲线上按照定值寻找该定值发生的所有时间点，构成点时序列，然后预测未来该定值发生时间）</li></ul><h2 id="灰色关联度与优势分析"><a href="#灰色关联度与优势分析" class="headerlink" title="灰色关联度与优势分析"></a>灰色关联度与优势分析</h2><blockquote><p>需要分析哪些因素是对系统来说是主要的，哪些是次要的，哪些是需要抑制的。<br>关注点应该在于，因素间的关联性，关联程度和如何量化。</p></blockquote><h2 id="灰色关联度"><a href="#灰色关联度" class="headerlink" title="灰色关联度"></a>灰色关联度</h2><blockquote><p>可以选最优有点类似层次分析法</p></blockquote><ul><li>选取参考数列</li><li>m个比较数列</li><li>算出m个关联度</li></ul><h2 id="灰色生成数列"><a href="#灰色生成数列" class="headerlink" title="灰色生成数列"></a>灰色生成数列</h2><blockquote><p>目的：弱化数据的随机性<br>方法：</p><ul><li>累加法 -》能使任意非负数列转化为非减递增的。</li><li>累减法 -》具有求导性质</li><li>加权邻值生成</li></ul></blockquote><h2 id="灰色模型-G-M（1-1）"><a href="#灰色模型-G-M（1-1）" class="headerlink" title="灰色模型 G M（1,1）"></a>灰色模型 G M（1,1）</h2><blockquote><p>G表示灰色 M表示模型</p></blockquote><h3 id="建模步骤"><a href="#建模步骤" class="headerlink" title="建模步骤"></a>建模步骤</h3><ol><li>数据检验和处理（<code>级比检验</code>）<blockquote><p>目的为保证建模方法的可行性<br>如果所有的前一个数除下一个数都落在一个区间内即可进行灰色预测。<br>如果不可以的话可以尝试对数据进行平移变换（一般为统一加上一个数）再进行检验<br>如果还是不行，马上改用其他方法模型。</p></blockquote></li><li>建立GM模型</li><li>利用最小二乘法求解a,b</li><li>建立微分方程</li><li>累减法获得预测值</li><li>检验！！<ol><li>残差检验</li><li>级比偏差值检验</li></ol></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学建模 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>插值拟合算法</title>
       <link href="/2021/08/03/%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/"/>
       <url>/2021/08/03/%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/</url>
