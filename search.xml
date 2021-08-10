@@ -134,15 +134,15 @@
             
             <tag> 前端 </tag>
             
-            <tag> HTML </tag>
-            
-            <tag> CSS </tag>
-            
-            <tag> JS </tag>
-            
             <tag> 后端 </tag>
             
             <tag> PHP </tag>
+            
+            <tag> JS </tag>
+            
+            <tag> HTML </tag>
+            
+            <tag> CSS </tag>
             
             <tag> MySQL </tag>
             
@@ -200,11 +200,11 @@
             
             <tag> 前端 </tag>
             
+            <tag> JS </tag>
+            
             <tag> HTML </tag>
             
             <tag> CSS </tag>
-            
-            <tag> JS </tag>
             
         </tags>
       
@@ -241,37 +241,6 @@
     
     <entry>
       <title>ESP32使用VLGL(arduino)</title>
-      <link href="/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/"/>
-      <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/</url>
-      
-        <content type="html"><![CDATA[<p>LVGL 为免费开源的图形库，用于在嵌入式设备的屏幕上创建 GUI，也适用于触摸屏</p><span id="more"></span><p>元件：</p><ul><li>ESP32</li><li>TFT 屏幕<br>软件：</li><li>Arduino<br>准备工作：</li><li>库<ul><li><a href="https://github.com/Bodmer/TFT_eSPI">TFT_eSPI</a></li><li><a href="https://github.com/Bodmer/TFT_Touch">TFT_Touch</a>(如果有触摸需求的话)</li><li><a href="https://github.com/lvgl/lv_arduino">lv_arduino</a></li></ul></li><li>将库引入 Arduino 的 Library 文化夹中去<br>更改配置文件：<blockquote><p>由于默认使用了 User_setup.h 配置文件所以需要根据自己的硬件环境进行更改方法为：<br>在 User_Setup_select.h 文件中将 User_setup.h 头文件注释掉再根据自己的开发版和屏幕型号选择对应的头文件取消注释，然后道相应的头文件里面配置引脚和屏幕大小即可。<br>可以使用库中的 examples 测试。<br>参考：<a href="https://blog.csdn.net/qq_41868901/article/details/107998469">https://blog.csdn.net/qq_41868901/article/details/107998469</a></p></blockquote></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 硬件开发 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 硬件开发 </tag>
-            
-            <tag> Arduino </tag>
-            
-            <tag> ESP32 </tag>
-            
-            <tag> VLGL图形库 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>ESP32使用VLGL(arduino)</title>
       <link href="/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/"/>
       <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/</url>
       
@@ -294,6 +263,37 @@
             <tag> ESP32 </tag>
             
             <tag> MPU6050 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ESP32使用VLGL(arduino)</title>
+      <link href="/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/"/>
+      <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/</url>
+      
+        <content type="html"><![CDATA[<p>LVGL 为免费开源的图形库，用于在嵌入式设备的屏幕上创建 GUI，也适用于触摸屏</p><span id="more"></span><p>元件：</p><ul><li>ESP32</li><li>TFT 屏幕<br>软件：</li><li>Arduino<br>准备工作：</li><li>库<ul><li><a href="https://github.com/Bodmer/TFT_eSPI">TFT_eSPI</a></li><li><a href="https://github.com/Bodmer/TFT_Touch">TFT_Touch</a>(如果有触摸需求的话)</li><li><a href="https://github.com/lvgl/lv_arduino">lv_arduino</a></li></ul></li><li>将库引入 Arduino 的 Library 文化夹中去<br>更改配置文件：<blockquote><p>由于默认使用了 User_setup.h 配置文件所以需要根据自己的硬件环境进行更改方法为：<br>在 User_Setup_select.h 文件中将 User_setup.h 头文件注释掉再根据自己的开发版和屏幕型号选择对应的头文件取消注释，然后道相应的头文件里面配置引脚和屏幕大小即可。<br>可以使用库中的 examples 测试。<br>参考：<a href="https://blog.csdn.net/qq_41868901/article/details/107998469">https://blog.csdn.net/qq_41868901/article/details/107998469</a></p></blockquote></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 硬件开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 硬件开发 </tag>
+            
+            <tag> Arduino </tag>
+            
+            <tag> ESP32 </tag>
+            
+            <tag> VLGL图形库 </tag>
             
         </tags>
       
