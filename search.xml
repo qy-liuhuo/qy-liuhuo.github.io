@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>回归分析</title>
+      <link href="/2021/08/11/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/"/>
+      <url>/2021/08/11/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<p>主要包括一元线性回归和多元线性回归，目的在于对拟合方程的效果进行分析</p><span id="more"></span><h2 id="一元线性回归"><a href="#一元线性回归" class="headerlink" title="一元线性回归"></a>一元线性回归</h2><h3 id="使用最小二乘法确定回归系数"><a href="#使用最小二乘法确定回归系数" class="headerlink" title="使用最小二乘法确定回归系数"></a>使用最小二乘法确定回归系数</h3><h3 id="用样本值对回归系数进行点估计"><a href="#用样本值对回归系数进行点估计" class="headerlink" title="用样本值对回归系数进行点估计"></a>用样本值对回归系数进行点估计</h3><h3 id="对回归系数做假设检验"><a href="#对回归系数做假设检验" class="headerlink" title="对回归系数做假设检验"></a>对回归系数做假设检验</h3><ul><li>F检验</li><li>t检验</li><li>r检验</li></ul><h3 id="在-x-x-0-处对y做预测，并进行区间估计"><a href="#在-x-x-0-处对y做预测，并进行区间估计" class="headerlink" title="在$x=x_0$处对y做预测，并进行区间估计"></a>在$x=x_0$处对y做预测，并进行区间估计</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学建模 </tag>
+            
+            <tag> 数据分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>灰色理论</title>
       <link href="/2021/08/06/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/"/>
       <url>/2021/08/06/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/</url>
