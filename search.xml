@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数学建模论文写作</title>
+      <link href="/2021/08/17/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/"/>
+      <url>/2021/08/17/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><blockquote><p>摘要可以等完成作品之后再写<br>内容包括</p><ul><li>建模思想</li><li>数学归类</li><li>算法思想</li><li>建模特点</li><li>主要结果<br>突出方法算法，结论，创新点，特点，不要出现图表和数学公式。<br>尽量不要出现<code>我们</code>这样的词语，可以用本文代替</li></ul></blockquote><h2 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h2><ul><li>关键信息提取</li><li>删除不必要信息</li><li>语气转换（如请您……需要更改）</li></ul><h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><blockquote><p>可以合到一起写也可以分开一小问一小问分析</p></blockquote><ul><li>问题类型定位</li><li>问题特点</li><li>问题难点</li><li>无关因素剔除</li><li>求解完成之后回来重新改一下问题分析</li></ul><h2 id="提出假设"><a href="#提出假设" class="headerlink" title="提出假设"></a>提出假设</h2><blockquote><p>目的：将问题理想化，简单化</p></blockquote><ul><li>假设需要建立在题目的条件和要求之上</li><li>不能缺少关键性假设</li><li>用严格确切的数学语言来表达假设</li><li>假设需要切合题意</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学建模 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PAT甲级Counting leaves</title>
       <link href="/2021/08/14/PAT%E7%94%B2%E7%BA%A7Counting%20leaves/"/>
       <url>/2021/08/14/PAT%E7%94%B2%E7%BA%A7Counting%20leaves/</url>
