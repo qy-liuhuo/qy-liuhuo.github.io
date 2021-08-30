@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>matlab图像处理基础</title>
+      <link href="/2021/08/24/matlab%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/"/>
+      <url>/2021/08/24/matlab%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<p>主要为matlab图像处理工具箱的基本使用</p><span id="more"></span><h2 id="图像读入"><a href="#图像读入" class="headerlink" title="图像读入"></a>图像读入</h2><p><code>imread(路径)</code></p><p>使用时可赋值给一个变量，实际就是一个二维数组</p><h2 id="图像的基本信息"><a href="#图像的基本信息" class="headerlink" title="图像的基本信息"></a>图像的基本信息</h2><p><code>imfinfo(&#39;demo.png&#39;)</code></p><blockquote><p>会返回一个struct 包含文件名，文件大小，文件格式，宽高等等信息。但是要注意这个参数要填<code>文件名</code><br>最开始尝试的是读入的图片对象，报错了，才知道要写文件名，考虑了一下发现应该是imread只返回一个二维数组，而不是一个图像对象，所以没有这些内容。</p></blockquote><h2 id="图像的二维相关系数"><a href="#图像的二维相关系数" class="headerlink" title="图像的二维相关系数"></a>图像的二维相关系数</h2><p><code>corr2()</code></p><blockquote><p>此函数本质就是去计算两个矩阵的相关系数</p></blockquote><pre class="language-matlab" data-language="matlab"><code class="language-matlab">I <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'pout.tif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>J <span class="token operator">=</span> <span class="token function">medfilt2</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">;</span>R <span class="token operator">=</span> <span class="token function">corr2</span><span class="token punctuation">(</span>I<span class="token punctuation">,</span>J<span class="token punctuation">)</span></code></pre><h2 id="像素值的获取"><a href="#像素值的获取" class="headerlink" title="像素值的获取"></a>像素值的获取</h2><p><code>impixel()</code></p><blockquote><p>impixel只传入图像变量，则会进入交互界面左键可选中多个像素点，右键选中最后一个像素点并结束交互，显示出RGB颜色<br> <code>impixel(I,[100,20],[40,80])</code> 传入图像和两个长为n的向量，可以获得n个像素值</p></blockquote><h2 id="图像均值与标准差"><a href="#图像均值与标准差" class="headerlink" title="图像均值与标准差"></a>图像均值与标准差</h2><p><code>mean2(I)</code><br><code>std2(I)</code></p><blockquote><p>实质也就是获取的二维矩阵元素的平均值和标准差</p></blockquote><h2 id="图片展示窗口上显示图片信息"><a href="#图片展示窗口上显示图片信息" class="headerlink" title="图片展示窗口上显示图片信息"></a>图片展示窗口上显示图片信息</h2><pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token function">imshow</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">;</span>impixelinfo<span class="token punctuation">;</span></code></pre><h2 id="图片的缩放，裁剪和旋转"><a href="#图片的缩放，裁剪和旋转" class="headerlink" title="图片的缩放，裁剪和旋转"></a>图片的缩放，裁剪和旋转</h2><p><code>imresize(I,倍数)</code></p><p><code>imcrop(I,rec)</code>  rec为一个向量[左上角x 左上角y 右下角x 右下角y]</p><p><code>imrotate(I,deg)</code> 图像旋转 deg 为角度 注意正值为逆时针 负值为顺时针</p><p>以上操作都返回处理后的图像！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数字图像处理 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数字图像处理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数学建模论文写作</title>
       <link href="/2021/08/17/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/"/>
       <url>/2021/08/17/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</url>
