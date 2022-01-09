@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>js函数中的this指代问题.md</title>
+      <link href="/2022/01/09/js%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this%E6%8C%87%E4%BB%A3%E9%97%AE%E9%A2%98-md/"/>
+      <url>/2022/01/09/js%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this%E6%8C%87%E4%BB%A3%E9%97%AE%E9%A2%98-md/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在尝试写微信小程序时发现调用接口后的回调中访问不到全局的this，查了一下资料发现需要用箭头函数，因为普通的回调函数自己有局部的this，而ES6中新增加的箭头函数没有自己的this，所以会访问上一级的this。</p><pre class="language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;普通函数success: function (res) &#123;        console.log(this);      &#125;&#x2F;&#x2F;箭头函数success: (res)&#x3D;&gt;&#123;    console.log(this);&#x2F;&#x2F;上一级的this&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+            <tag> js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PAT甲级Maximum Subsequence Sum</title>
       <link href="/2022/01/09/PAT%E7%94%B2%E7%BA%A7Maximum%20Subsequence%20Sum/"/>
       <url>/2022/01/09/PAT%E7%94%B2%E7%BA%A7Maximum%20Subsequence%20Sum/</url>
