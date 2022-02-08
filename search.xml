@@ -4,6 +4,50 @@
   
     
     <entry>
+      <title>Number</title>
+      <link href="/2022/02/08/PAT%E7%94%B2%E7%BA%A7Recover%20the%20Smallest%20Number/"/>
+      <url>/2022/02/08/PAT%E7%94%B2%E7%BA%A7Recover%20the%20Smallest%20Number/</url>
+      
+        <content type="html"><![CDATA[<h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote><p>Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.</p></blockquote><h3 id="输入要求"><a href="#输入要求" class="headerlink" title="输入要求"></a>输入要求</h3><blockquote><p>Each input file contains one test case. Each case gives a positive integer <strong>N</strong> (<strong>≤</strong>1<strong>0</strong>4) followed by <strong>N</strong> number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.</p></blockquote><h3 id="输出要求"><a href="#输出要求" class="headerlink" title="输出要求"></a>输出要求</h3><blockquote><p>each test case, print the smallest number in one line. Notice that the first digit must not be zero.</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote><p>题意很简单，就是给定一个数字段，给他拼成一个最小的数。很容易想到贪心算法，但是贪的是什么？</p><p>首先想到按从小到大的顺序输出不就好了嘛，但是仔细想想不是这样的比如321&gt;32但是321放前面才是正确的为什么呢？可以这样想假设我们下一个待选的只有a和b两个，两者是不是你在前我在后就是我在后你在前的关系，那么他们后面的数字位数一定是相同的即总位数-前面的位数-a的位数-b的位数，所以从a开始算两种选择的数字大小如下：</p><ol><li>a在前  ab*10^n</li><li>b在前 ba*10^n</li></ol><p>这样就很容易看出了，决定a和b谁在前面的方法就是比较ab以及ba的大小。</p><p>这里可能产生一个疑问，我在每一个位置的选择可不止两种啊，这么多个该怎么比较呢？</p><p>有一个巧妙地方法就是借助sort 自己实现一个cmp规则，这样排出的一定符合规则！可以尝试证明一下：</p><p>我们假设排完之后的顺序是 a b c d e f…………</p><p>使用反证法：如果该顺序不是最优解，那么一定需要通过置换变成最优解，假设我们换了a和c 那么前面从 abc变成了cba（即cba&lt;abc） 而bc&lt;cb  bca&lt;cba  ab&lt;ba  bca&lt;cba&lt;cab同理 一直推到 bca&lt;cba&lt;cab&lt;acb&lt;abc; 两者相悖，所以我们的贪心策略能够得到最优解！</p><p>注意输出没有前导零，还有一个测试点需要注意就是结果为0时还要输出0（也就是说不能单纯的不输出前面的0)</p></blockquote><h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span><span class="token keyword">bool</span> <span class="token function">cmp</span><span class="token punctuation">(</span>string a<span class="token punctuation">,</span> string b<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>    <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">&lt;</span> b <span class="token operator">+</span> a<span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>    <span class="token keyword">int</span> n<span class="token punctuation">;</span>    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>    string s<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>    string result<span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token punctuation">&#123;</span>        cin <span class="token operator">>></span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    <span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> s <span class="token operator">+</span> n<span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token punctuation">&#123;</span>        result <span class="token operator">+=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token punctuation">&#123;</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'0'</span> <span class="token operator">||</span> <span class="token operator">!</span>flag<span class="token punctuation">)</span>        <span class="token punctuation">&#123;</span>            flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>            cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token punctuation">&#125;</span>    <span class="token punctuation">&#125;</span>    cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> PAT </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PAT甲级英文生词</title>
+      <link href="/2022/01/27/PAT%E7%94%B2%E7%BA%A7%E8%8B%B1%E6%96%87%E7%94%9F%E8%AF%8D/"/>
+      <url>/2022/01/27/PAT%E7%94%B2%E7%BA%A7%E8%8B%B1%E6%96%87%E7%94%9F%E8%AF%8D/</url>
+      
+        <content type="html"><![CDATA[<h2 id="生词"><a href="#生词" class="headerlink" title="生词"></a>生词</h2><ol><li>shuffle 拖着脚走，曳足而行<ol><li>shuffing 有洗牌的含义</li></ol></li><li>procedure 程序，过程</li><li>randomize <code>make (a set of items, people, etc.) unpredictable, unsystematic, or random in order or arrangement.</code> 随机化</li><li>inside jobs 暗箱操作</li><li>collaborate  合作 同义词：cooperation</li><li>（in）adequate （不）足够</li><li> permutation  排列</li><li> distinct integers  不同的整数</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PAT </tag>
+            
+            <tag> 英语 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ES6新特性</title>
       <link href="/2022/01/09/ES6%E6%96%B0%E7%89%B9%E6%80%A7/"/>
       <url>/2022/01/09/ES6%E6%96%B0%E7%89%B9%E6%80%A7/</url>
@@ -100,7 +144,7 @@
       <link href="/2021/12/28/c++%E5%88%B7%E7%AE%97%E6%B3%95/"/>
       <url>/2021/12/28/c++%E5%88%B7%E7%AE%97%E6%B3%95/</url>
       
-        <content type="html"><![CDATA[<p>c++刷算法时的一些技巧</p><span id="more"></span><h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ol><li><code>getline(cin,str,&lt;separator&gt;);</code><ul><li>三个参数一次为输入流，存放位置，分割符，其中分隔符默认为\n，即默认读取一行</li></ul></li></ol><h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><ol><li>字符串转数字<ul><li>stoi(int)</li><li>stol(long)</li><li>stof(float)</li><li>stod(double)</li></ul></li><li>字符串可直接用+连接</li><li>大小写转换<ul><li>transform(s.begin(), s.end(), s.begin(), ::toupper); //小写转大写</li><li>transform(s.begin(), s.end(), s.begin(), ::tolower); //大写转小写</li></ul></li></ol><h2 id="vector-操作"><a href="#vector-操作" class="headerlink" title="vector 操作"></a>vector 操作</h2><ol><li>max_element(v.begin(),v.end()) 可以返回最大元素的迭代器，用*获得最大值 如 <code>*max_element(p.begin(), p.end())</code>,最小值即min_element();</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>c++刷算法时的一些技巧</p><span id="more"></span><h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ol><li><code>getline(cin,str,&lt;separator&gt;);</code><ul><li>三个参数一次为输入流，存放位置，分割符，其中分隔符默认为\n，即默认读取一行</li></ul></li></ol><h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><ol><li>字符串转数字<ul><li>stoi(int)</li><li>stol(long)</li><li>stof(float)</li><li>stod(double)</li></ul></li><li>字符串可直接用+连接</li><li>数字转字符串to_string()</li><li>大小写转换<ul><li>transform(s.begin(), s.end(), s.begin(), ::toupper); //小写转大写</li><li>transform(s.begin(), s.end(), s.begin(), ::tolower); //大写转小写</li></ul></li></ol><h2 id="vector-操作"><a href="#vector-操作" class="headerlink" title="vector 操作"></a>vector 操作</h2><ol><li>max_element(v.begin(),v.end()) 可以返回最大元素的迭代器，用*获得最大值 如 <code>*max_element(p.begin(), p.end())</code>,最小值即min_element();</li><li>vector 赋值给另一个vector <ul><li><strong>直接用等号赋值</strong></li><li>v1.assign(v2.begin(), v2.end()); //将v2赋值给v1 会清除掉v1以前的内容</li></ul></li><li>v1.swap(v2); 交换vector</li></ol>]]></content>
       
       
       <categories>
