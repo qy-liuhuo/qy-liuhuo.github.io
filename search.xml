@@ -167,44 +167,6 @@
     
     
     <entry>
-      <title>HBU易班图片设计规范</title>
-      <link href="/2021/10/30/HBU%E6%98%93%E7%8F%AD%E5%9B%BE%E7%89%87%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/"/>
-      <url>/2021/10/30/HBU%E6%98%93%E7%8F%AD%E5%9B%BE%E7%89%87%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</url>
-      
-        <content type="html"><![CDATA[<h2 id="图片基本格式要求"><a href="#图片基本格式要求" class="headerlink" title="图片基本格式要求"></a>图片基本格式要求</h2><blockquote><p>为便于设计及使用图片格式统一使用<code>png</code>格式</p></blockquote><h2 id="易班大厅相关图片要求"><a href="#易班大厅相关图片要求" class="headerlink" title="易班大厅相关图片要求"></a>易班大厅相关图片要求</h2><ul><li>易办大厅首页图长宽比为2:1</li><li>易办大厅内部应用图标为正方形透明png,设计中可参考<a href="https://fontawesome.com/">fontawesome</a>,<a href="https://www.iconfont.cn/">阿里巴巴矢量图标库</a></li></ul><h2 id="易班APP首页图标"><a href="#易班APP首页图标" class="headerlink" title="易班APP首页图标"></a>易班APP首页图标</h2><ul><li>格式为png</li><li>一式两份<ul><li>64*64一份</li><li>108*108一份</li></ul></li><li>两套风格<ul><li>易班相关风格(易办大厅，易班教务)</li><li>学校相关风格(学生事物)</li></ul></li></ul><h2 id="易班APP首页轮播图"><a href="#易班APP首页轮播图" class="headerlink" title="易班APP首页轮播图"></a>易班APP首页轮播图</h2><ul><li>大小为710 * 284 或 1060 * 424，宽高比1:0.4，单张最大15M</li></ul>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>一卡通挂失设计</title>
-      <link href="/2021/10/01/%E4%B8%80%E5%8D%A1%E9%80%9A%E6%8C%82%E5%A4%B1%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/"/>
-      <url>/2021/10/01/%E4%B8%80%E5%8D%A1%E9%80%9A%E6%8C%82%E5%A4%B1%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/</url>
-      
-        <content type="html"><![CDATA[<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><h3 id="功能需求"><a href="#功能需求" class="headerlink" title="功能需求"></a>功能需求</h3><ul><li>拾取者可在应用上发布遗失卡的学号，并提供自己的联系方式，方便取得联系。</li><li>遗失者可通过易班APP的消息或者应用界面查看到拾取者联系方式，私下取得联系。</li></ul><h3 id="安全需求"><a href="#安全需求" class="headerlink" title="安全需求"></a>安全需求</h3><ul><li>不暴露过多的个人信息</li></ul><h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h2 id="使用技术方案"><a href="#使用技术方案" class="headerlink" title="使用技术方案"></a>使用技术方案</h2><ul><li>前端使用基于bootstrap的sb-admin框架</li><li>后端使用thinkphp5框架</li></ul><h4 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h4><blockquote><p> 界面简洁优美，开发迅速</p></blockquote><h3 id="程序流程"><a href="#程序流程" class="headerlink" title="程序流程"></a>程序流程</h3><ol><li>学生捡到遗失的一卡通</li><li>转到易班APP填写遗失的卡号及个人联系方式</li><li>调用校级授权接口数据库根据学号获得易班id</li><li>使用易班接口给遗失者的易班账号发消息</li></ol><h2 id="难点及解决方案"><a href="#难点及解决方案" class="headerlink" title="难点及解决方案"></a>难点及解决方案</h2><ol><li>由于易班官方接口只可以根据id获得学号，但无法反向完成。需要用户至少登录应用一次将用户id和学号对应关系存到我们自己的数据库</li><li>易班app通知无弹窗，需要主动的去查看，建议进阶为短信通知，但需要购买短信服务。</li><li>推广难点：如何让大家了解到有这样一个功能，并在捡到一卡通的时候使用。  目前只能想到加大宣传</li></ol><h2 id="进阶方向"><a href="#进阶方向" class="headerlink" title="进阶方向"></a>进阶方向</h2><h3 id="购买短信服务"><a href="#购买短信服务" class="headerlink" title="购买短信服务"></a>购买短信服务</h3><blockquote><p>给遗失者的手机发送短信提醒，需要资金支持，价格参考 [阿里云短信服务] (<a href="https://common-buy.aliyun.com/?spm=5176.8195934.J_5834642020.2.65044378QROj06&amp;&amp;commodityCode=newdysmsbag#/buy">https://common-buy.aliyun.com/?spm=5176.8195934.J_5834642020.2.65044378QROj06&amp;&amp;commodityCode=newdysmsbag#/buy</a> )</p></blockquote><h3 id="使用读卡器（此条只是设想）"><a href="#使用读卡器（此条只是设想）" class="headerlink" title="使用读卡器（此条只是设想）"></a>使用读卡器（此条只是设想）</h3><blockquote><p>与一卡通部门联系，申请读卡器，在学校的固定地点设置丢失领取处，拾取者刷卡，读卡器读出信息后自动给遗失者发送短信，通知其到领取处领取。</p></blockquote><h3 id="预期开发时间"><a href="#预期开发时间" class="headerlink" title="预期开发时间"></a>预期开发时间</h3><p><code>一周</code></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 设计文档 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 设计文档 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>计组实验：乘法器</title>
       <link href="/2021/09/26/%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%EF%BC%9A%E4%B9%98%E6%B3%95%E5%99%A8/"/>
       <url>/2021/09/26/%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%EF%BC%9A%E4%B9%98%E6%B3%95%E5%99%A8/</url>
@@ -224,31 +186,6 @@
             <tag> 计算机组成原理与体系结构 </tag>
             
             <tag> 龙芯实验平台 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>优秀组织产品</title>
-      <link href="/2021/09/23/%E4%BC%98%E7%A7%80%E7%BB%84%E7%BB%87%E4%BA%A7%E5%93%81/"/>
-      <url>/2021/09/23/%E4%BC%98%E7%A7%80%E7%BB%84%E7%BB%87%E4%BA%A7%E5%93%81/</url>
-      
-        <content type="html"><![CDATA[<p>主要学习其他高校优秀互联网组织的产品</p><span id="more"></span><h2 id="华科"><a href="#华科" class="headerlink" title="华科"></a>华科</h2><h3 id="联创团队"><a href="#联创团队" class="headerlink" title="联创团队"></a>联创团队</h3><blockquote><p>联创团队（Unique-Studio）创建于2000年6月。团队秉承不断创新的核心精神，怀揣对技术的无限热忱，努力打造一个以技术为驱动，多元发展的精英学生组织。团队立足信息技术，通过承担科研项目，参加科技大赛，孕育创新产品等形式激发队员的无限激情和潜能，并积极整合历届队员的优势和资源，共同创造团队和个人的未来。unique22作为一个以兴趣为主导、强调主动实践和自主创新，由学生自发组织、自我管理的学生团队，团队致力于为有潜力、肯努力、富有激情的学生构建一流的学习环境，引导他们快速成长。目前团队已经取得了优异的成绩成为华中科技大学大学生主动实践获得成功的典范之一。团队积极参加国际高水平的科技创新大赛，尤其是在微软创新杯(Imagine-Cup)全球学生大赛中，连续5年闯进总决赛并代表中国大学生在世界大学生科技竞赛的舞台上崭露头角。unique33近年来，团队大力推广校园极客文化，努力把创新活动与IT产业相结合。团队连续三年举办了Unique-Hack-Day校园黑客马拉松大赛，通过Unique-Hack-Day，连接起了当今最有想法的年轻人，努力让极客文化传播得更广。与此同时，团队成员在校期间努力创新，推出了众多产品。离校后，团队成员积极投身创业浪潮，成功孵化出了百纳信息技术有限公司等企业。联创团队着力打造新的联创平台，为把更多更好的学生带向自主创新之路而不懈努力。<br><a href="https://hustunique.com/#groups_page">https://hustunique.com/#groups_page</a></p></blockquote><ul><li>校园匿名社区</li><li>以书会友阅读交流平台</li></ul><h3 id="冰岩团队"><a href="#冰岩团队" class="headerlink" title="冰岩团队"></a>冰岩团队</h3><p><a href="https://www.bingyan.net/#/product">https://www.bingyan.net/#/product</a></p><ul><li>公共选修课评价系统</li><li>周边商铺评价系统</li><li>校园通</li><li>二手市场</li><li>软件分享平台</li></ul><h3 id="Dian团队"><a href="#Dian团队" class="headerlink" title="Dian团队"></a>Dian团队</h3><blockquote><p> Dian团队全称是“基于导师制的人才孵化站”，由刘玉教授于2002年3月创建，植根于华中科技大学电信学院，隶属于华中科技大学启明学院，旨在通过真实项目实践培养学生的创新能力、实践精神和综合素质。目前培养的正式队员共677名，已出站637名，并常年保持100名在校队员的规模，队员主要来自华中科技大学各院系。</p></blockquote><p><a href="https://www.dian.org.cn/cn/projects/">https://www.dian.org.cn/cn/projects/</a></p><p>主要是一个互联网科研平台</p><h2 id="南昌大学"><a href="#南昌大学" class="headerlink" title="南昌大学"></a>南昌大学</h2><h3 id="云家园"><a href="#云家园" class="headerlink" title="云家园"></a>云家园</h3><p><a href="http://team.ncuos.com/product">http://team.ncuos.com/product</a></p><p>学生事务: 离/返校登记、 学生证补(换)、 安全教育、 学长小教员（星火使者）、 自助报到、 认定申请、 最美大学生投票、 新生入学教育、 错峰返校登记、 信贷志愿者报名、 在读证明打印、 毕业生离校、 学生活动、 班导评价、 辅导员评价、 …</p><p>信息查询: 成绩查询、 班级通讯录、 违纪处分、 微信平台、 综合素质、 晚查房记录、 寝室用电查询</p><h2 id="重庆邮电大学"><a href="#重庆邮电大学" class="headerlink" title="重庆邮电大学"></a>重庆邮电大学</h2><h3 id="红岩网校"><a href="#红岩网校" class="headerlink" title="红岩网校"></a>红岩网校</h3><blockquote><p>红岩网校工作站是学校唯一一个从事互联网产品开发运营的校级学生组织，在校团委的指导下，由学生自我管理，多年来走出了一大批优秀的IT互联网人才，深受腾讯、阿里巴巴、字节跳动、华为等知名互联网企业的青睐。 团队先后获评“全国五四红旗团支部”、“团中央新媒体专业工作室”、“重庆市IT杰出青年群体”等系列荣誉。开发上线了“重邮小帮手”微信公众号，“重邮帮”微信小程序、“掌上重邮”APP等一系列优秀的校园网络产品，深受广大师生好评。<br><a href="https://redrock.team/#/">https://redrock.team/#/</a></p></blockquote><ul><li>校园网址导航</li><li>弹幕系统</li></ul><h2 id="浙江大学"><a href="#浙江大学" class="headerlink" title="浙江大学"></a>浙江大学</h2><h3 id="求是网"><a href="#求是网" class="headerlink" title="求是网"></a>求是网</h3><p><a href="http://www.qsc.zju.edu.cn/#Content0_0">http://www.qsc.zju.edu.cn/#Content0_0</a></p><ul><li>云盘(小文件速传)<a href="https://www.qsc.zju.edu.cn/box/">https://www.qsc.zju.edu.cn/box/</a></li><li>招新系统(面向全校各组织社团)<a href="https://rop.zjuqsc.com/">https://rop.zjuqsc.com/</a></li><li>选课助手 教师评价</li></ul><h2 id="武汉大学"><a href="#武汉大学" class="headerlink" title="武汉大学"></a>武汉大学</h2><h3 id="自强Studio"><a href="#自强Studio" class="headerlink" title="自强Studio"></a>自强Studio</h3><blockquote><p>武汉大学自强Studio，是武汉大学乃至华中地区最大的学生互联网团队之一。主要运营的线上产品包括，掌上武大微信公众号，自强网，自强学堂官方QQ、微博，自强Report、淘课啦网站、吃乎等；举办的品牌活动包括:十大珞珈风云学子评选活动、奔跑吧珞珈、毕业集市、脱机自习等。我们的愿景是成为全国最专业最有趣的高校互联网团队之一，引领武大精神。<br><a href="https://www.ziqiang.net.cn/#index">https://www.ziqiang.net.cn/#index</a></p></blockquote><ul><li>吃乎 美食分享评测</li><li>摄影交流</li><li>掌上武大(线下事务线上办理)</li><li>淘课啦<ul><li>武大公选课大众点评精心收集公共资源淘课啦，武大最强学习平台</li></ul></li><li>脱机自习</li><li>毕业集市(二手交易)</li><li>十大珞珈风云学子评选</li><li>奔跑吧珞珈(running 河大？)</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 日常 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 日常 </tag>
             
         </tags>
       
@@ -701,15 +638,15 @@
             
             <tag> 前端 </tag>
             
-            <tag> 后端 </tag>
-            
-            <tag> PHP </tag>
-            
-            <tag> JS </tag>
-            
             <tag> HTML </tag>
             
             <tag> CSS </tag>
+            
+            <tag> JS </tag>
+            
+            <tag> 后端 </tag>
+            
+            <tag> PHP </tag>
             
             <tag> MySQL </tag>
             
@@ -767,11 +704,11 @@
             
             <tag> 前端 </tag>
             
-            <tag> JS </tag>
-            
             <tag> HTML </tag>
             
             <tag> CSS </tag>
+            
+            <tag> JS </tag>
             
         </tags>
       
