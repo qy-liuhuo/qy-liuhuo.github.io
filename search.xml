@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>UML</title>
+      <link href="/2022/04/14/UML/"/>
+      <url>/2022/04/14/UML/</url>
+      
+        <content type="html"><![CDATA[<p>UML——Unified modeling language 统一建模语言是一种用于软件系统费分析和设计的语言工具，用于帮助开发人员思考和额记录思路的结果</p><span id="more"></span><h3 id="类-class"><a href="#类-class" class="headerlink" title="类 class"></a>类 class</h3><h3 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口 interface"></a>接口 interface</h3><h3 id="依赖-dependency"><a href="#依赖-dependency" class="headerlink" title="依赖 dependency"></a>依赖 dependency</h3><h3 id="关联-association"><a href="#关联-association" class="headerlink" title="关联 association"></a>关联 association</h3><h3 id="泛化（继承）generalization"><a href="#泛化（继承）generalization" class="headerlink" title="泛化（继承）generalization"></a>泛化（继承）generalization</h3><h3 id="实现-realization"><a href="#实现-realization" class="headerlink" title="实现 realization"></a>实现 realization</h3><h3 id="聚合-aggregation"><a href="#聚合-aggregation" class="headerlink" title="聚合 aggregation"></a>聚合 aggregation</h3><h3 id="组合-Composite"><a href="#组合-Composite" class="headerlink" title="组合 Composite"></a>组合 Composite</h3>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 软件工程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式的目的</title>
       <link href="/2022/04/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%9B%AE%E7%9A%84/"/>
       <url>/2022/04/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%9B%AE%E7%9A%84/</url>
       
-        <content type="html"><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>为了让软件具有更好的<code>重用性</code>、<code>可读性</code>、<code>可扩展性</code>、<code>可靠性</code>（更改功能后，对原有功能几乎没印象）、<code>低耦合，高内聚</code>（模块间关联性低，内部关联性强）</p><h2 id="需要遵守的七大原则"><a href="#需要遵守的七大原则" class="headerlink" title="需要遵守的七大原则"></a>需要遵守的七大原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>一个类只负责一项职责，或者在方法上遵守上述原则</p><h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>客户端不应该以来它不需要的接口，即一个类对另一个类的以来应该建立在最小的接口上</p><h3 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h3><ol><li>高层模块不应该依赖底层模块，二者都应该依赖其抽象</li><li>抽象不应该以来细节，细节应该以来抽象</li><li>中心思想是面向接口编程</li><li>相对于细节的多变性，抽象的东西要稳定得多</li><li>java中抽象值得是接口或者抽象类，细节就是值具体的实现类</li><li>是有接口或者抽象类的目的是<code>制定好规范</code>,在于设计</li></ol><h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><ol><li>集成包含的一个含义：父类中凡是已经实现好的方法，实际上是在设定规范和契约（虽然子类不一定遵守）</li><li>一个类被其他类所继承，如果该类的方法需要改变，必须考虑到其他所有子类是否会受到影响。</li></ol><p>要求：<br>尽量不要重写父类的方法</p><h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><ol><li>模块和函数应该对扩展开放（对提供方而言），对修改关闭（对使用放而言）。</li><li>软件需要变化时，尽量通过扩展软件实体来实现，而不是通过修改已有的代码来实现的。</li><li>其他原则的目的就是遵循开闭原则</li></ol><h3 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h3><ol><li>一个对象应该对其他对象保持最少的了解</li><li>类之间的关系越密切，耦合度越大</li><li>对于被依赖的类不管多么复杂，都应该尽量将逻辑封装在类的内部。对外除了提供public方法外不泄露任何信息。</li><li>陌生的类最好不要以局部变量的形式出现在方法中</li></ol>]]></content>
+        <content type="html"><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>为了让软件具有更好的<code>重用性</code>、<code>可读性</code>、<code>可扩展性</code>、<code>可靠性</code>（更改功能后，对原有功能几乎没印象）、<code>低耦合，高内聚</code>（模块间关联性低，内部关联性强）</p><h2 id="需要遵守的七大原则"><a href="#需要遵守的七大原则" class="headerlink" title="需要遵守的七大原则"></a>需要遵守的七大原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>一个类只负责一项职责，或者在方法上遵守上述原则</p><h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>客户端不应该以来它不需要的接口，即一个类对另一个类的以来应该建立在最小的接口上</p><h3 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h3><ol><li>高层模块不应该依赖底层模块，二者都应该依赖其抽象</li><li>抽象不应该以来细节，细节应该以来抽象</li><li>中心思想是面向接口编程</li><li>相对于细节的多变性，抽象的东西要稳定得多</li><li>java中抽象值得是接口或者抽象类，细节就是值具体的实现类</li><li>是有接口或者抽象类的目的是<code>制定好规范</code>,在于设计</li></ol><h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><ol><li>集成包含的一个含义：父类中凡是已经实现好的方法，实际上是在设定规范和契约（虽然子类不一定遵守）</li><li>一个类被其他类所继承，如果该类的方法需要改变，必须考虑到其他所有子类是否会受到影响。</li></ol><p>要求：<br>尽量不要重写父类的方法</p><h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><ol><li>模块和函数应该对扩展开放（对提供方而言），对修改关闭（对使用放而言）。</li><li>软件需要变化时，尽量通过扩展软件实体来实现，而不是通过修改已有的代码来实现的。</li><li>其他原则的目的就是遵循开闭原则</li></ol><h3 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h3><ol><li>一个对象应该对其他对象保持最少的了解</li><li>类之间的关系越密切，耦合度越大</li><li>对于被依赖的类不管多么复杂，都应该尽量将逻辑封装在类的内部。对外除了提供public方法外不泄露任何信息。</li><li>陌生的类最好不要以局部变量的形式出现在方法中</li></ol><h3 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h3><p>尽量使用依赖/合成/聚合的方式，而不是使用继承</p>]]></content>
       
       
       
