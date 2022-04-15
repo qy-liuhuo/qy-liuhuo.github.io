@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>数字范围按位与</title>
+      <link href="/2022/04/15/%E6%95%B0%E5%AD%97%E8%8C%83%E5%9B%B4%E6%8C%89%E4%BD%8D%E4%B8%8E/"/>
+      <url>/2022/04/15/%E6%95%B0%E5%AD%97%E8%8C%83%E5%9B%B4%E6%8C%89%E4%BD%8D%E4%B8%8E/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given two integers left and right that represent the range [left, right], return the bitwise AND of all numbers in this range, inclusive.</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最容易想到的就是暴力做，但肯定会超时。需要想有没有什么规律算法？</p><blockquote><p>2进制的数字每一个都是在前一个基础上变动而来的，那么他们应该是从某一位之前是相同的。而这一位的位置应该随着两个数的距离而向前移动，所以我们可以将问题简化求为最左端与最右端的这个数的位置，在这个数之前每个位都是相同的，也就是and之后不影响结果，而之后因为两个数之间多个数and导致为0，所以只需要保留前面相同的位置，后面的取0即可。</p></blockquote><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rangeBitwiseAnd</span><span class="token punctuation">(</span><span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        <span class="token keyword">int</span> len<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>left<span class="token operator">&lt;</span>right<span class="token punctuation">)</span>        <span class="token punctuation">&#123;</span>            left<span class="token operator">=</span>left<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>            right<span class="token operator">=</span>right<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>            len<span class="token operator">++</span><span class="token punctuation">;</span>        <span class="token punctuation">&#125;</span>        <span class="token keyword">return</span> left<span class="token operator">&lt;&lt;</span>len<span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 力扣 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>UML</title>
       <link href="/2022/04/14/UML/"/>
       <url>/2022/04/14/UML/</url>
