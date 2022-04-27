@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>软件工程调研报告</title>
+      <link href="/2022/04/28/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/"/>
+      <url>/2022/04/28/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/</url>
+      
+        <content type="html"><![CDATA[<p>软件工程课小组作业——软件与编程语言调研报告计划实施方案</p><span id="more"></span><h2 id="软件与编程语言"><a href="#软件与编程语言" class="headerlink" title="软件与编程语言"></a>软件与编程语言</h2><blockquote><p>目前已经有超过700种的编程语言，50种比较流行的。TIOBE编程语言排行榜</p><p><a href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a>  编程社区指数</p></blockquote><h3 id="查找文献"><a href="#查找文献" class="headerlink" title="查找文献"></a>查找文献</h3><p>[1]丁建邦,张美娜,李政蓬.计算机应用软件开发中编程语言的选择[J].计算机产品与流通,2020(10):64.</p><p>[1]戈健.计算机应用软件开发过程中不同编程语言的影响[J].现代工业经济和信息化,2019,9(02):94-95.DOI:10.16525/j.cnki.14-1362/n.2019.02.39.</p><p>DEFINING AND MEASURING THE PRODUCTIVITY OF PROGRAMMING<br>LANGUAGES (定义和衡量编程语言的生产力)</p><p>On the Impact of Programming Languages on Code Quality:<br>A Reproduction Study （编程语言对代码质量的影响）</p><p>An Empirical Comparison of Seven Programming Languages(针对同一个需求分别用七种语言进行编码，比较了代码量，代码质量，内存占用，执行速度等)</p><p>Popularity, Interoperability, and Impact of Programming Languages<br>in 100,000 Open Source Projects（通过对github开源项目的分析解决以下三个问题 1. 使用的编程语言与项目成功之间是否存在相关性？2. 使用的编程语言与问题报告的数量之间有什么关联？3. 编程语言如何与开发团队的规模相关联）</p><br/><h3 id="做什么"><a href="#做什么" class="headerlink" title="做什么"></a>做什么</h3><ol><li>从几个指标分析编程语言如编写效率 ，代码质量，代码安全性，性能等特性。</li><li>不同软件类型和团队规模下如何选择编程语言。</li><li>目前就业环境下开发语言岗位需求情况</li><li>根据编程语言排行榜的历史变化，分析造成变动的原因</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker学习Day1</title>
       <link href="/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/"/>
       <url>/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/</url>
