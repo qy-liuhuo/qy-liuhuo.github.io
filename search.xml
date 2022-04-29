@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Docker学习Day3--容器命令</title>
+      <link href="/2022/04/29/Docker%E5%AD%A6%E4%B9%A0Day3-%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2022/04/29/Docker%E5%AD%A6%E4%B9%A0Day3-%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="安装一个centos镜像学习"><a href="#安装一个centos镜像学习" class="headerlink" title="安装一个centos镜像学习"></a>安装一个centos镜像学习</h2><pre class="language-shell" data-language="shell"><code class="language-shell">docker pull centosUsing default tag: latestlatest: Pulling from library&#x2F;centosa1d0c7532777: Pull complete Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177Status: Downloaded newer image for centos:latestdocker.io&#x2F;library&#x2F;centos:latest</code></pre><h3 id="docker-run-可选参数-image"><a href="#docker-run-可选参数-image" class="headerlink" title="docker run [可选参数] image"></a><code>docker run [可选参数] image</code></h3><blockquote><p>参数说明</p></blockquote><ul><li>–name=”name” 给容器起名字</li><li>-d 后台方式运行</li><li>-it 使用交互方式运行，进入容器查看内容</li><li>-P  指定容器的端口（大写）<ul><li>-p 主机端口：容器端口 映射</li><li>-p 容器端口</li></ul></li><li>-p 随机端口（小写）</li></ul><p><code>docker run -it centos /bin/bash</code> 启动容器并用bash交互,可见内部也还是一个独立的centos系统</p><pre class="language-shell" data-language="shell"><code class="language-shell">[root@iZ8vbioqlrpr01woefafo2Z ~]# docker run -it centos &#x2F;bin&#x2F;bash[root@4a4d1f89c446 &#x2F;]# lsbin  etc   lib  lost+found  mnt  proc  run   srv  tmp  vardev  home  lib64  media       opt  root  sbin  sys  usr[root@4a4d1f89c446 &#x2F;]# </code></pre><h3 id="exit-退出主机"><a href="#exit-退出主机" class="headerlink" title="exit 退出主机"></a><code>exit</code> 退出主机</h3><h3 id="ctrl-p-q-容器不停止退出"><a href="#ctrl-p-q-容器不停止退出" class="headerlink" title="ctrl+p+q 容器不停止退出"></a><code>ctrl+p+q</code> 容器不停止退出</h3><h3 id="docker-ps-查看在运行的所有容器"><a href="#docker-ps-查看在运行的所有容器" class="headerlink" title="docker ps  查看在运行的所有容器"></a><code>docker ps </code> 查看在运行的所有容器</h3><ul><li>-a 也会列出历史运行的容器</li><li>-n=? 显示最近创建的n个容器</li><li>-q 只显示id </li></ul><h3 id="docker-rm-容器id-删除容器"><a href="#docker-rm-容器id-删除容器" class="headerlink" title="docker rm 容器id 删除容器"></a><code>docker rm 容器id</code> 删除容器</h3><p>不能删除正在运行的容器，如需要强制删除可以加-f<br>rmi是删除镜像 没有i是容器</p><p>docker rm -f $(docker ps -aq) 删除所有容器</p><h3 id="docker-start-id-开启容器"><a href="#docker-start-id-开启容器" class="headerlink" title="docker start id 开启容器"></a><code>docker start id</code> 开启容器</h3><h3 id="docker-restart-id-重启容器"><a href="#docker-restart-id-重启容器" class="headerlink" title="docker restart id 重启容器"></a><code>docker restart id</code> 重启容器</h3><h3 id="docker-stop-id-停止容器"><a href="#docker-stop-id-停止容器" class="headerlink" title="docker stop id 停止容器"></a><code>docker stop id</code> 停止容器</h3>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker学习Day2——镜像命令</title>
       <link href="/2022/04/28/Docker%E5%AD%A6%E4%B9%A0Day2/"/>
       <url>/2022/04/28/Docker%E5%AD%A6%E4%B9%A0Day2/</url>
