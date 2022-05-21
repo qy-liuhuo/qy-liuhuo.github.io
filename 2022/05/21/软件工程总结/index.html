@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#2f3542"><meta name="author" content="qy-liuhuo"><meta name="copyright" content="qy-liuhuo"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>软件工程总结 | 七月流火</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#2f3542"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"qylh.xyz","root":"/","title":"七月流火","version":"1.6.1","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M9KWR9L');</script><!-- End Google Tag Manager --><meta name="description" content="概述   软件 程序+数据+文档      软件危机的表现 1. 对软件的开发成本和进度的估计不准确 2. 用户对已完成的系统不满意 3. 软件质量不可靠 4. 软件可维护性差 5. 缺乏文档资料 6. 软件成本上升 7. 生产速率跟不上计算机应用普及的趋势      软件危机的原因 1. 软件自身特点使得开发和维护困难 2. 软件开发维护方法不正确    1. 没有科学的工程化思想来阻止和指导开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程总结">
+<meta property="og:url" content="https://qylh.xyz/2022/05/21/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="七月流火">
+<meta property="og:description" content="概述   软件 程序+数据+文档      软件危机的表现 1. 对软件的开发成本和进度的估计不准确 2. 用户对已完成的系统不满意 3. 软件质量不可靠 4. 软件可维护性差 5. 缺乏文档资料 6. 软件成本上升 7. 生产速率跟不上计算机应用普及的趋势      软件危机的原因 1. 软件自身特点使得开发和维护困难 2. 软件开发维护方法不正确    1. 没有科学的工程化思想来阻止和指导开">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1653148393253.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1653148416139.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1653148568070.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1653148728999.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1653148893746.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/uTools_1653149879021.png">
+<meta property="article:published_time" content="2022-05-21T13:25:24.000Z">
+<meta property="article:modified_time" content="2022-05-21T16:21:17.664Z">
+<meta property="article:author" content="qy-liuhuo">
+<meta property="article:tag" content="软件工程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.qylh.xyz/blog/1653148393253.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="qy-liuhuo"><img width="96" loading="lazy" src="/avatar.jpg" alt="qy-liuhuo"><span class="site-author-status" title="emmmmm.">😎</span></a><div class="site-author-name"><a href="/about/">qy-liuhuo</a></div><span class="site-name">七月流火</span><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">49</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">10</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">52</span></a></div><a class="site-state-item hty-icon-button" href="/about/" title="about"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2499094347&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/qy-liuhuo" title="GitHub" target="_blank" style="color:#95a5a6"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="/images/gitee.svg" title="Gitee" target="_blank" style="color:#ff4757"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2499094347@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1553883989" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">软件开发模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%80%91%E5%B8%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">瀑布模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">快速原型模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">增量模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%9E%BA%E6%97%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.4.</span> <span class="toc-text">螺旋模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%96%B7%E6%B3%89%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">喷泉模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%8F%E6%8D%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.6.</span> <span class="toc-text">敏捷模型</span></a></li></ol></li></ol></li></ol></div></div></div><div class="tag-cloud"><div class="tag-cloud-tags"><a href="/tags/AD/" style="font-size: 12px; color: #999">AD</a> <a href="/tags/Arduino/" style="font-size: 24px; color: #3383cd">Arduino</a> <a href="/tags/CSP/" style="font-size: 18px; color: #668eb3">CSP</a> <a href="/tags/CSS/" style="font-size: 18px; color: #668eb3">CSS</a> <a href="/tags/Docker/" style="font-size: 24px; color: #3383cd">Docker</a> <a href="/tags/ESP32/" style="font-size: 24px; color: #3383cd">ESP32</a> <a href="/tags/HTML/" style="font-size: 18px; color: #668eb3">HTML</a> <a href="/tags/JS/" style="font-size: 18px; color: #668eb3">JS</a> <a href="/tags/MPU6050/" style="font-size: 12px; color: #999">MPU6050</a> <a href="/tags/MySQL/" style="font-size: 12px; color: #999">MySQL</a> <a href="/tags/PAT/" style="font-size: 30px; color: #0078e7">PAT</a> <a href="/tags/PAT%E7%94%B2%E7%BA%A7/" style="font-size: 12px; color: #999">PAT甲级</a> <a href="/tags/PHP/" style="font-size: 12px; color: #999">PHP</a> <a href="/tags/STM32/" style="font-size: 12px; color: #999">STM32</a> <a href="/tags/VLGL%E5%9B%BE%E5%BD%A2%E5%BA%93/" style="font-size: 12px; color: #999">VLGL图形库</a> <a href="/tags/WEB/" style="font-size: 12px; color: #999">WEB</a> <a href="/tags/c/" style="font-size: 12px; color: #999">c++</a> <a href="/tags/demo/" style="font-size: 12px; color: #999">demo</a> <a href="/tags/js/" style="font-size: 18px; color: #668eb3">js</a> <a href="/tags/keil5/" style="font-size: 12px; color: #999">keil5</a></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://qylh.xyz/2022/05/21/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%80%BB%E7%BB%93/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="qy-liuhuo"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="七月流火"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">软件工程总结</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <span class="post-meta-icon-text">发表于</span> <time title="创建时间：2022-05-21 21:25:24" itemprop="dateCreated datePublished" datetime="2022-05-21T21:25:24+08:00">2022-05-21</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <span class="post-meta-icon-text">更新于</span> <time title="修改时间：2022-05-22 00:21:17" itemprop="dateModified" datetime="2022-05-22T00:21:17+08:00">2022-05-22</time></div><div class="post-classify"><span class="post-tag"><a class="tag-item" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">软件工程</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#2f3542;"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><details>
+  <summary>软件</summary>
+程序+数据+文档
+</details>
+
+<details>
+  <summary>软件危机的表现</summary>
+1. 对软件的开发成本和进度的估计不准确
+2. 用户对已完成的系统不满意
+3. 软件质量不可靠
+4. 软件可维护性差
+5. 缺乏文档资料
+6. 软件成本上升
+7. 生产速率跟不上计算机应用普及的趋势
+</details>
+
+<details>
+  <summary>软件危机的原因</summary>
+1. 软件自身特点使得开发和维护困难
+2. 软件开发维护方法不正确
+   1. 没有科学的工程化思想来阻止和指导开发
+   2. 没有完善的质量保证体系
+   3. 软件文档没有得到重视
+   4. 从业人员缺乏经验
+</details>
+
+<details>
+  <summary>软件工程的定义</summary>
+软件工程是知道计算机软件开发和维护的一门学科，采用工程的概念原理技术和方法来开发与维护软件，把进过时间考验而证明正确的管理技术和当前能够的到的最好的技术方法结合起来，以经济地开发出高质量的软件并有效地维护它。
+</details>
+
+<details>
+  <summary>软件工程的本质特征</summary>
+1. 关注于大型程序的构造
+2. 中心课题是控制复杂性
+3. 软件经常变化
+4. 开发效率非常重要
+5. 和谐开发是关键
+6. 必须有效地支持用户
+7. 开发者与用户的文化背景不同
+</details>
+
+<details>
+  <summary>软件工程的目标</summary>
+1. 控制成本
+2. 使软件满足用户需求
+3. 提高质量
+4. 提高可靠性
+5. 便于维护、移植、使用
+6. 控制开发周期
+</details>
+
+<details>
+  <summary>软件工程的基本原理</summary>
+1. 用分阶段的生命周期计划严格管理
+2. 坚持阶段评审
+3. 实行严格的产品控制
+4. 采用现代程序设计技术
+5. 结果应能清楚地进行审查
+6. 开发小组应少而精
+7. 承认不断改进软件工程实践的必要性
+</details>
+
+<details>
+  <summary>软件工程要素</summary>
+1. 方法：软件开发如何做？
+2. 工具：为软件工程方法提供的软件支撑工具
+3. 标准：软件工程实施过程中一系列统一的约束和规定
+4. 过程：用于开发、管理、维护软件的一系列活动，是将软件工程的标准、方法、工具综合起来以达到合理及时进行软件开发管理维护活动的序列
+</details>
+
+
+<details>
+  <summary>软件开发三个阶段</summary>
+1. 定义阶段
+2. 开发阶段
+3. 维护阶段
+</details>
+
+<details>
+  <summary>软件生命周期 6步</summary>
+1. 可行性研究
+2. 需求分析
+3. 软件设计
+4. 编码
+5. 软件测试
+6. 软件维护
+</details>
+
+<h3 id="软件开发模型"><a href="#软件开发模型" class="headerlink" title="软件开发模型"></a>软件开发模型</h3><h4 id="瀑布模型"><a href="#瀑布模型" class="headerlink" title="瀑布模型"></a>瀑布模型</h4><blockquote>
+<p>各阶段间的组织方式就如同瀑布流水一样，逐级下落，完成前一阶段任务后才可开始下一阶段工作<br><img src="https://img.qylh.xyz/blog/1653148393253.png" loading="lazy"><br>特点：</p>
+</blockquote>
+<ol>
+<li>回溯性差，修复错误成本高</li>
+<li>基于里程碑的阶段过程，开发人员为每个阶段设立里程碑，并做好评审</li>
+<li>强调阶段性，每个阶段完成特定任务</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>过程模型简单</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>无法适应变更</li>
+</ul>
+<h4 id="快速原型模型"><a href="#快速原型模型" class="headerlink" title="快速原型模型"></a>快速原型模型</h4><blockquote>
+<p>快速建立起能反映用户需求的程序，让用户试用，以了解目标系统概貌，并按照客户要求快速修改原型系统，不断重复。</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1653148416139.png" loading="lazy"></p>
+<p>优点：</p>
+<ul>
+<li>简单快速</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要花费额外成本构造原型</li>
+<li>不利于创新</li>
+</ul>
+<h4 id="增量模型"><a href="#增量模型" class="headerlink" title="增量模型"></a>增量模型</h4><blockquote>
+<p>增量模型是把待开发的软件系统模块化，将每个模块作为一个增量组件，从而分批次地分析、设计、编码和测试这些增量组件。是一个递增的过程，分批次交付软件</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1653148568070.png" loading="lazy"></p>
+<p>优点：</p>
+<ul>
+<li>模块化可分批次交付，便于客户了解进展</li>
+<li>模块化降低开发风险，一个周期内的错误不会影响整个系统</li>
+<li>开发顺序灵活</li>
+</ul>
+<h4 id="螺旋模型"><a href="#螺旋模型" class="headerlink" title="螺旋模型"></a>螺旋模型</h4><blockquote>
+<p>用于风险较大的大型软件项目开发过程，可以看成是增加了风险分析过程的快速原型模型</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1653148728999.png" loading="lazy"></p>
+<h4 id="喷泉模型"><a href="#喷泉模型" class="headerlink" title="喷泉模型"></a>喷泉模型</h4><blockquote>
+<p>一种过程模型，支持面向对象，由于面向对象经常需要迭代，喷泉模型可随时回到底层</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1653148893746.png" loading="lazy"></p>
+<h4 id="敏捷模型"><a href="#敏捷模型" class="headerlink" title="敏捷模型"></a>敏捷模型</h4><blockquote>
+<p>敏捷方法是一种轻量级的软件工程方法，相对于传统的软件工程方法，它更强调软件开发过程中各种变化的必然性，通过团队成员间充分的交流和沟通以及合理的机制来有效地响应变化。</p>
+</blockquote>
+<p>敏捷软件开发宣言：</p>
+<ol>
+<li>个体和交互胜过过程和工具</li>
+<li>可以工作的软件胜过面面俱到的文档</li>
+<li>客户合作胜过合同谈判</li>
+<li>响应变化胜过遵循计划</li>
+</ol>
+<p><img src="https://img.qylh.xyz/blog/uTools_1653149879021.png" loading="lazy"></p>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>qy-liuhuo</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://qylh.xyz/2022/05/21/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%80%BB%E7%BB%93/" title="软件工程总结">https://qylh.xyz/2022/05/21/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%80%BB%E7%BB%93/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/05/15/ip%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7/" rel="next" title="ip查询工具"><span class="post-nav-text">ip查询工具</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎通过QQ:2499094347与我交流。</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="beian"><a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021012791号</a></div><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> qy-liuhuo</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.1</span></div><div class="live_time"><span>本博客已运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2021-07-18T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#2f3542" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div id="local-search-result"></div></div><script>const date = new Date();
+const today = (date.getMonth() + 1) + "-" + date.getDate()
+const mourn_days = ["4-4","7-7","12-13"]
+if (mourn_days.includes(today)) {
+  document.documentElement.style.filter = "grayscale(1)";
+}</script></div></body></html>
