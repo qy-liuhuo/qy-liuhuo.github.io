@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qylh.xyz/about/index.html</loc>
+    
+    <lastmod>2022-06-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://qylh.xyz/2022/06/29/%E5%8C%BA%E5%9D%97%E9%93%BE2-BTC%E5%8D%8F%E8%AE%AE/</loc>
     
     <lastmod>2022-06-29</lastmod>
@@ -59,15 +68,6 @@
     <loc>https://qylh.xyz/2021/05/08/%E8%8B%B1%E6%96%87%E4%BD%9C%E6%96%87/</loc>
     
     <lastmod>2022-05-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qylh.xyz/about/index.html</loc>
-    
-    <lastmod>2022-05-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
