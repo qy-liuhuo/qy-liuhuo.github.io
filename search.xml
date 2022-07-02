@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>区块链3-BTC实现</title>
+      <link href="/2022/07/02/%E5%8C%BA%E5%9D%97%E9%93%BE3-BTC%E5%AE%9E%E7%8E%B0/"/>
+      <url>/2022/07/02/%E5%8C%BA%E5%9D%97%E9%93%BE3-BTC%E5%AE%9E%E7%8E%B0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="transaction-based-ledger"><a href="#transaction-based-ledger" class="headerlink" title="transaction-based ledger"></a>transaction-based ledger</h2><blockquote><p>比特币采用基于交易的账本模式，并不直接记录账户余额，每次交易都要说明币的来源 </p></blockquote><h3 id="UTXO"><a href="#UTXO" class="headerlink" title="UTXO"></a>UTXO</h3><p>全节点维护的数据结构（Unspent Transaction Output）</p><p>所有没有被花出去的交易输出集合。</p><p><img src="https://img.qylh.xyz/blog/utxo.png" loading="lazy"></p><p>可以用于检测交易是否合法，即待交易的货币是否存在于该集合中。</p><h3 id="transaction-fee"><a href="#transaction-fee" class="headerlink" title="transaction fee"></a>transaction fee</h3><blockquote><p>为了提高全节点记账的积极性，每笔交易都要给予其一定的交易费</p></blockquote><p>当矿被挖完了之后，这仍然是一种激励机制</p><h3 id="挖矿问题"><a href="#挖矿问题" class="headerlink" title="挖矿问题"></a>挖矿问题</h3><blockquote><p>Bitcoin is secured by mining</p></blockquote><p>由于挖矿难度增加，很可能nonce（4字节，32位）找不到一个满足条件的，这时可以调整merkle tree的根哈希值？</p><blockquote><p>merkle tree中的铸币交易有一个被称为coinbase的区域可以写入任意内容，以影响根哈希值。也就是将coinbase的一部分作为extra nonce。</p></blockquote><h4 id="Bernoulli-trial"><a href="#Bernoulli-trial" class="headerlink" title="Bernoulli trial"></a>Bernoulli trial</h4><blockquote><p>a random experiment with binary outcome</p></blockquote><p>无记忆性：memoryless</p><h4 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a>Bernoulli process</h4><blockquote><p>a sequence of independent bernoulli trials</p></blockquote><p>挖矿尝试次数很多，但每次概率很小可以用（Poison process）泊松过程来近似。</p><p>可推导出出块时间服从指数分布。</p><p>（progress free）将来还要挖多长时间与已经挖了多长时间是没有关系的。假如已经挖了10分钟了，没有挖出，那么平均还需要再挖10分钟才能挖出。这保证了不同算力挖矿机器的公平性，否则会导致高算力机器不成比例的挖矿成功概率上升。</p><p>系统会一直调整让出块时间维持在十分钟左右，而对于每个矿工来说出块时间是根据其算力占该系统的比例来决定的。</p><h3 id="比特币数量"><a href="#比特币数量" class="headerlink" title="比特币数量"></a>比特币数量</h3><p>出块奖励每隔四年（21万个区块）会减半</p><p>比特币总量多少？</p><p>21万*(50+25+12.5+6.25+….)=2100万个比特币</p><h3 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h3><blockquote><p>假设大多数算力都是合法的</p></blockquote><p>恶意节点从概率上有可能获得记账权</p><h4 id="伪造转账？"><a href="#伪造转账？" class="headerlink" title="伪造转账？"></a>伪造转账？</h4><p>不可行，因为其没有转账方的私钥。如果非要写的话，其他节点也不会接受，善意节点会沿着合法的区块继续延伸。非法区块被作废。</p><h4 id="双重支付问题？"><a href="#双重支付问题？" class="headerlink" title="双重支付问题？"></a>双重支付问题？</h4><p>两种方式</p><h5 id="将区块插在最后面？"><a href="#将区块插在最后面？" class="headerlink" title="将区块插在最后面？"></a>将区块插在最后面？</h5><p>其他节点不会承认</p><h5 id="插在与第一次支付平行的位置"><a href="#插在与第一次支付平行的位置" class="headerlink" title="插在与第一次支付平行的位置"></a>插在与第一次支付平行的位置</h5><p><img src="https://img.qylh.xyz/blog/1656750639439.png" loading="lazy"></p><p>若正常区块发生某种问题，造成回滚，则非法区块可能会取代正常区块。</p><p>如何防范？</p><p>多等几个确认（比特币默认需要等6个）才能认为其实正确且不可篡改的。也就是要等一个小时。这样非法节点取代正常区块的难度大大降低。</p><h4 id="故意不写某些节点？"><a href="#故意不写某些节点？" class="headerlink" title="故意不写某些节点？"></a>故意不写某些节点？</h4><p>总有其他节点会把交易写到其他节点中去（其实比特币系统中每个区块大小是有限制的，实际上也有可能会写入之后的区块）</p><h5 id="藏着发？"><a href="#藏着发？" class="headerlink" title="藏着发？"></a>藏着发？</h5><p>selfish mining</p><p>挖到之后不发布，积攒一定长度之后再发布，使其长度长于现有链，以覆盖正常区块。</p><p>但前提是有足够大的算力。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 区块链 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>区块链2-BTC协议</title>
       <link href="/2022/06/29/%E5%8C%BA%E5%9D%97%E9%93%BE2-BTC%E5%8D%8F%E8%AE%AE/"/>
       <url>/2022/06/29/%E5%8C%BA%E5%9D%97%E9%93%BE2-BTC%E5%8D%8F%E8%AE%AE/</url>

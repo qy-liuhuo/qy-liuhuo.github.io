@@ -1,0 +1,33 @@
+<mxfile host="65bd71144e">
+    <diagram id="rmah00YCPYHOCop0xspu" name="第 1 页">
+        <mxGraphModel dx="3189" dy="830" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="A-------&amp;gt;B(5)&lt;br&gt;---------&amp;gt;C(6)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-1010" y="160" width="190" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="此时记录B的5个和C的6个" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;" vertex="1" parent="1">
+                    <mxGeometry x="-970" y="80" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="B------------&amp;gt;c（3）" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-680" y="160" width="190" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="此时记录B的3个和C的6个+新获得的3个" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;" vertex="1" parent="1">
+                    <mxGeometry x="-650" y="80" width="120" height="80" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="xo12YMbBUFkpB3SRcxbM" name="第 2 页">
+        <mxGraphModel dx="1535" dy="830" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="OHPv4NsPvXV0Eth0RLvL-0"/>
+                <mxCell id="OHPv4NsPvXV0Eth0RLvL-1" parent="OHPv4NsPvXV0Eth0RLvL-0"/>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
