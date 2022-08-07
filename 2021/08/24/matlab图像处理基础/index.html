@@ -59,9 +59,9 @@ IconifyProviders = {
 <blockquote>
 <p>此函数本质就是去计算两个矩阵的相关系数</p>
 </blockquote>
-<pre class="line-numbers language-matlab" data-language="matlab"><code class="language-matlab">I <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'pout.tif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab">I <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'pout.tif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 J <span class="token operator">=</span> <span class="token function">medfilt2</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">;</span>
-R <span class="token operator">=</span> <span class="token function">corr2</span><span class="token punctuation">(</span>I<span class="token punctuation">,</span>J<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+R <span class="token operator">=</span> <span class="token function">corr2</span><span class="token punctuation">(</span>I<span class="token punctuation">,</span>J<span class="token punctuation">)</span></code></pre>
 
 <h2 id="像素值的获取"><a href="#像素值的获取" class="headerlink" title="像素值的获取"></a>像素值的获取</h2><p><code>impixel()</code></p>
 <blockquote>
@@ -71,8 +71,8 @@ R <span class="token operator">=</span> <span class="token function">corr2</span
 <blockquote>
 <p>实质也就是获取的二维矩阵元素的平均值和标准差</p>
 </blockquote>
-<h2 id="图片展示窗口上显示图片信息"><a href="#图片展示窗口上显示图片信息" class="headerlink" title="图片展示窗口上显示图片信息"></a>图片展示窗口上显示图片信息</h2><pre class="line-numbers language-matlab" data-language="matlab"><code class="language-matlab"><span class="token function">imshow</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">;</span>
-impixelinfo<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="图片展示窗口上显示图片信息"><a href="#图片展示窗口上显示图片信息" class="headerlink" title="图片展示窗口上显示图片信息"></a>图片展示窗口上显示图片信息</h2><pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token function">imshow</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">;</span>
+impixelinfo<span class="token punctuation">;</span></code></pre>
 
 <h2 id="图片的缩放，裁剪和旋转"><a href="#图片的缩放，裁剪和旋转" class="headerlink" title="图片的缩放，裁剪和旋转"></a>图片的缩放，裁剪和旋转</h2><p><code>imresize(I,倍数)</code></p>
 <p><code>imcrop(I,rec)</code>  rec为一个向量[左上角x 左上角y 右下角x 右下角y]</p>

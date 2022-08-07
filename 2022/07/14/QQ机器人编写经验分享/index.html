@@ -86,28 +86,28 @@ IconifyProviders = {
 <p>还是按照官方文档进行配置初始项目，也是注意config文件的编写，尤其是端口需要与上面的对应。</p>
 <p>我的理解这个主要是我们机器人逻辑实现的一个框架，借助cqhttp（其实也支持其他框架的）与qq的交互。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>借助AliceBot文档的图来解释：</p>
-<p><img src="https://img.qylh.xyz/blog/1657805067518.png"></p>
+<p><img src="https://img.qylh.xyz/blog/1657805067518.png" loading="lazy"></p>
 <blockquote>
 <p>AliceBot 在使用时，首先需要你实例化一个 Bot 对象，Bot 对象负责加载配置文件，维护一个插件列表和一个适配器列表并提供了一个供适配器使用的通用的事件分发方法。协议适配器（Adapter）负责和协议后端进行通讯，当协议后端发送一个新的事件（Event）给适配器后，适配器会按插件优先级分发事件给各个插件进行处理。<br>插件（Plugin）是由你编写的用于处理事件的类，它必须具有两个方法，rule() 和 handle() ，rule() 方法要求返回一个 bool 值，表示当前事件是否要交由此插件处理，当 rule() 方法返回 True 时，handle() 方法会被调用以进行事件处理。</p>
 </blockquote>
-<p><img src="https://img.qylh.xyz/blog/1657805281264.png"></p>
+<p><img src="https://img.qylh.xyz/blog/1657805281264.png" loading="lazy"></p>
 <h2 id="插件类的编写"><a href="#插件类的编写" class="headerlink" title="插件类的编写"></a>插件类的编写</h2><p>简单来说就是需要接收事件，根据API作出响应。每一个功能是一个插件也就是一个类，这个类需要继承<code>alicebot.plugin.Plugin</code>，插件由三部分组成：</p>
 <p>事件的信息和API参考go-cqhttp(或其他框架的文档)</p>
 <p>API不一定要手写请求，AliceBot已经封装好了，参考<a target="_blank" rel="noopener" href="https://docs.alicebot.dev/guide/cqhttp-adapter.html">CQHTTP 协议适配器</a></p>
-<h3 id="优先级配置"><a href="#优先级配置" class="headerlink" title="优先级配置"></a>优先级配置</h3><pre class="line-numbers language-none"><code class="language-none">priority: int &#x3D; 5  # 数字越高优先级越低
-block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前事件传播，更低优先级的插件将不会被执行<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="优先级配置"><a href="#优先级配置" class="headerlink" title="优先级配置"></a>优先级配置</h3><pre class="language-none"><code class="language-none">priority: int &#x3D; 5  # 数字越高优先级越低
+block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前事件传播，更低优先级的插件将不会被执行</code></pre>
 
-<h3 id="执行条件"><a href="#执行条件" class="headerlink" title="执行条件"></a>执行条件</h3><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">async def rule(self) -&gt; bool:
+<h3 id="执行条件"><a href="#执行条件" class="headerlink" title="执行条件"></a>执行条件</h3><pre class="language-Python" data-language="Python"><code class="language-Python">async def rule(self) -&gt; bool:
     if self.event.type &#x3D;&#x3D; &#39;message&#39;:
         msg &#x3D; str(self.event.message).lower()
         keyWords &#x3D; [&#39;hello&#39;, &#39;hi&#39;, &#39;大家好&#39;, &#39;你好&#39;]
         for key in keyWords:
             if msg.endswith(key) or msg.startswith(key):
-                return True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                return True</code></pre>
 
 <p>该某个插件执行时，需要先检查rule，若返回了True才会执行具体内容</p>
 <h3 id="执行内容"><a href="#执行内容" class="headerlink" title="执行内容"></a>执行内容</h3><p>满足rule后会执行handle代码</p>
-<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">async def handle(self) -&gt; None:
+<pre class="language-Python" data-language="Python"><code class="language-Python">async def handle(self) -&gt; None:
 
     replay &#x3D; [
         &#123;
@@ -123,7 +123,7 @@ block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前�
             &#125;
         &#125;
     ]
-    await self.event.reply(replay)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    await self.event.reply(replay)</code></pre>
 
 <h2 id="一些踩过的坑"><a href="#一些踩过的坑" class="headerlink" title="一些踩过的坑"></a>一些踩过的坑</h2><ol>
 <li>QQ机器人通过API发出的操作，也会再次被接收到，如果执行条件写的不好，可能会被误处理，导致错误。</li>

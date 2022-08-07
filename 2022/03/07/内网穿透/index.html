@@ -81,20 +81,20 @@ IconifyProviders = {
 </ul>
 <h4 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h4><ol>
 <li>首先下载适合服务器端系统的压缩包，将其解压到合适的路径。</li>
-<li>修改frps.ini 文件<pre class="line-numbers language-[common]" data-language="[common]"><code class="language-[common]">bind_port &#x3D; 2345
-vhost_http_port &#x3D; 8001<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<li>修改frps.ini 文件<pre class="language-[common]" data-language="[common]"><code class="language-[common]">bind_port &#x3D; 2345
+vhost_http_port &#x3D; 8001</code></pre>
 选择的端口可自定义（但也不要选择已经被占用的端口啊啊啊），但记得对端口进行放行（如果你配置完发现不能用，很有可能是没有放行相关端口）</li>
 <li>启动服务 :在安装目录下输入命令 <code>./frps -c ./frps.ini</code></li>
 </ol>
 <h4 id="内网电脑"><a href="#内网电脑" class="headerlink" title="内网电脑"></a>内网电脑</h4><ol>
 <li>下载适合自己电脑的压缩包（一般都是windows叭）</li>
-<li>修改frpc.ini文件<pre class="line-numbers language-[common]" data-language="[common]"><code class="language-[common]">server_addr &#x3D; 服务器IP
+<li>修改frpc.ini文件<pre class="language-[common]" data-language="[common]"><code class="language-[common]">server_addr &#x3D; 服务器IP
 server_port &#x3D; 2345（与上面的bind_port相对应）
 [web]
 type &#x3D; http
 local_ip &#x3D; 192.168.3.43（本机的话就是127.0.0.1就好了，我这里是穿透到了同一局域网内的esp8266）
 local_port &#x3D; 80 (对应HTTP服务)
-custom_domains &#x3D; 自己的域名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+custom_domains &#x3D; 自己的域名</code></pre></li>
 <li>将域名解析到服务器IP（域名购买商会提供服务，比如我的是在阿里云买的，就可以在阿里云进行解析）</li>
 <li>启动服务 <code>./frpc -c ./frpc.ini</code> <strong>注意这里时frpc代表客户端，俄日frps代表服务端</strong></li>
 <li>成功启动后命令行会提示连接成功</li>
@@ -114,7 +114,7 @@ custom_domains &#x3D; 自己的域名<span aria-hidden="true" class="line-number
 <li>需求访问量较小</li>
 </ol>
 <h4 id="注册及登录"><a href="#注册及登录" class="headerlink" title="注册及登录"></a>注册及登录</h4><p>注册称为<a target="_blank" rel="noopener" href="https://suidao.io/%E7%9A%84%E7%94%A8%E6%88%B7">https://suidao.io/的用户</a></p>
-<h4 id="创建隧道"><a href="#创建隧道" class="headerlink" title="创建隧道"></a>创建隧道</h4><p><img src="http://chevereto.qylh.xyz/images/2022/03/08/Snipaste_2022-03-08_13-40-20.jpg" alt="img"></p>
+<h4 id="创建隧道"><a href="#创建隧道" class="headerlink" title="创建隧道"></a>创建隧道</h4><p><img src="http://chevereto.qylh.xyz/images/2022/03/08/Snipaste_2022-03-08_13-40-20.jpg" alt="img" loading="lazy"></p>
 <p>填写服务器所在地，隧道类型，子域名，内网IP，端口（http是80端口）</p>
 <h4 id="去个人中心复制AccessKey"><a href="#去个人中心复制AccessKey" class="headerlink" title="去个人中心复制AccessKey"></a>去个人中心复制AccessKey</h4><h4 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h4><p>根据系统条件选择合适的<a target="_blank" rel="noopener" href="https://gitee.com/Hgui/FastTunnel.SuiDao/releases">客户端</a></p>
 <h4 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h4><p>启动后会提示你输入AccessKey,将刚刚复制的粘贴进去就好了。</p>

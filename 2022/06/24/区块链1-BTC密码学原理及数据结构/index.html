@@ -113,7 +113,7 @@ IconifyProviders = {
 <li>用发送方的私钥加密，发送被接收方，接收方用发送方的公钥解密（保证消息不被篡改，也保证是发送发出的）</li>
 </ol>
 <p>密钥的构造使用了hash方法，保证了几乎不可能存在两个相同的公私钥</p>
-<h2 id="比特币的加密方式"><a href="#比特币的加密方式" class="headerlink" title="比特币的加密方式"></a>比特币的加密方式</h2><p><img src="https://img.qylh.xyz/blog/bitcoincode.png"></p>
+<h2 id="比特币的加密方式"><a href="#比特币的加密方式" class="headerlink" title="比特币的加密方式"></a>比特币的加密方式</h2><p><img src="https://img.qylh.xyz/blog/bitcoincode.png" loading="lazy"></p>
 <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>比特币主要是用到两种数据结构：</p>
 <ul>
 <li>hash pointers</li>
@@ -123,20 +123,20 @@ IconifyProviders = {
 <blockquote>
 <p>block chain is a linked list using hash pointers</p>
 </blockquote>
-<p><img src="https://img.qylh.xyz/blog/blockchain.png"></p>
+<p><img src="https://img.qylh.xyz/blog/blockchain.png" loading="lazy"></p>
 <p>一个哈希指针内的哈希值由前一整个块的内容生成，要想改块内容，后面的hash都得改</p>
 <p>比特币中有些节点并不保存整个链，仅保存最近的一部分，需要之前的内容时会想其他节点询问，通过哈希值的验证就可以判断拿到的是不是正确的（因为有恶意节点的存在）</p>
 <h2 id="merkle-tree"><a href="#merkle-tree" class="headerlink" title="merkle tree"></a>merkle tree</h2><blockquote>
 <p>类似二叉树，只是指针变成了hash pointers</p>
 </blockquote>
-<p><img src="https://img.qylh.xyz/blog/1656067997831.png"></p>
+<p><img src="https://img.qylh.xyz/blog/1656067997831.png" loading="lazy"></p>
 <h3 id="全节点与轻节点"><a href="#全节点与轻节点" class="headerlink" title="全节点与轻节点"></a>全节点与轻节点</h3><ul>
 <li>全节点保存block header+blocke body</li>
 <li>轻节点仅保存block header</li>
 </ul>
-<h4 id="轻节点如何验证对方已经给自己转账了呢？"><a href="#轻节点如何验证对方已经给自己转账了呢？" class="headerlink" title="轻节点如何验证对方已经给自己转账了呢？"></a>轻节点如何验证对方已经给自己转账了呢？</h4><p>首先会要求转账方发送给自己一个<code>merkle proof</code>，是提条从交易节点一直到根节点的路径（下图绿色所示）<br><img src="https://img.qylh.xyz/blog/1656068141044.png"></p>
+<h4 id="轻节点如何验证对方已经给自己转账了呢？"><a href="#轻节点如何验证对方已经给自己转账了呢？" class="headerlink" title="轻节点如何验证对方已经给自己转账了呢？"></a>轻节点如何验证对方已经给自己转账了呢？</h4><p>首先会要求转账方发送给自己一个<code>merkle proof</code>，是提条从交易节点一直到根节点的路径（下图绿色所示）<br><img src="https://img.qylh.xyz/blog/1656068141044.png" loading="lazy"></p>
 <p>然后自己去向全节点请求一些节点的哈希指针（下图红色所示）</p>
-<p><img src="https://img.qylh.xyz/blog/1656068227137.png"></p>
+<p><img src="https://img.qylh.xyz/blog/1656068227137.png" loading="lazy"></p>
 <p>然后根据tx交易块获得hash指针，再加上请求的hash指针值，可以求得上一个的hash值，一直推到根节点，再与header中记录的根节点的hash值比较，一致则交易信息正确</p>
 <p>时间复杂度log2n</p>
 <h4 id="如何判断交易不存在呢？"><a href="#如何判断交易不存在呢？" class="headerlink" title="如何判断交易不存在呢？"></a>如何判断交易不存在呢？</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>拿到整棵树，遍历叶节点，判断每个叶节点的正确性并查看有没有某个交易存在</p>

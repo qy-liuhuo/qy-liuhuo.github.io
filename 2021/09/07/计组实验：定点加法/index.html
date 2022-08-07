@@ -53,7 +53,7 @@ IconifyProviders = {
 <h2 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h2><blockquote>
 <p>设备选择中 family选择Artix 7  package选择fbg676 型号为：xc7a200tfbg676-2</p>
 </blockquote>
-<h2 id="添加加法器程序"><a href="#添加加法器程序" class="headerlink" title="添加加法器程序"></a>添加加法器程序</h2><pre class="line-numbers language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps
+<h2 id="添加加法器程序"><a href="#添加加法器程序" class="headerlink" title="添加加法器程序"></a>添加加法器程序</h2><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps
 <span class="token keyword">module</span> <span class="token function">adder</span><span class="token punctuation">(</span>
         <span class="token keyword">input</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand1<span class="token punctuation">,</span>
         <span class="token keyword">input</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand2<span class="token punctuation">,</span>
@@ -62,12 +62,12 @@ IconifyProviders = {
         <span class="token keyword">output</span> cout
     <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">assign</span> <span class="token operator">&#123;</span>cout<span class="token punctuation">,</span>result<span class="token operator">&#125;</span> <span class="token operator">=</span> operand1<span class="token operator">+</span>operand2<span class="token operator">+</span>cin<span class="token punctuation">;</span>
-<span class="token keyword">endmodule</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">endmodule</span></code></pre>
 <ul>
 <li>两个32位操作数输入和一个进位信号输入</li>
 <li>一个32位结果输入和一位进位信号输出</li>
 </ul>
-<h2 id="进行仿真"><a href="#进行仿真" class="headerlink" title="进行仿真"></a>进行仿真</h2><h3 id="添加仿真文件"><a href="#添加仿真文件" class="headerlink" title="添加仿真文件"></a>添加仿真文件</h3><pre class="line-numbers language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps   <span class="token comment">//仿真单位时间为1ns，精度为1ps</span>
+<h2 id="进行仿真"><a href="#进行仿真" class="headerlink" title="进行仿真"></a>进行仿真</h2><h3 id="添加仿真文件"><a href="#添加仿真文件" class="headerlink" title="添加仿真文件"></a>添加仿真文件</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps   <span class="token comment">//仿真单位时间为1ns，精度为1ps</span>
 <span class="token keyword">module</span> testbench<span class="token punctuation">;</span>
 
     <span class="token comment">// Inputs</span>
@@ -98,7 +98,7 @@ IconifyProviders = {
     <span class="token important">always</span> <span class="token number">#10</span> operand1 <span class="token operator">=</span> <span class="token kernel-function property">$random</span><span class="token punctuation">;</span>  <span class="token comment">//$random为系统任务，产生一个随机的32位数</span>
     <span class="token important">always</span> <span class="token number">#10</span> operand2 <span class="token operator">=</span> <span class="token kernel-function property">$random</span><span class="token punctuation">;</span>  <span class="token comment">//#10 表示等待10个单位时间(10ns)，即每过10ns，赋值一个随机的32位数</span>
     <span class="token important">always</span> <span class="token number">#10</span> cin <span class="token operator">=</span> <span class="token operator">&#123;</span><span class="token kernel-function property">$random</span><span class="token operator">&#125;</span> <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">//加了拼接符，&#123;$random&#125;产生一个非负数，除2取余得到0或1</span>
-<span class="token keyword">endmodule</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">endmodule</span></code></pre>
 <p>目的是进行一个随机模拟输入信号，以验证程序正确</p>
 <h3 id="进行仿真-1"><a href="#进行仿真-1" class="headerlink" title="进行仿真"></a>进行仿真</h3><p>点击 Run simulation 可以看到波形图，右键信号源可更改颜色和数制等</p>
 <h2 id="添加外围模块"><a href="#添加外围模块" class="headerlink" title="添加外围模块"></a>添加外围模块</h2><blockquote>

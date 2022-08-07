@@ -56,7 +56,7 @@ IconifyProviders = {
 <span id="more"></span>
 
 
-<h2 id="Docker-概述"><a href="#Docker-概述" class="headerlink" title="Docker 概述"></a>Docker 概述</h2><p><img src="https://img.qylh.xyz/blog/1651051541515.png" alt="Docker"></p>
+<h2 id="Docker-概述"><a href="#Docker-概述" class="headerlink" title="Docker 概述"></a>Docker 概述</h2><p><img src="https://img.qylh.xyz/blog/1651051541515.png" alt="Docker" loading="lazy"></p>
 <p>一种小巧的虚拟化技术（虚拟机也是虚拟化技术，但比较笨重），基于GoLang开发</p>
 <h3 id="Docker出现原因"><a href="#Docker出现原因" class="headerlink" title="Docker出现原因"></a>Docker出现原因</h3><p>一款产品有两套环境</p>
 <ul>
@@ -75,7 +75,7 @@ IconifyProviders = {
 <li>容器内的应用直接运行在宿主机的内容，容器没有自己的内核，也没有虚拟硬件，更加轻便</li>
 <li>每个容器间石象湖隔离的，每个容器有自己的文件系统，互不影响</li>
 </ul>
-<p><img src="https://img.qylh.xyz/blog/1651052446028.png" alt="虚拟机"><br><img src="https://img.qylh.xyz/blog/1651052204289.png" alt="Docker"></p>
+<p><img src="https://img.qylh.xyz/blog/1651052446028.png" alt="虚拟机" loading="lazy"><br><img src="https://img.qylh.xyz/blog/1651052204289.png" alt="Docker" loading="lazy"></p>
 <h3 id="对DevOps（开发、运维）的意义"><a href="#对DevOps（开发、运维）的意义" class="headerlink" title="对DevOps（开发、运维）的意义"></a>对DevOps（开发、运维）的意义</h3><ol>
 <li>应用更快速的交付和部署</li>
 <li>更便捷的升级和扩缩容</li>
@@ -91,14 +91,14 @@ IconifyProviders = {
 <h4 id="仓库（Repository）"><a href="#仓库（Repository）" class="headerlink" title="仓库（Repository）"></a>仓库（Repository）</h4><blockquote>
 <p>仓库是存放镜像的地方</p>
 </blockquote>
-<p><img src="https://img.qylh.xyz/blog/1651053127230.png"></p>
+<p><img src="https://img.qylh.xyz/blog/1651053127230.png" loading="lazy"></p>
 <h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">官方文档</a></p>
 <p>启动服务</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span></code></pre>
 <p>hello-world 测试</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world</code></pre>
 <p>如果正常的话会出现如下输出</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Unable to <span class="token function">find</span> image <span class="token string">'hello-world:latest'</span> locally <span class="token punctuation">(</span>无法在本地找到该镜像<span class="token punctuation">)</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Unable to <span class="token function">find</span> image <span class="token string">'hello-world:latest'</span> locally <span class="token punctuation">(</span>无法在本地找到该镜像<span class="token punctuation">)</span>
 latest: Pulling from library/hello-world <span class="token punctuation">(</span>从远程仓库拉取<span class="token punctuation">)</span>
 2db29710123e: Pull complete  <span class="token punctuation">(</span>拉取成功<span class="token punctuation">)</span>
 Digest: sha256:10d7d58d5ebd2a652f4d93fdd86da8f265f5318c6a73cc5b6a9798ff6d2b2e67
@@ -123,23 +123,23 @@ Share images, automate workflows, and <span class="token function">more</span> w
  https://hub.docker.com/
 
 For <span class="token function">more</span> examples and ideas, visit:
- https://docs.docker.com/get-started/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ https://docs.docker.com/get-started/</code></pre>
 
 
 <p>通过 <code>docker images </code>查看本地所有镜像</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
-hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> months ago   <span class="token number">13</span>.3kB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> months ago   <span class="token number">13</span>.3kB</code></pre>
 <p>可见hello-world已经在本地存在</p>
 <h3 id="开启阿里云容器镜像加速服务"><a href="#开启阿里云容器镜像加速服务" class="headerlink" title="开启阿里云容器镜像加速服务"></a>开启阿里云容器镜像加速服务</h3><p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-zhangjiakou/instances/mirrors">阿里云配置地址</a></p>
 <p>选择相应操作系统，运行命令即可<br>例如</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /etc/docker
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /etc/docker
 <span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'
 &#123;
   "registry-mirrors": ["https://xxxxxx.mirror.aliyuncs.com"]
 &#125;
 EOF</span>
 <span class="token function">sudo</span> systemctl daemon-reload
-<span class="token function">sudo</span> systemctl restart <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">sudo</span> systemctl restart <span class="token function">docker</span></code></pre>
 </div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Ma Haotian</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://qylh.xyz/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/" title="Docker学习Day1">https://qylh.xyz/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2022/04/28/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A/" rel="prev" title="软件工程调研报告"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">软件工程调研报告</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/04/25/%E8%B7%A8%E6%BA%90%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%ABCORS/" rel="next" title="跨源资源共享CORS"><span class="post-nav-text">跨源资源共享CORS</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎通过Email:maht2001@163.com与我交流。</span><br></div><div id="waline"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@waline/client@v2/dist/waline.css"><script>window.CONFIG.waline.config.path = "/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/"</script><div class="js-Pjax"><script src="/js/comments/waline.js" type="module" defer></script></div></div></main><footer class="sidebar-translate" id="footer"><div class="beian"><a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021012791号</a></div><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Ma Haotian</span></div><div class="live-time"><span>本博客已运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
   setTimeout(blog_live_time, 1000);
   const start = new Date('2021-07-18T00:00:00');
