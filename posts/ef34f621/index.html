@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#2f3542"><meta name="author" content="Ma Haotian"><meta name="copyright" content="Ma Haotian"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Docker学习Day1 | MaHaotian's blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><script src="https://fastly.jsdelivr.net/npm/pjax@latest/pjax.min.js" defer></script><script src="/js/pjax.js" defer type="module"></script><script src="https://fastly.jsdelivr.net/npm/vue@2.6.14"></script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#2f3542"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"qylh.xyz","root":"/","title":"七月流火","version":"1.10.6","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M9KWR9L');</script><!-- End Google Tag Manager --><meta name="description" content="参考B站狂神说Docker教程弱小和无知不是生存的障碍，傲慢才是 ——三体 由于学校给的服务器（windows server 2008 emm）不支持Docker，所以一直没有接触这东西，现在才觉得应该好好学习一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习Day1">
+<meta property="og:url" content="https://qylh.xyz/posts/ef34f621/index.html">
+<meta property="og:site_name" content="MaHaotian&#39;s blog">
+<meta property="og:description" content="参考B站狂神说Docker教程弱小和无知不是生存的障碍，傲慢才是 ——三体 由于学校给的服务器（windows server 2008 emm）不支持Docker，所以一直没有接触这东西，现在才觉得应该好好学习一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1651051541515.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1651052446028.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1651052204289.png">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1651053127230.png">
+<meta property="article:published_time" content="2022-04-27T09:06:34.000Z">
+<meta property="article:modified_time" content="2022-08-07T10:18:03.310Z">
+<meta property="article:author" content="Ma Haotian">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.qylh.xyz/blog/1651051541515.png"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Ma Haotian"><img width="96" loading="lazy" src="https://img.qylh.xyz/blog/v2-d39a2afc22963be458e0311cb0965dc3_r.jpg" alt="Ma Haotian"><span class="site-author-status" title="永远相信美好的事情即将发生">😎</span></a><div class="site-author-name"><a href="/about/">Ma Haotian</a></div><span class="site-name">MaHaotian's blog</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">48</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">10</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">58</span></a></div><a class="site-state-item hty-icon-button" href="/about/" title="about"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2499094347&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/qy-liuhuo" title="GitHub" target="_blank" style="color:#95a5a6"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="http://hdyb.hbu.cn/git/Mahaotian" title="Gitee" target="_blank" style="color:#ff4757"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:maht2001@163.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1553883989" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">Docker 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%87%BA%E7%8E%B0%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">Docker出现原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-number">1.2.</span> <span class="toc-text">Docker的核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E4%B8%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%B7%AE%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">Docker与虚拟机的差别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9DevOps%EF%BC%88%E5%BC%80%E5%8F%91%E3%80%81%E8%BF%90%E7%BB%B4%EF%BC%89%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">1.4.</span> <span class="toc-text">对DevOps（开发、运维）的意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E6%9E%84%E6%88%90"><span class="toc-number">1.5.</span> <span class="toc-text">Docker构成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%EF%BC%88Image%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">镜像（Image）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%EF%BC%88Container%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">容器（Container）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%EF%BC%88Repository%EF%BC%89"><span class="toc-number">1.5.3.</span> <span class="toc-text">仓库（Repository）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%AE%89%E8%A3%85"><span class="toc-number">1.6.</span> <span class="toc-text">Docker安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.7.</span> <span class="toc-text">开启阿里云容器镜像加速服务</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#2f3542;"><link itemprop="mainEntityOfPage" href="https://qylh.xyz/posts/ef34f621/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Ma Haotian"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="MaHaotian's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Docker学习Day1</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2022-04-27 17:06:34" itemprop="dateCreated datePublished" datetime="2022-04-27T17:06:34+08:00">2022-04-27</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2022-08-07 18:18:03" itemprop="dateModified" datetime="2022-08-07T18:18:03+08:00">2022-08-07</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">822</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">3m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Docker/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Docker</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Docker/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">Docker</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>参考B站狂神说Docker教程<br>弱小和无知不是生存的障碍，傲慢才是 ——三体</p>
+<p>由于学校给的服务器（windows server 2008 emm）不支持Docker，所以一直没有接触这东西，现在才觉得应该好好学习一下。</p>
+<span id="more"></span>
+
+
+<h2 id="Docker-概述"><a href="#Docker-概述" class="headerlink" title="Docker 概述"></a>Docker 概述</h2><p><img src="https://img.qylh.xyz/blog/1651051541515.png" alt="Docker" loading="lazy"></p>
+<p>一种小巧的虚拟化技术（虚拟机也是虚拟化技术，但比较笨重），基于GoLang开发</p>
+<h3 id="Docker出现原因"><a href="#Docker出现原因" class="headerlink" title="Docker出现原因"></a>Docker出现原因</h3><p>一款产品有两套环境</p>
+<ul>
+<li>线上环境</li>
+<li>开发环境</li>
+</ul>
+<p>开发和部署环境就会比较麻烦，每一个机器都要部署环境，浪费时间。 那么我们项目文件能不能和环境一起打包发布呢？</p>
+<p>传统方式：开发人员开发jar包，运维来上线</p>
+<p>现在的方案：开发打包部署上线，一套流程完成</p>
+<p>在这种需求下Docker应运而生！</p>
+<h3 id="Docker的核心思想"><a href="#Docker的核心思想" class="headerlink" title="Docker的核心思想"></a>Docker的核心思想</h3><blockquote>
+<p>打包装箱，相互隔离<br>互不影响</p>
+</blockquote>
+<h3 id="Docker与虚拟机的差别"><a href="#Docker与虚拟机的差别" class="headerlink" title="Docker与虚拟机的差别"></a>Docker与虚拟机的差别</h3><ul>
+<li>传统虚拟机，虚拟出一条硬件，运行一个完整的操作系统，在此基础上安装和运行软件</li>
+<li>容器内的应用直接运行在宿主机的内容，容器没有自己的内核，也没有虚拟硬件，更加轻便</li>
+<li>每个容器间石象湖隔离的，每个容器有自己的文件系统，互不影响</li>
+</ul>
+<p><img src="https://img.qylh.xyz/blog/1651052446028.png" alt="虚拟机" loading="lazy"><br><img src="https://img.qylh.xyz/blog/1651052204289.png" alt="Docker" loading="lazy"></p>
+<h3 id="对DevOps（开发、运维）的意义"><a href="#对DevOps（开发、运维）的意义" class="headerlink" title="对DevOps（开发、运维）的意义"></a>对DevOps（开发、运维）的意义</h3><ol>
+<li>应用更快速的交付和部署</li>
+<li>更便捷的升级和扩缩容</li>
+<li>更简单的系统运维（开发测试环境高度一致）</li>
+<li>更搞笑的计算资源利用</li>
+</ol>
+<h3 id="Docker构成"><a href="#Docker构成" class="headerlink" title="Docker构成"></a>Docker构成</h3><h4 id="镜像（Image）"><a href="#镜像（Image）" class="headerlink" title="镜像（Image）"></a>镜像（Image）</h4><blockquote>
+<p>docker镜像累死一个模板可以用这个模板来创建容器服务，通过这个镜像可以创建多个容器</p>
+</blockquote>
+<h4 id="容器（Container）"><a href="#容器（Container）" class="headerlink" title="容器（Container）"></a>容器（Container）</h4><blockquote>
+<p>容器技术独立运行一个或者一组应用，通过镜像来创建。<br>可以简单理解成一个简单的Linux系统</p>
+</blockquote>
+<h4 id="仓库（Repository）"><a href="#仓库（Repository）" class="headerlink" title="仓库（Repository）"></a>仓库（Repository）</h4><blockquote>
+<p>仓库是存放镜像的地方</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1651053127230.png" loading="lazy"></p>
+<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">官方文档</a></p>
+<p>启动服务</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span></code></pre>
+<p>hello-world 测试</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world</code></pre>
+<p>如果正常的话会出现如下输出</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Unable to <span class="token function">find</span> image <span class="token string">'hello-world:latest'</span> locally <span class="token punctuation">(</span>无法在本地找到该镜像<span class="token punctuation">)</span>
+latest: Pulling from library/hello-world <span class="token punctuation">(</span>从远程仓库拉取<span class="token punctuation">)</span>
+2db29710123e: Pull complete  <span class="token punctuation">(</span>拉取成功<span class="token punctuation">)</span>
+Digest: sha256:10d7d58d5ebd2a652f4d93fdd86da8f265f5318c6a73cc5b6a9798ff6d2b2e67
+Status: Downloaded newer image <span class="token keyword">for</span> hello-world:latest
+
+Hello from Docker<span class="token operator">!</span> <span class="token punctuation">(</span>运行成功<span class="token punctuation">)</span>
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ <span class="token number">1</span>. The Docker client contacted the Docker daemon.
+ <span class="token number">2</span>. The Docker daemon pulled the <span class="token string">"hello-world"</span> image from the Docker Hub.
+    <span class="token punctuation">(</span>amd64<span class="token punctuation">)</span>
+ <span class="token number">3</span>. The Docker daemon created a new container from that image <span class="token function">which</span> runs the
+    executable that produces the output you are currently reading.
+ <span class="token number">4</span>. The Docker daemon streamed that output to the Docker client, <span class="token function">which</span> sent it
+    to your terminal.
+
+To try something <span class="token function">more</span> ambitious, you can run an Ubuntu container with:
+ $ <span class="token function">docker</span> run -it ubuntu <span class="token function">bash</span>
+
+Share images, automate workflows, and <span class="token function">more</span> with a <span class="token function">free</span> Docker ID:
+ https://hub.docker.com/
+
+For <span class="token function">more</span> examples and ideas, visit:
+ https://docs.docker.com/get-started/</code></pre>
+
+
+<p>通过 <code>docker images </code>查看本地所有镜像</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> months ago   <span class="token number">13</span>.3kB</code></pre>
+<p>可见hello-world已经在本地存在</p>
+<h3 id="开启阿里云容器镜像加速服务"><a href="#开启阿里云容器镜像加速服务" class="headerlink" title="开启阿里云容器镜像加速服务"></a>开启阿里云容器镜像加速服务</h3><p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-zhangjiakou/instances/mirrors">阿里云配置地址</a></p>
+<p>选择相应操作系统，运行命令即可<br>例如</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /etc/docker
+<span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'
+&#123;
+  "registry-mirrors": ["https://xxxxxx.mirror.aliyuncs.com"]
+&#125;
+EOF</span>
+<span class="token function">sudo</span> systemctl daemon-reload
+<span class="token function">sudo</span> systemctl restart <span class="token function">docker</span></code></pre>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Ma Haotian</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://qylh.xyz/posts/ef34f621/" title="Docker学习Day1">https://qylh.xyz/posts/ef34f621/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/54f61860/" rel="prev" title="软件工程调研报告"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">软件工程调研报告</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/299e0af6/" rel="next" title="跨源资源共享CORS"><span class="post-nav-text">跨源资源共享CORS</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎通过Email:maht2001@163.com与我交流。</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="beian"><a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021012791号</a></div><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Ma Haotian</span></div><div class="live-time"><span>本博客已运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2021-07-18T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = ` ${passDay} 天 ${passHour} 小时 ${passMinute} 分 ${passSecond} 秒`;
+}
+blog_live_time();
+</script></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#2f3542" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
