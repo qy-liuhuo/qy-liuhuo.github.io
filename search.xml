@@ -169,6 +169,103 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker学习Day1</title>
+    <url>/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/</url>
+    <content><![CDATA[<p>参考B站狂神说Docker教程<br>弱小和无知不是生存的障碍，傲慢才是 ——三体</p>
+<p>由于学校给的服务器（windows server 2008 emm）不支持Docker，所以一直没有接触这东西，现在才觉得应该好好学习一下。</p>
+<span id="more"></span>
+
+
+<h2 id="Docker-概述"><a href="#Docker-概述" class="headerlink" title="Docker 概述"></a>Docker 概述</h2><p><img src="https://img.qylh.xyz/blog/1651051541515.png" alt="Docker" loading="lazy"></p>
+<p>一种小巧的虚拟化技术（虚拟机也是虚拟化技术，但比较笨重），基于GoLang开发</p>
+<h3 id="Docker出现原因"><a href="#Docker出现原因" class="headerlink" title="Docker出现原因"></a>Docker出现原因</h3><p>一款产品有两套环境</p>
+<ul>
+<li>线上环境</li>
+<li>开发环境</li>
+</ul>
+<p>开发和部署环境就会比较麻烦，每一个机器都要部署环境，浪费时间。 那么我们项目文件能不能和环境一起打包发布呢？</p>
+<p>传统方式：开发人员开发jar包，运维来上线</p>
+<p>现在的方案：开发打包部署上线，一套流程完成</p>
+<p>在这种需求下Docker应运而生！</p>
+<h3 id="Docker的核心思想"><a href="#Docker的核心思想" class="headerlink" title="Docker的核心思想"></a>Docker的核心思想</h3><blockquote>
+<p>打包装箱，相互隔离<br>互不影响</p>
+</blockquote>
+<h3 id="Docker与虚拟机的差别"><a href="#Docker与虚拟机的差别" class="headerlink" title="Docker与虚拟机的差别"></a>Docker与虚拟机的差别</h3><ul>
+<li>传统虚拟机，虚拟出一条硬件，运行一个完整的操作系统，在此基础上安装和运行软件</li>
+<li>容器内的应用直接运行在宿主机的内容，容器没有自己的内核，也没有虚拟硬件，更加轻便</li>
+<li>每个容器间石象湖隔离的，每个容器有自己的文件系统，互不影响</li>
+</ul>
+<p><img src="https://img.qylh.xyz/blog/1651052446028.png" alt="虚拟机" loading="lazy"><br><img src="https://img.qylh.xyz/blog/1651052204289.png" alt="Docker" loading="lazy"></p>
+<h3 id="对DevOps（开发、运维）的意义"><a href="#对DevOps（开发、运维）的意义" class="headerlink" title="对DevOps（开发、运维）的意义"></a>对DevOps（开发、运维）的意义</h3><ol>
+<li>应用更快速的交付和部署</li>
+<li>更便捷的升级和扩缩容</li>
+<li>更简单的系统运维（开发测试环境高度一致）</li>
+<li>更搞笑的计算资源利用</li>
+</ol>
+<h3 id="Docker构成"><a href="#Docker构成" class="headerlink" title="Docker构成"></a>Docker构成</h3><h4 id="镜像（Image）"><a href="#镜像（Image）" class="headerlink" title="镜像（Image）"></a>镜像（Image）</h4><blockquote>
+<p>docker镜像累死一个模板可以用这个模板来创建容器服务，通过这个镜像可以创建多个容器</p>
+</blockquote>
+<h4 id="容器（Container）"><a href="#容器（Container）" class="headerlink" title="容器（Container）"></a>容器（Container）</h4><blockquote>
+<p>容器技术独立运行一个或者一组应用，通过镜像来创建。<br>可以简单理解成一个简单的Linux系统</p>
+</blockquote>
+<h4 id="仓库（Repository）"><a href="#仓库（Repository）" class="headerlink" title="仓库（Repository）"></a>仓库（Repository）</h4><blockquote>
+<p>仓库是存放镜像的地方</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1651053127230.png" loading="lazy"></p>
+<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p><a href="https://docs.docker.com/engine/install/centos/">官方文档</a></p>
+<p>启动服务</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span></code></pre>
+<p>hello-world 测试</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world</code></pre>
+<p>如果正常的话会出现如下输出</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Unable to <span class="token function">find</span> image <span class="token string">'hello-world:latest'</span> locally <span class="token punctuation">(</span>无法在本地找到该镜像<span class="token punctuation">)</span>
+latest: Pulling from library/hello-world <span class="token punctuation">(</span>从远程仓库拉取<span class="token punctuation">)</span>
+2db29710123e: Pull complete  <span class="token punctuation">(</span>拉取成功<span class="token punctuation">)</span>
+Digest: sha256:10d7d58d5ebd2a652f4d93fdd86da8f265f5318c6a73cc5b6a9798ff6d2b2e67
+Status: Downloaded newer image <span class="token keyword">for</span> hello-world:latest
+
+Hello from Docker<span class="token operator">!</span> <span class="token punctuation">(</span>运行成功<span class="token punctuation">)</span>
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ <span class="token number">1</span>. The Docker client contacted the Docker daemon.
+ <span class="token number">2</span>. The Docker daemon pulled the <span class="token string">"hello-world"</span> image from the Docker Hub.
+    <span class="token punctuation">(</span>amd64<span class="token punctuation">)</span>
+ <span class="token number">3</span>. The Docker daemon created a new container from that image <span class="token function">which</span> runs the
+    executable that produces the output you are currently reading.
+ <span class="token number">4</span>. The Docker daemon streamed that output to the Docker client, <span class="token function">which</span> sent it
+    to your terminal.
+
+To try something <span class="token function">more</span> ambitious, you can run an Ubuntu container with:
+ $ <span class="token function">docker</span> run -it ubuntu <span class="token function">bash</span>
+
+Share images, automate workflows, and <span class="token function">more</span> with a <span class="token function">free</span> Docker ID:
+ https://hub.docker.com/
+
+For <span class="token function">more</span> examples and ideas, visit:
+ https://docs.docker.com/get-started/</code></pre>
+
+
+<p>通过 <code>docker images </code>查看本地所有镜像</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> months ago   <span class="token number">13</span>.3kB</code></pre>
+<p>可见hello-world已经在本地存在</p>
+<h3 id="开启阿里云容器镜像加速服务"><a href="#开启阿里云容器镜像加速服务" class="headerlink" title="开启阿里云容器镜像加速服务"></a>开启阿里云容器镜像加速服务</h3><p><a href="https://cr.console.aliyun.com/cn-zhangjiakou/instances/mirrors">阿里云配置地址</a></p>
+<p>选择相应操作系统，运行命令即可<br>例如</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /etc/docker
+<span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'
+&#123;
+  "registry-mirrors": ["https://xxxxxx.mirror.aliyuncs.com"]
+&#125;
+EOF</span>
+<span class="token function">sudo</span> systemctl daemon-reload
+<span class="token function">sudo</span> systemctl restart <span class="token function">docker</span></code></pre>
+]]></content>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker学习Day2——镜像命令</title>
     <url>/2022/04/28/Docker%E5%AD%A6%E4%B9%A0Day2/</url>
     <content><![CDATA[<h2 id="Docker工作原理"><a href="#Docker工作原理" class="headerlink" title="Docker工作原理"></a>Docker工作原理</h2><p>Docker是一个C&#x2F;S结构的系统，Docker的守护进程运行在主机上，通过Socket从客户端访问。</p>
@@ -274,100 +371,17 @@ hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> month
       </tags>
   </entry>
   <entry>
-    <title>Docker学习Day1</title>
-    <url>/2022/04/27/Docker%E5%AD%A6%E4%B9%A0Day1/</url>
-    <content><![CDATA[<p>参考B站狂神说Docker教程<br>弱小和无知不是生存的障碍，傲慢才是 ——三体</p>
-<p>由于学校给的服务器（windows server 2008 emm）不支持Docker，所以一直没有接触这东西，现在才觉得应该好好学习一下。</p>
-<span id="more"></span>
-
-
-<h2 id="Docker-概述"><a href="#Docker-概述" class="headerlink" title="Docker 概述"></a>Docker 概述</h2><p><img src="https://img.qylh.xyz/blog/1651051541515.png" alt="Docker" loading="lazy"></p>
-<p>一种小巧的虚拟化技术（虚拟机也是虚拟化技术，但比较笨重），基于GoLang开发</p>
-<h3 id="Docker出现原因"><a href="#Docker出现原因" class="headerlink" title="Docker出现原因"></a>Docker出现原因</h3><p>一款产品有两套环境</p>
-<ul>
-<li>线上环境</li>
-<li>开发环境</li>
-</ul>
-<p>开发和部署环境就会比较麻烦，每一个机器都要部署环境，浪费时间。 那么我们项目文件能不能和环境一起打包发布呢？</p>
-<p>传统方式：开发人员开发jar包，运维来上线</p>
-<p>现在的方案：开发打包部署上线，一套流程完成</p>
-<p>在这种需求下Docker应运而生！</p>
-<h3 id="Docker的核心思想"><a href="#Docker的核心思想" class="headerlink" title="Docker的核心思想"></a>Docker的核心思想</h3><blockquote>
-<p>打包装箱，相互隔离<br>互不影响</p>
-</blockquote>
-<h3 id="Docker与虚拟机的差别"><a href="#Docker与虚拟机的差别" class="headerlink" title="Docker与虚拟机的差别"></a>Docker与虚拟机的差别</h3><ul>
-<li>传统虚拟机，虚拟出一条硬件，运行一个完整的操作系统，在此基础上安装和运行软件</li>
-<li>容器内的应用直接运行在宿主机的内容，容器没有自己的内核，也没有虚拟硬件，更加轻便</li>
-<li>每个容器间石象湖隔离的，每个容器有自己的文件系统，互不影响</li>
-</ul>
-<p><img src="https://img.qylh.xyz/blog/1651052446028.png" alt="虚拟机" loading="lazy"><br><img src="https://img.qylh.xyz/blog/1651052204289.png" alt="Docker" loading="lazy"></p>
-<h3 id="对DevOps（开发、运维）的意义"><a href="#对DevOps（开发、运维）的意义" class="headerlink" title="对DevOps（开发、运维）的意义"></a>对DevOps（开发、运维）的意义</h3><ol>
-<li>应用更快速的交付和部署</li>
-<li>更便捷的升级和扩缩容</li>
-<li>更简单的系统运维（开发测试环境高度一致）</li>
-<li>更搞笑的计算资源利用</li>
-</ol>
-<h3 id="Docker构成"><a href="#Docker构成" class="headerlink" title="Docker构成"></a>Docker构成</h3><h4 id="镜像（Image）"><a href="#镜像（Image）" class="headerlink" title="镜像（Image）"></a>镜像（Image）</h4><blockquote>
-<p>docker镜像累死一个模板可以用这个模板来创建容器服务，通过这个镜像可以创建多个容器</p>
-</blockquote>
-<h4 id="容器（Container）"><a href="#容器（Container）" class="headerlink" title="容器（Container）"></a>容器（Container）</h4><blockquote>
-<p>容器技术独立运行一个或者一组应用，通过镜像来创建。<br>可以简单理解成一个简单的Linux系统</p>
-</blockquote>
-<h4 id="仓库（Repository）"><a href="#仓库（Repository）" class="headerlink" title="仓库（Repository）"></a>仓库（Repository）</h4><blockquote>
-<p>仓库是存放镜像的地方</p>
-</blockquote>
-<p><img src="https://img.qylh.xyz/blog/1651053127230.png" loading="lazy"></p>
-<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p><a href="https://docs.docker.com/engine/install/centos/">官方文档</a></p>
-<p>启动服务</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">systemctl start <span class="token function">docker</span></code></pre>
-<p>hello-world 测试</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world</code></pre>
-<p>如果正常的话会出现如下输出</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">Unable to <span class="token function">find</span> image <span class="token string">'hello-world:latest'</span> locally <span class="token punctuation">(</span>无法在本地找到该镜像<span class="token punctuation">)</span>
-latest: Pulling from library/hello-world <span class="token punctuation">(</span>从远程仓库拉取<span class="token punctuation">)</span>
-2db29710123e: Pull complete  <span class="token punctuation">(</span>拉取成功<span class="token punctuation">)</span>
-Digest: sha256:10d7d58d5ebd2a652f4d93fdd86da8f265f5318c6a73cc5b6a9798ff6d2b2e67
-Status: Downloaded newer image <span class="token keyword">for</span> hello-world:latest
-
-Hello from Docker<span class="token operator">!</span> <span class="token punctuation">(</span>运行成功<span class="token punctuation">)</span>
-This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
- <span class="token number">1</span>. The Docker client contacted the Docker daemon.
- <span class="token number">2</span>. The Docker daemon pulled the <span class="token string">"hello-world"</span> image from the Docker Hub.
-    <span class="token punctuation">(</span>amd64<span class="token punctuation">)</span>
- <span class="token number">3</span>. The Docker daemon created a new container from that image <span class="token function">which</span> runs the
-    executable that produces the output you are currently reading.
- <span class="token number">4</span>. The Docker daemon streamed that output to the Docker client, <span class="token function">which</span> sent it
-    to your terminal.
-
-To try something <span class="token function">more</span> ambitious, you can run an Ubuntu container with:
- $ <span class="token function">docker</span> run -it ubuntu <span class="token function">bash</span>
-
-Share images, automate workflows, and <span class="token function">more</span> with a <span class="token function">free</span> Docker ID:
- https://hub.docker.com/
-
-For <span class="token function">more</span> examples and ideas, visit:
- https://docs.docker.com/get-started/</code></pre>
-
-
-<p>通过 <code>docker images </code>查看本地所有镜像</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
-hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> months ago   <span class="token number">13</span>.3kB</code></pre>
-<p>可见hello-world已经在本地存在</p>
-<h3 id="开启阿里云容器镜像加速服务"><a href="#开启阿里云容器镜像加速服务" class="headerlink" title="开启阿里云容器镜像加速服务"></a>开启阿里云容器镜像加速服务</h3><p><a href="https://cr.console.aliyun.com/cn-zhangjiakou/instances/mirrors">阿里云配置地址</a></p>
-<p>选择相应操作系统，运行命令即可<br>例如</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /etc/docker
-<span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'
-&#123;
-  "registry-mirrors": ["https://xxxxxx.mirror.aliyuncs.com"]
-&#125;
-EOF</span>
-<span class="token function">sudo</span> systemctl daemon-reload
-<span class="token function">sudo</span> systemctl restart <span class="token function">docker</span></code></pre>
-]]></content>
+    <title>ESP32使用VLGL(arduino)</title>
+    <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/</url>
+    <content><![CDATA[<span id="more"></span>]]></content>
+      <categories>
+        <category>硬件开发</category>
+      </categories>
       <tags>
-        <tag>Docker</tag>
+        <tag>硬件开发</tag>
+        <tag>Arduino</tag>
+        <tag>ESP32</tag>
+        <tag>MPU6050</tag>
       </tags>
   </entry>
   <entry>
@@ -415,52 +429,6 @@ dev  home  lib64  media       opt  root  sbin  sys  usr
       </tags>
   </entry>
   <entry>
-    <title>ESP32使用VLGL(arduino)</title>
-    <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
-      <categories>
-        <category>硬件开发</category>
-      </categories>
-      <tags>
-        <tag>硬件开发</tag>
-        <tag>Arduino</tag>
-        <tag>ESP32</tag>
-        <tag>MPU6050</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ESP32使用VLGL(arduino)</title>
-    <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/</url>
-    <content><![CDATA[<p>LVGL 为免费开源的图形库，用于在嵌入式设备的屏幕上创建 GUI，也适用于触摸屏</p>
-<span id="more"></span>
-<p>元件：</p>
-<ul>
-<li>ESP32</li>
-<li>TFT 屏幕<br>软件：</li>
-<li>Arduino<br>准备工作：</li>
-<li>库<ul>
-<li><a href="https://github.com/Bodmer/TFT_eSPI">TFT_eSPI</a></li>
-<li><a href="https://github.com/Bodmer/TFT_Touch">TFT_Touch</a>(如果有触摸需求的话)</li>
-<li><a href="https://github.com/lvgl/lv_arduino">lv_arduino</a></li>
-</ul>
-</li>
-<li>将库引入 Arduino 的 Library 文化夹中去<br>更改配置文件：<blockquote>
-<p>由于默认使用了 User_setup.h 配置文件所以需要根据自己的硬件环境进行更改方法为：<br>在 User_Setup_select.h 文件中将 User_setup.h 头文件注释掉再根据自己的开发版和屏幕型号选择对应的头文件取消注释，然后道相应的头文件里面配置引脚和屏幕大小即可。<br>可以使用库中的 examples 测试。<br>参考：<a href="https://blog.csdn.net/qq_41868901/article/details/107998469">https://blog.csdn.net/qq_41868901/article/details/107998469</a></p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>硬件开发</category>
-      </categories>
-      <tags>
-        <tag>硬件开发</tag>
-        <tag>Arduino</tag>
-        <tag>ESP32</tag>
-        <tag>VLGL图形库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ES6新特性</title>
     <url>/2022/01/09/ES6%E6%96%B0%E7%89%B9%E6%80%A7/</url>
     <content><![CDATA[<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><blockquote>
@@ -501,6 +469,38 @@ dev  home  lib64  media       opt  root  sbin  sys  usr
       <tags>
         <tag>前端</tag>
         <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ESP32使用VLGL(arduino)</title>
+    <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/</url>
+    <content><![CDATA[<p>LVGL 为免费开源的图形库，用于在嵌入式设备的屏幕上创建 GUI，也适用于触摸屏</p>
+<span id="more"></span>
+<p>元件：</p>
+<ul>
+<li>ESP32</li>
+<li>TFT 屏幕<br>软件：</li>
+<li>Arduino<br>准备工作：</li>
+<li>库<ul>
+<li><a href="https://github.com/Bodmer/TFT_eSPI">TFT_eSPI</a></li>
+<li><a href="https://github.com/Bodmer/TFT_Touch">TFT_Touch</a>(如果有触摸需求的话)</li>
+<li><a href="https://github.com/lvgl/lv_arduino">lv_arduino</a></li>
+</ul>
+</li>
+<li>将库引入 Arduino 的 Library 文化夹中去<br>更改配置文件：<blockquote>
+<p>由于默认使用了 User_setup.h 配置文件所以需要根据自己的硬件环境进行更改方法为：<br>在 User_Setup_select.h 文件中将 User_setup.h 头文件注释掉再根据自己的开发版和屏幕型号选择对应的头文件取消注释，然后道相应的头文件里面配置引脚和屏幕大小即可。<br>可以使用库中的 examples 测试。<br>参考：<a href="https://blog.csdn.net/qq_41868901/article/details/107998469">https://blog.csdn.net/qq_41868901/article/details/107998469</a></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>硬件开发</category>
+      </categories>
+      <tags>
+        <tag>硬件开发</tag>
+        <tag>Arduino</tag>
+        <tag>ESP32</tag>
+        <tag>VLGL图形库</tag>
       </tags>
   </entry>
   <entry>
@@ -611,26 +611,6 @@ dev  home  lib64  media       opt  root  sbin  sys  usr
         <tag>PAT</tag>
         <tag>图</tag>
         <tag>迪杰斯特拉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HBU计网复习整理</title>
-    <url>/2022/04/28/HBU%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<p>计算机网络知识点个人总结，仅供参考，请勿过分解读</p>
-<span id="more"></span>
-
-<p>当时整理在了幕布平台上，这里给出分享链接,如有错误请批评指正</p>
-<p><a href="https://www.mubucm.com/doc/aONkBGZtii">概述和物理层</a></p>
-<p><a href="https://www.mubucm.com/doc/2qLEtOg6xyi">数据链路层</a></p>
-<p><a href="https://www.mubucm.com/doc/2wyF5qRGW2i">传输层</a></p>
-<p><a href="https://www.mubucm.com/doc/k5zNhO0Ryi">网络层</a></p>
-<p><a href="https://www.mubucm.com/doc/t__GlQMBOi">应用层</a></p>
-<p><a href="https://www.mubucm.com/doc/7XQ6mrOSPOi">概括总结</a></p>
-<p><a href="https://www.mubucm.com/doc/35DQemuf2i">简答题</a></p>
-<p><a href="https://www.mubucm.com/doc/5LrXXZXXN2i">计算题</a></p>
-]]></content>
-      <tags>
-        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -794,68 +774,23 @@ int main()
       </tags>
   </entry>
   <entry>
-    <title>PAT甲级REcover the Smallest Number</title>
-    <url>/2022/02/08/PAT%E7%94%B2%E7%BA%A7Recover%20the%20Smallest%20Number/</url>
-    <content><![CDATA[<h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote>
-<p>Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.</p>
-</blockquote>
-<h3 id="输入要求"><a href="#输入要求" class="headerlink" title="输入要求"></a>输入要求</h3><blockquote>
-<p>Each input file contains one test case. Each case gives a positive integer <strong>N</strong> (<strong>≤</strong>1<strong>0</strong>4) followed by <strong>N</strong> number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.</p>
-</blockquote>
-<h3 id="输出要求"><a href="#输出要求" class="headerlink" title="输出要求"></a>输出要求</h3><blockquote>
-<p>each test case, print the smallest number in one line. Notice that the first digit must not be zero.</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
-<p>题意很简单，就是给定一个数字段，给他拼成一个最小的数。很容易想到贪心算法，但是贪的是什么？</p>
-<p>首先想到按从小到大的顺序输出不就好了嘛，但是仔细想想不是这样的比如321&gt;32但是321放前面才是正确的为什么呢？可以这样想假设我们下一个待选的只有a和b两个，两者是不是你在前我在后就是我在后你在前的关系，那么他们后面的数字位数一定是相同的即总位数-前面的位数-a的位数-b的位数，所以从a开始算两种选择的数字大小如下：</p>
-<ol>
-<li>a在前  ab*10^n</li>
-<li>b在前 ba*10^n</li>
-</ol>
-<p>这样就很容易看出了，决定a和b谁在前面的方法就是比较ab以及ba的大小。</p>
-<p>这里可能产生一个疑问，我在每一个位置的选择可不止两种啊，这么多个该怎么比较呢？</p>
-<p>有一个巧妙地方法就是借助sort 自己实现一个cmp规则，这样排出的一定符合规则！可以尝试证明一下：</p>
-<p>我们假设排完之后的顺序是 a b c d e f…………</p>
-<p>使用反证法：如果该顺序不是最优解，那么一定需要通过置换变成最优解，假设我们换了a和c 那么前面从 abc变成了cba（即cba&lt;abc） 而bc&lt;cb  bca&lt;cba  ab&lt;ba  bca&lt;cba&lt;cab同理 一直推到 bca&lt;cba&lt;cab&lt;acb&lt;abc; 两者相悖，所以我们的贪心策略能够得到最优解！</p>
-<p>注意输出没有前导零，还有一个测试点需要注意就是结果为0时还要输出0（也就是说不能单纯的不输出前面的0)</p>
-</blockquote>
-<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">bool</span> <span class="token function">cmp</span><span class="token punctuation">(</span>string a<span class="token punctuation">,</span> string b<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">&lt;</span> b <span class="token operator">+</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
-    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
-    string s<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    string result<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        cin <span class="token operator">>></span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> s <span class="token operator">+</span> n<span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        result <span class="token operator">+=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'0'</span> <span class="token operator">||</span> <span class="token operator">!</span>flag<span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
+    <title>HBU计网复习整理</title>
+    <url>/2022/04/28/HBU%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<p>计算机网络知识点个人总结，仅供参考，请勿过分解读</p>
+<span id="more"></span>
+
+<p>当时整理在了幕布平台上，这里给出分享链接,如有错误请批评指正</p>
+<p><a href="https://www.mubucm.com/doc/aONkBGZtii">概述和物理层</a></p>
+<p><a href="https://www.mubucm.com/doc/2qLEtOg6xyi">数据链路层</a></p>
+<p><a href="https://www.mubucm.com/doc/2wyF5qRGW2i">传输层</a></p>
+<p><a href="https://www.mubucm.com/doc/k5zNhO0Ryi">网络层</a></p>
+<p><a href="https://www.mubucm.com/doc/t__GlQMBOi">应用层</a></p>
+<p><a href="https://www.mubucm.com/doc/7XQ6mrOSPOi">概括总结</a></p>
+<p><a href="https://www.mubucm.com/doc/35DQemuf2i">简答题</a></p>
+<p><a href="https://www.mubucm.com/doc/5LrXXZXXN2i">计算题</a></p>
 ]]></content>
       <tags>
-        <tag>算法</tag>
-        <tag>PAT</tag>
-        <tag>贪心</tag>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -945,30 +880,6 @@ block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前�
         <tag>Python</tag>
         <tag>go-cqhttp</tag>
         <tag>AliceBot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STM32+keil5环境配置踩坑</title>
-    <url>/2021/08/02/STM32%20keil%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%B8%A9%E5%9D%91/</url>
-    <content><![CDATA[<p>环境配置主要参考了<a href="https://blog.csdn.net/daniaoxp/article/details/100101149">海创电子的教程</a>,但应该是keil5新版本问题，配置过程中出现了很多问题，本文将进行一个总结</p>
-<span id="more"></span>
-
-<h2 id="C-环境的Define填写"><a href="#C-环境的Define填写" class="headerlink" title="C++环境的Define填写"></a>C++环境的Define填写</h2><p>只需要填写<code>USE_STDPERIPH_DRIVER</code>即可，否则会有大量报错出现，好像是由于新版本默认会给添加这个东西</p>
-<h2 id="程序烧录后不自动复位"><a href="#程序烧录后不自动复位" class="headerlink" title="程序烧录后不自动复位"></a>程序烧录后不自动复位</h2><p>需要改两个地方：</p>
-<ol>
-<li>依次点击options for target -&gt; debug -&gt; setting</li>
-<li>在flashdownload中将reset and run 勾选上</li>
-<li>在pack中将enable取消勾选</li>
-<li>保存即可</li>
-</ol>
-]]></content>
-      <categories>
-        <category>硬件开发</category>
-      </categories>
-      <tags>
-        <tag>硬件开发</tag>
-        <tag>STM32</tag>
-        <tag>keil5</tag>
       </tags>
   </entry>
   <entry>
@@ -1087,6 +998,95 @@ block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前�
       <tags>
         <tag>算法</tag>
         <tag>PAT甲级</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32+keil5环境配置踩坑</title>
+    <url>/2021/08/02/STM32%20keil%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%B8%A9%E5%9D%91/</url>
+    <content><![CDATA[<p>环境配置主要参考了<a href="https://blog.csdn.net/daniaoxp/article/details/100101149">海创电子的教程</a>,但应该是keil5新版本问题，配置过程中出现了很多问题，本文将进行一个总结</p>
+<span id="more"></span>
+
+<h2 id="C-环境的Define填写"><a href="#C-环境的Define填写" class="headerlink" title="C++环境的Define填写"></a>C++环境的Define填写</h2><p>只需要填写<code>USE_STDPERIPH_DRIVER</code>即可，否则会有大量报错出现，好像是由于新版本默认会给添加这个东西</p>
+<h2 id="程序烧录后不自动复位"><a href="#程序烧录后不自动复位" class="headerlink" title="程序烧录后不自动复位"></a>程序烧录后不自动复位</h2><p>需要改两个地方：</p>
+<ol>
+<li>依次点击options for target -&gt; debug -&gt; setting</li>
+<li>在flashdownload中将reset and run 勾选上</li>
+<li>在pack中将enable取消勾选</li>
+<li>保存即可</li>
+</ol>
+]]></content>
+      <categories>
+        <category>硬件开发</category>
+      </categories>
+      <tags>
+        <tag>硬件开发</tag>
+        <tag>STM32</tag>
+        <tag>keil5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PAT甲级REcover the Smallest Number</title>
+    <url>/2022/02/08/PAT%E7%94%B2%E7%BA%A7Recover%20the%20Smallest%20Number/</url>
+    <content><![CDATA[<h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.</p>
+</blockquote>
+<h3 id="输入要求"><a href="#输入要求" class="headerlink" title="输入要求"></a>输入要求</h3><blockquote>
+<p>Each input file contains one test case. Each case gives a positive integer <strong>N</strong> (<strong>≤</strong>1<strong>0</strong>4) followed by <strong>N</strong> number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.</p>
+</blockquote>
+<h3 id="输出要求"><a href="#输出要求" class="headerlink" title="输出要求"></a>输出要求</h3><blockquote>
+<p>each test case, print the smallest number in one line. Notice that the first digit must not be zero.</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
+<p>题意很简单，就是给定一个数字段，给他拼成一个最小的数。很容易想到贪心算法，但是贪的是什么？</p>
+<p>首先想到按从小到大的顺序输出不就好了嘛，但是仔细想想不是这样的比如321&gt;32但是321放前面才是正确的为什么呢？可以这样想假设我们下一个待选的只有a和b两个，两者是不是你在前我在后就是我在后你在前的关系，那么他们后面的数字位数一定是相同的即总位数-前面的位数-a的位数-b的位数，所以从a开始算两种选择的数字大小如下：</p>
+<ol>
+<li>a在前  ab*10^n</li>
+<li>b在前 ba*10^n</li>
+</ol>
+<p>这样就很容易看出了，决定a和b谁在前面的方法就是比较ab以及ba的大小。</p>
+<p>这里可能产生一个疑问，我在每一个位置的选择可不止两种啊，这么多个该怎么比较呢？</p>
+<p>有一个巧妙地方法就是借助sort 自己实现一个cmp规则，这样排出的一定符合规则！可以尝试证明一下：</p>
+<p>我们假设排完之后的顺序是 a b c d e f…………</p>
+<p>使用反证法：如果该顺序不是最优解，那么一定需要通过置换变成最优解，假设我们换了a和c 那么前面从 abc变成了cba（即cba&lt;abc） 而bc&lt;cb  bca&lt;cba  ab&lt;ba  bca&lt;cba&lt;cab同理 一直推到 bca&lt;cba&lt;cab&lt;acb&lt;abc; 两者相悖，所以我们的贪心策略能够得到最优解！</p>
+<p>注意输出没有前导零，还有一个测试点需要注意就是结果为0时还要输出0（也就是说不能单纯的不输出前面的0)</p>
+</blockquote>
+<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">bool</span> <span class="token function">cmp</span><span class="token punctuation">(</span>string a<span class="token punctuation">,</span> string b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">&lt;</span> b <span class="token operator">+</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+    string s<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    string result<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cin <span class="token operator">>></span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> s <span class="token operator">+</span> n<span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        result <span class="token operator">+=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'0'</span> <span class="token operator">||</span> <span class="token operator">!</span>flag<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>PAT</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -1538,6 +1538,61 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
       </tags>
   </entry>
   <entry>
+    <title>区块链3-BTC实现</title>
+    <url>/2022/07/02/%E5%8C%BA%E5%9D%97%E9%93%BE3-BTC%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h2 id="transaction-based-ledger"><a href="#transaction-based-ledger" class="headerlink" title="transaction-based ledger"></a>transaction-based ledger</h2><blockquote>
+<p>比特币采用基于交易的账本模式，并不直接记录账户余额，每次交易都要说明币的来源 </p>
+</blockquote>
+<h3 id="UTXO"><a href="#UTXO" class="headerlink" title="UTXO"></a>UTXO</h3><p>全节点维护的数据结构（Unspent Transaction Output）</p>
+<p>所有没有被花出去的交易输出集合。</p>
+<p><img src="https://img.qylh.xyz/blog/utxo.png" loading="lazy"></p>
+<p>可以用于检测交易是否合法，即待交易的货币是否存在于该集合中。</p>
+<h3 id="transaction-fee"><a href="#transaction-fee" class="headerlink" title="transaction fee"></a>transaction fee</h3><blockquote>
+<p>为了提高全节点记账的积极性，每笔交易都要给予其一定的交易费</p>
+</blockquote>
+<p>当矿被挖完了之后，这仍然是一种激励机制</p>
+<h3 id="挖矿问题"><a href="#挖矿问题" class="headerlink" title="挖矿问题"></a>挖矿问题</h3><blockquote>
+<p>Bitcoin is secured by mining</p>
+</blockquote>
+<p>由于挖矿难度增加，很可能nonce（4字节，32位）找不到一个满足条件的，这时可以调整merkle tree的根哈希值？</p>
+<blockquote>
+<p>merkle tree中的铸币交易有一个被称为coinbase的区域可以写入任意内容，以影响根哈希值。也就是将coinbase的一部分作为extra nonce。</p>
+</blockquote>
+<h4 id="Bernoulli-trial"><a href="#Bernoulli-trial" class="headerlink" title="Bernoulli trial"></a>Bernoulli trial</h4><blockquote>
+<p>a random experiment with binary outcome</p>
+</blockquote>
+<p>无记忆性：memoryless</p>
+<h4 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a>Bernoulli process</h4><blockquote>
+<p>a sequence of independent bernoulli trials</p>
+</blockquote>
+<p>挖矿尝试次数很多，但每次概率很小可以用（Poison process）泊松过程来近似。</p>
+<p>可推导出出块时间服从指数分布。</p>
+<p>（progress free）将来还要挖多长时间与已经挖了多长时间是没有关系的。假如已经挖了10分钟了，没有挖出，那么平均还需要再挖10分钟才能挖出。这保证了不同算力挖矿机器的公平性，否则会导致高算力机器不成比例的挖矿成功概率上升。</p>
+<p>系统会一直调整让出块时间维持在十分钟左右，而对于每个矿工来说出块时间是根据其算力占该系统的比例来决定的。</p>
+<h3 id="比特币数量"><a href="#比特币数量" class="headerlink" title="比特币数量"></a>比特币数量</h3><p>出块奖励每隔四年（21万个区块）会减半</p>
+<p>比特币总量多少？</p>
+<p>21万*(50+25+12.5+6.25+….)&#x3D;2100万个比特币</p>
+<h3 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h3><blockquote>
+<p>假设大多数算力都是合法的</p>
+</blockquote>
+<p>恶意节点从概率上有可能获得记账权</p>
+<h4 id="伪造转账？"><a href="#伪造转账？" class="headerlink" title="伪造转账？"></a>伪造转账？</h4><p>不可行，因为其没有转账方的私钥。如果非要写的话，其他节点也不会接受，善意节点会沿着合法的区块继续延伸。非法区块被作废。</p>
+<h4 id="双重支付问题？"><a href="#双重支付问题？" class="headerlink" title="双重支付问题？"></a>双重支付问题？</h4><p>两种方式</p>
+<h5 id="将区块插在最后面？"><a href="#将区块插在最后面？" class="headerlink" title="将区块插在最后面？"></a>将区块插在最后面？</h5><p>其他节点不会承认</p>
+<h5 id="插在与第一次支付平行的位置"><a href="#插在与第一次支付平行的位置" class="headerlink" title="插在与第一次支付平行的位置"></a>插在与第一次支付平行的位置</h5><p><img src="https://img.qylh.xyz/blog/1656750639439.png" loading="lazy"></p>
+<p>若正常区块发生某种问题，造成回滚，则非法区块可能会取代正常区块。</p>
+<p>如何防范？</p>
+<p>多等几个确认（比特币默认需要等6个）才能认为其实正确且不可篡改的。也就是要等一个小时。这样非法节点取代正常区块的难度大大降低。</p>
+<h4 id="故意不写某些节点？"><a href="#故意不写某些节点？" class="headerlink" title="故意不写某些节点？"></a>故意不写某些节点？</h4><p>总有其他节点会把交易写到其他节点中去（其实比特币系统中每个区块大小是有限制的，实际上也有可能会写入之后的区块）</p>
+<h5 id="藏着发？"><a href="#藏着发？" class="headerlink" title="藏着发？"></a>藏着发？</h5><p>selfish mining</p>
+<p>挖到之后不发布，积攒一定长度之后再发布，使其长度长于现有链，以覆盖正常区块。</p>
+<p>但前提是有足够大的算力。</p>
+]]></content>
+      <tags>
+        <tag>区块链</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>区块链1_BTC密码学原理及数据结构</title>
     <url>/2022/06/24/%E5%8C%BA%E5%9D%97%E9%93%BE1-BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h1 id="密码学原理"><a href="#密码学原理" class="headerlink" title="密码学原理"></a>密码学原理</h1><blockquote>
@@ -1637,55 +1692,20 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
       </tags>
   </entry>
   <entry>
-    <title>区块链3-BTC实现</title>
-    <url>/2022/07/02/%E5%8C%BA%E5%9D%97%E9%93%BE3-BTC%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<h2 id="transaction-based-ledger"><a href="#transaction-based-ledger" class="headerlink" title="transaction-based ledger"></a>transaction-based ledger</h2><blockquote>
-<p>比特币采用基于交易的账本模式，并不直接记录账户余额，每次交易都要说明币的来源 </p>
-</blockquote>
-<h3 id="UTXO"><a href="#UTXO" class="headerlink" title="UTXO"></a>UTXO</h3><p>全节点维护的数据结构（Unspent Transaction Output）</p>
-<p>所有没有被花出去的交易输出集合。</p>
-<p><img src="https://img.qylh.xyz/blog/utxo.png" loading="lazy"></p>
-<p>可以用于检测交易是否合法，即待交易的货币是否存在于该集合中。</p>
-<h3 id="transaction-fee"><a href="#transaction-fee" class="headerlink" title="transaction fee"></a>transaction fee</h3><blockquote>
-<p>为了提高全节点记账的积极性，每笔交易都要给予其一定的交易费</p>
-</blockquote>
-<p>当矿被挖完了之后，这仍然是一种激励机制</p>
-<h3 id="挖矿问题"><a href="#挖矿问题" class="headerlink" title="挖矿问题"></a>挖矿问题</h3><blockquote>
-<p>Bitcoin is secured by mining</p>
-</blockquote>
-<p>由于挖矿难度增加，很可能nonce（4字节，32位）找不到一个满足条件的，这时可以调整merkle tree的根哈希值？</p>
-<blockquote>
-<p>merkle tree中的铸币交易有一个被称为coinbase的区域可以写入任意内容，以影响根哈希值。也就是将coinbase的一部分作为extra nonce。</p>
-</blockquote>
-<h4 id="Bernoulli-trial"><a href="#Bernoulli-trial" class="headerlink" title="Bernoulli trial"></a>Bernoulli trial</h4><blockquote>
-<p>a random experiment with binary outcome</p>
-</blockquote>
-<p>无记忆性：memoryless</p>
-<h4 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a>Bernoulli process</h4><blockquote>
-<p>a sequence of independent bernoulli trials</p>
-</blockquote>
-<p>挖矿尝试次数很多，但每次概率很小可以用（Poison process）泊松过程来近似。</p>
-<p>可推导出出块时间服从指数分布。</p>
-<p>（progress free）将来还要挖多长时间与已经挖了多长时间是没有关系的。假如已经挖了10分钟了，没有挖出，那么平均还需要再挖10分钟才能挖出。这保证了不同算力挖矿机器的公平性，否则会导致高算力机器不成比例的挖矿成功概率上升。</p>
-<p>系统会一直调整让出块时间维持在十分钟左右，而对于每个矿工来说出块时间是根据其算力占该系统的比例来决定的。</p>
-<h3 id="比特币数量"><a href="#比特币数量" class="headerlink" title="比特币数量"></a>比特币数量</h3><p>出块奖励每隔四年（21万个区块）会减半</p>
-<p>比特币总量多少？</p>
-<p>21万*(50+25+12.5+6.25+….)&#x3D;2100万个比特币</p>
-<h3 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h3><blockquote>
-<p>假设大多数算力都是合法的</p>
-</blockquote>
-<p>恶意节点从概率上有可能获得记账权</p>
-<h4 id="伪造转账？"><a href="#伪造转账？" class="headerlink" title="伪造转账？"></a>伪造转账？</h4><p>不可行，因为其没有转账方的私钥。如果非要写的话，其他节点也不会接受，善意节点会沿着合法的区块继续延伸。非法区块被作废。</p>
-<h4 id="双重支付问题？"><a href="#双重支付问题？" class="headerlink" title="双重支付问题？"></a>双重支付问题？</h4><p>两种方式</p>
-<h5 id="将区块插在最后面？"><a href="#将区块插在最后面？" class="headerlink" title="将区块插在最后面？"></a>将区块插在最后面？</h5><p>其他节点不会承认</p>
-<h5 id="插在与第一次支付平行的位置"><a href="#插在与第一次支付平行的位置" class="headerlink" title="插在与第一次支付平行的位置"></a>插在与第一次支付平行的位置</h5><p><img src="https://img.qylh.xyz/blog/1656750639439.png" loading="lazy"></p>
-<p>若正常区块发生某种问题，造成回滚，则非法区块可能会取代正常区块。</p>
-<p>如何防范？</p>
-<p>多等几个确认（比特币默认需要等6个）才能认为其实正确且不可篡改的。也就是要等一个小时。这样非法节点取代正常区块的难度大大降低。</p>
-<h4 id="故意不写某些节点？"><a href="#故意不写某些节点？" class="headerlink" title="故意不写某些节点？"></a>故意不写某些节点？</h4><p>总有其他节点会把交易写到其他节点中去（其实比特币系统中每个区块大小是有限制的，实际上也有可能会写入之后的区块）</p>
-<h5 id="藏着发？"><a href="#藏着发？" class="headerlink" title="藏着发？"></a>藏着发？</h5><p>selfish mining</p>
-<p>挖到之后不发布，积攒一定长度之后再发布，使其长度长于现有链，以覆盖正常区块。</p>
-<p>但前提是有足够大的算力。</p>
+    <title>区块链3-BTC网络</title>
+    <url>/2022/07/03/%E5%8C%BA%E5%9D%97%E9%93%BE3-BTC%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<p>The BitCoin Network</p>
+<span id="more"></span>
+
+<h2 id="BTC-网络"><a href="#BTC-网络" class="headerlink" title="BTC 网络"></a>BTC 网络</h2><p><img src="https://img.qylh.xyz/blog/netword.png" loading="lazy"></p>
+<p>网络层为简单的P2P结构（每个节点对等，不存在Super node），节点间通过TCP通信。</p>
+<p>设计原则：</p>
+<ul>
+<li>简单</li>
+<li>鲁棒性强</li>
+</ul>
+<p>simple，robust but not efficient.</p>
+<p>每个节点都要维护一个待上链集合，第一次收到交易时转发给其他节点。</p>
 ]]></content>
       <tags>
         <tag>区块链</tag>
@@ -1764,26 +1784,6 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
 ]]></content>
   </entry>
   <entry>
-    <title>区块链3-BTC网络</title>
-    <url>/2022/07/03/%E5%8C%BA%E5%9D%97%E9%93%BE3-BTC%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<p>The BitCoin Network</p>
-<span id="more"></span>
-
-<h2 id="BTC-网络"><a href="#BTC-网络" class="headerlink" title="BTC 网络"></a>BTC 网络</h2><p><img src="https://img.qylh.xyz/blog/netword.png" loading="lazy"></p>
-<p>网络层为简单的P2P结构（每个节点对等，不存在Super node），节点间通过TCP通信。</p>
-<p>设计原则：</p>
-<ul>
-<li>简单</li>
-<li>鲁棒性强</li>
-</ul>
-<p>simple，robust but not efficient.</p>
-<p>每个节点都要维护一个待上链集合，第一次收到交易时转发给其他节点。</p>
-]]></content>
-      <tags>
-        <tag>区块链</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>回归分析</title>
     <url>/2021/08/11/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p>主要包括一元线性回归和多元线性回归，目的在于对拟合方程的效果进行分析</p>
@@ -1800,56 +1800,6 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
       <tags>
         <tag>数学建模</tag>
         <tag>数据分析</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图像的数字化处理</title>
-    <url>/2021/09/07/%E5%9B%BE%E5%83%8F%E7%9A%84%E6%95%B0%E5%AD%97%E5%8C%96%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><blockquote>
-<p>方法很简单就是对图像（数组）进行间隔取样，随着取样间隔的增大，图像越来越模糊</p>
-</blockquote>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span>  <span class="token function">fun</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span>
-    <span class="token comment">%获得图片大小</span>
-    <span class="token punctuation">[</span>w<span class="token punctuation">,</span>h<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">size</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">%画出原图像</span>
-    <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">imshow</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">%命名</span>
-    <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"<span class="token comment">%d*%d",w,h));</span>
-    <span class="token comment">%每次图片取样间隔为2，逐渐缩小图像</span>
-    <span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">5</span>
-        p2<span class="token operator">=</span><span class="token function">p1</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token operator">:</span><span class="token keyword">end</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token operator">:</span><span class="token keyword">end</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">imshow</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"<span class="token comment">%d*%d",w/power(2,i),h/power(2,i)));</span>
-        p1<span class="token operator">=</span>p2<span class="token punctuation">;</span>
-    <span class="token keyword">end</span>
-<span class="token keyword">end</span></code></pre>
-<p>效果<br><img src="/images/dp1.png" loading="lazy"></p>
-<h2 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h2><blockquote>
-<p>灰度图像灰度值一般为0-255，可以缩减范围来压缩图片<br>matlab函数为<code>histeq(图片,量化等级)</code></p>
-</blockquote>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab">    <span class="token keyword">function</span> <span class="token function">fun2</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span>
-    <span class="token comment">%画出原图像</span>
-    <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">imshow</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">%命名</span>
-    <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"灰度级<span class="token comment">%d",256));</span>
-    <span class="token comment">%每次图片灰度值范围缩减一半</span>
-    <span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">7</span>
-        p2<span class="token operator">=</span><span class="token function">histeq</span><span class="token punctuation">(</span>p1<span class="token punctuation">,</span><span class="token number">256</span><span class="token operator">/</span><span class="token function">power</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">imshow</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"灰度级<span class="token comment">%d",256/power(2,i)));</span>
-    <span class="token keyword">end</span>
-<span class="token keyword">end</span></code></pre>
-<p>效果<br><img src="/images/dp2.png" loading="lazy"></p>
-]]></content>
-      <categories>
-        <category>数字图像处理</category>
-      </categories>
-      <tags>
-        <tag>数字图像处理</tag>
       </tags>
   </entry>
   <entry>
@@ -1882,155 +1832,6 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
 ]]></content>
       <tags>
         <tag>数据可视化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数字范围按位与</title>
-    <url>/2022/04/15/%E6%95%B0%E5%AD%97%E8%8C%83%E5%9B%B4%E6%8C%89%E4%BD%8D%E4%B8%8E/</url>
-    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given two integers left and right that represent the range [left, right], return the bitwise AND of all numbers in this range, inclusive.</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最容易想到的就是暴力做，但肯定会超时。需要想有没有什么规律算法？</p>
-<blockquote>
-<p>2进制的数字每一个都是在前一个基础上变动而来的，那么他们应该是从某一位之前是相同的。而这一位的位置应该随着两个数的距离而向前移动，所以我们可以将问题简化求为最左端与最右端的这个数的位置，在这个数之前每个位都是相同的，也就是and之后不影响结果，而之后因为两个数之间多个数and导致为0，所以只需要保留前面相同的位置，后面的取0即可。</p>
-</blockquote>
-<pre class="language-java" data-language="java"><code class="language-java">
-<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rangeBitwiseAnd</span><span class="token punctuation">(</span><span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> len<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>left<span class="token operator">&lt;</span>right<span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            left<span class="token operator">=</span>left<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>
-            right<span class="token operator">=</span>right<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>
-            len<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> left<span class="token operator">&lt;&lt;</span>len<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-</code></pre>]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>力扣</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>插值拟合算法</title>
-    <url>/2021/08/03/%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>用于处理数据缺失，基本思想是根据周围点建立联系，以补充缺失数据，或者预测未来的数据。</p>
-<span id="more"></span>
-
-<h2 id="插值与拟合的应用方向区别"><a href="#插值与拟合的应用方向区别" class="headerlink" title="插值与拟合的应用方向区别"></a>插值与拟合的应用方向区别</h2><blockquote>
-<p>每隔一个小时测一次温度，测12小时</p>
-<ul>
-<li>如果第6个小时忘记测了，根据规律补上一个—–&gt; 插值</li>
-<li>如果想要得知12小时以后的 ——&gt; 拟合</li>
-</ul>
-</blockquote>
-<h2 id="插值问题"><a href="#插值问题" class="headerlink" title="插值问题"></a>插值问题</h2><blockquote>
-<p>归结为已知函数在某区间内若干点处的值，求函数在该区间内其他点处的值。<br>已知函数$x_0,x_1,x_2\cdots x_n$处的值为$y_0,y_1,y_2\cdots y_n$求简单函数$p(x)$,使得$p(x_i)&#x3D;y_i$.</p>
-</blockquote>
-<h3 id="拉格朗日插值法"><a href="#拉格朗日插值法" class="headerlink" title="拉格朗日插值法"></a>拉格朗日插值法</h3><p>具体可参考<a href="https://www.zhihu.com/question/58333118">知乎-如何直观地理解拉格朗日插值法？</a></p>
-<h3 id="牛顿插值"><a href="#牛顿插值" class="headerlink" title="牛顿插值"></a>牛顿插值</h3><h3 id="高次插值的Runge现象"><a href="#高次插值的Runge现象" class="headerlink" title="高次插值的Runge现象"></a>高次插值的Runge现象</h3><blockquote>
-<p>warning<br>插值多项式并不是次数越高越好</p>
-</blockquote>
-<p><code>Runge现象</code>：使用高次插值的时候在边缘产生的震荡现象</p>
-<p>所以再实际中不应该使用七次以上的插值</p>
-<blockquote>
-<p>避免Runge现象<br>将插值区间分为若干小区间，在每个小区间呗用地刺插值，分段低次插值。</p>
-</blockquote>
-<h3 id="Matlab插值"><a href="#Matlab插值" class="headerlink" title="Matlab插值"></a>Matlab插值</h3><h4 id="一维"><a href="#一维" class="headerlink" title="一维"></a>一维</h4><p><a href="https://ww2.mathworks.cn/help/matlab/ref/interp1.html">官方文档</a></p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab">yi<span class="token operator">=</span><span class="token function">interp1</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>xi<span class="token punctuation">,</span><span class="token string">'method'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<blockquote>
-<p>x,y为插值点（已知），xi,yi为被插值点和插值结果（可以试单一点，也可以是向量）method为插值方法可以选用：</p>
-<ul>
-<li>nearest 最邻近插值</li>
-<li>linear 线性插值(默认方法)</li>
-<li>spline 三次样条插值(效果相对好)</li>
-<li>cubic 立方插值</li>
-</ul>
-</blockquote>
-<p>matlab拉格朗日插值需要手写。代码如下</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> y<span class="token operator">=</span><span class="token function">lagrange</span><span class="token punctuation">(</span>x0<span class="token punctuation">,</span>y0<span class="token punctuation">,</span>x<span class="token punctuation">)</span>   <span class="token comment">%x0,y0为初始坐标，x为需要插值的点，返回的y为插值结果</span>
-n<span class="token operator">=</span><span class="token function">length</span><span class="token punctuation">(</span>x0<span class="token punctuation">)</span><span class="token punctuation">;</span>m<span class="token operator">=</span><span class="token function">length</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>m
-    z<span class="token operator">=</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    s<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token number">j</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>n
-        p<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> k<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>n
-            <span class="token keyword">if</span> k<span class="token operator">~=</span><span class="token number">j</span>
-                p<span class="token operator">=</span>p<span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>z<span class="token operator">-</span><span class="token function">x0</span><span class="token punctuation">(</span><span class="token number">j</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token function">x0</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token operator">-</span><span class="token function">x0</span><span class="token punctuation">(</span><span class="token number">j</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">end</span>
-        <span class="token keyword">end</span>
-        s<span class="token operator">=</span>p<span class="token operator">*</span><span class="token function">y0</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token operator">+</span>s<span class="token punctuation">;</span>
-    <span class="token keyword">end</span>
-    <span class="token function">y</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token operator">=</span>s<span class="token punctuation">;</span>
-<span class="token keyword">end</span></code></pre>
-
-<h4 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h4><p>可以将三维图变得更加平缓圆润</p>
-<p><a href="https://ww2.mathworks.cn/help/matlab/ref/interp2.html?searchHighlight=interp2&s_tid=srchtitle">zi&#x3D;interp2(x,y,z,xi,yi,’method’)</a></p>
-<p>method: </p>
-<ul>
-<li>nearest 最邻近插值</li>
-<li>linear 双线性插值</li>
-<li>spline 双上次样条插值</li>
-<li>cubic 双立方插值</li>
-</ul>
-<h4 id="散乱插值"><a href="#散乱插值" class="headerlink" title="散乱插值"></a>散乱插值</h4><blockquote>
-<p>二维插值插值点都在网格点上，但是有时可能需要在格子内部插入散乱点，此时使用 散乱插值</p>
-</blockquote>
-<p><a href="https://ww2.mathworks.cn/help/matlab/ref/griddata.html?searchHighlight=griddata&s_tid=srchtitle">griddata(x,y,z,xi,yi,’method’)</a></p>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数学建模</tag>
-        <tag>数据处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数学建模论文写作</title>
-    <url>/2021/08/17/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</url>
-    <content><![CDATA[<span id="more"></span>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><blockquote>
-<p>摘要可以等完成作品之后再写<br>内容包括</p>
-<ul>
-<li>建模思想</li>
-<li>数学归类</li>
-<li>算法思想</li>
-<li>建模特点</li>
-<li>主要结果<br>突出方法算法，结论，创新点，特点，不要出现图表和数学公式。<br>尽量不要出现<code>我们</code>这样的词语，可以用本文代替</li>
-</ul>
-</blockquote>
-<h2 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h2><ul>
-<li>关键信息提取</li>
-<li>删除不必要信息</li>
-<li>语气转换（如请您……需要更改）</li>
-</ul>
-<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><blockquote>
-<p>可以合到一起写也可以分开一小问一小问分析</p>
-</blockquote>
-<ul>
-<li>问题类型定位</li>
-<li>问题特点</li>
-<li>问题难点</li>
-<li>无关因素剔除</li>
-<li>求解完成之后回来重新改一下问题分析</li>
-</ul>
-<h2 id="提出假设"><a href="#提出假设" class="headerlink" title="提出假设"></a>提出假设</h2><blockquote>
-<p>目的：将问题理想化，简单化</p>
-</blockquote>
-<ul>
-<li>假设需要建立在题目的条件和要求之上</li>
-<li>不能缺少关键性假设</li>
-<li>用严格确切的数学语言来表达假设</li>
-<li>假设需要切合题意</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数学建模</tag>
       </tags>
   </entry>
   <entry>
@@ -2842,6 +2643,83 @@ n<span class="token operator">=</span><span class="token function">length</span>
       </tags>
   </entry>
   <entry>
+    <title>图像的数字化处理</title>
+    <url>/2021/09/07/%E5%9B%BE%E5%83%8F%E7%9A%84%E6%95%B0%E5%AD%97%E5%8C%96%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><blockquote>
+<p>方法很简单就是对图像（数组）进行间隔取样，随着取样间隔的增大，图像越来越模糊</p>
+</blockquote>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span>  <span class="token function">fun</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span>
+    <span class="token comment">%获得图片大小</span>
+    <span class="token punctuation">[</span>w<span class="token punctuation">,</span>h<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">size</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">%画出原图像</span>
+    <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">imshow</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">%命名</span>
+    <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"<span class="token comment">%d*%d",w,h));</span>
+    <span class="token comment">%每次图片取样间隔为2，逐渐缩小图像</span>
+    <span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">5</span>
+        p2<span class="token operator">=</span><span class="token function">p1</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token operator">:</span><span class="token keyword">end</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token operator">:</span><span class="token keyword">end</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">imshow</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"<span class="token comment">%d*%d",w/power(2,i),h/power(2,i)));</span>
+        p1<span class="token operator">=</span>p2<span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre>
+<p>效果<br><img src="/images/dp1.png" loading="lazy"></p>
+<h2 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h2><blockquote>
+<p>灰度图像灰度值一般为0-255，可以缩减范围来压缩图片<br>matlab函数为<code>histeq(图片,量化等级)</code></p>
+</blockquote>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab">    <span class="token keyword">function</span> <span class="token function">fun2</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span>
+    <span class="token comment">%画出原图像</span>
+    <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">imshow</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">%命名</span>
+    <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"灰度级<span class="token comment">%d",256));</span>
+    <span class="token comment">%每次图片灰度值范围缩减一半</span>
+    <span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">7</span>
+        p2<span class="token operator">=</span><span class="token function">histeq</span><span class="token punctuation">(</span>p1<span class="token punctuation">,</span><span class="token number">256</span><span class="token operator">/</span><span class="token function">power</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">i</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">imshow</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">title</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>"灰度级<span class="token comment">%d",256/power(2,i)));</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre>
+<p>效果<br><img src="/images/dp2.png" loading="lazy"></p>
+]]></content>
+      <categories>
+        <category>数字图像处理</category>
+      </categories>
+      <tags>
+        <tag>数字图像处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数字范围按位与</title>
+    <url>/2022/04/15/%E6%95%B0%E5%AD%97%E8%8C%83%E5%9B%B4%E6%8C%89%E4%BD%8D%E4%B8%8E/</url>
+    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>Given two integers left and right that represent the range [left, right], return the bitwise AND of all numbers in this range, inclusive.</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最容易想到的就是暴力做，但肯定会超时。需要想有没有什么规律算法？</p>
+<blockquote>
+<p>2进制的数字每一个都是在前一个基础上变动而来的，那么他们应该是从某一位之前是相同的。而这一位的位置应该随着两个数的距离而向前移动，所以我们可以将问题简化求为最左端与最右端的这个数的位置，在这个数之前每个位都是相同的，也就是and之后不影响结果，而之后因为两个数之间多个数and导致为0，所以只需要保留前面相同的位置，后面的取0即可。</p>
+</blockquote>
+<pre class="language-java" data-language="java"><code class="language-java">
+<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">rangeBitwiseAnd</span><span class="token punctuation">(</span><span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> len<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>left<span class="token operator">&lt;</span>right<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            left<span class="token operator">=</span>left<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>
+            right<span class="token operator">=</span>right<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>
+            len<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> left<span class="token operator">&lt;&lt;</span>len<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>力扣</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数模转换</title>
     <url>/2022/08/07/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2/</url>
     <content><![CDATA[<p>学习AD&#x2F;DA转换</p>
@@ -2862,6 +2740,128 @@ n<span class="token operator">=</span><span class="token function">length</span>
         <tag>Arduino</tag>
         <tag>ESP32</tag>
         <tag>AD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>插值拟合算法</title>
+    <url>/2021/08/03/%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>用于处理数据缺失，基本思想是根据周围点建立联系，以补充缺失数据，或者预测未来的数据。</p>
+<span id="more"></span>
+
+<h2 id="插值与拟合的应用方向区别"><a href="#插值与拟合的应用方向区别" class="headerlink" title="插值与拟合的应用方向区别"></a>插值与拟合的应用方向区别</h2><blockquote>
+<p>每隔一个小时测一次温度，测12小时</p>
+<ul>
+<li>如果第6个小时忘记测了，根据规律补上一个—–&gt; 插值</li>
+<li>如果想要得知12小时以后的 ——&gt; 拟合</li>
+</ul>
+</blockquote>
+<h2 id="插值问题"><a href="#插值问题" class="headerlink" title="插值问题"></a>插值问题</h2><blockquote>
+<p>归结为已知函数在某区间内若干点处的值，求函数在该区间内其他点处的值。<br>已知函数$x_0,x_1,x_2\cdots x_n$处的值为$y_0,y_1,y_2\cdots y_n$求简单函数$p(x)$,使得$p(x_i)&#x3D;y_i$.</p>
+</blockquote>
+<h3 id="拉格朗日插值法"><a href="#拉格朗日插值法" class="headerlink" title="拉格朗日插值法"></a>拉格朗日插值法</h3><p>具体可参考<a href="https://www.zhihu.com/question/58333118">知乎-如何直观地理解拉格朗日插值法？</a></p>
+<h3 id="牛顿插值"><a href="#牛顿插值" class="headerlink" title="牛顿插值"></a>牛顿插值</h3><h3 id="高次插值的Runge现象"><a href="#高次插值的Runge现象" class="headerlink" title="高次插值的Runge现象"></a>高次插值的Runge现象</h3><blockquote>
+<p>warning<br>插值多项式并不是次数越高越好</p>
+</blockquote>
+<p><code>Runge现象</code>：使用高次插值的时候在边缘产生的震荡现象</p>
+<p>所以再实际中不应该使用七次以上的插值</p>
+<blockquote>
+<p>避免Runge现象<br>将插值区间分为若干小区间，在每个小区间呗用地刺插值，分段低次插值。</p>
+</blockquote>
+<h3 id="Matlab插值"><a href="#Matlab插值" class="headerlink" title="Matlab插值"></a>Matlab插值</h3><h4 id="一维"><a href="#一维" class="headerlink" title="一维"></a>一维</h4><p><a href="https://ww2.mathworks.cn/help/matlab/ref/interp1.html">官方文档</a></p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab">yi<span class="token operator">=</span><span class="token function">interp1</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>xi<span class="token punctuation">,</span><span class="token string">'method'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<blockquote>
+<p>x,y为插值点（已知），xi,yi为被插值点和插值结果（可以试单一点，也可以是向量）method为插值方法可以选用：</p>
+<ul>
+<li>nearest 最邻近插值</li>
+<li>linear 线性插值(默认方法)</li>
+<li>spline 三次样条插值(效果相对好)</li>
+<li>cubic 立方插值</li>
+</ul>
+</blockquote>
+<p>matlab拉格朗日插值需要手写。代码如下</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> y<span class="token operator">=</span><span class="token function">lagrange</span><span class="token punctuation">(</span>x0<span class="token punctuation">,</span>y0<span class="token punctuation">,</span>x<span class="token punctuation">)</span>   <span class="token comment">%x0,y0为初始坐标，x为需要插值的点，返回的y为插值结果</span>
+n<span class="token operator">=</span><span class="token function">length</span><span class="token punctuation">(</span>x0<span class="token punctuation">)</span><span class="token punctuation">;</span>m<span class="token operator">=</span><span class="token function">length</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token number">i</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>m
+    z<span class="token operator">=</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token number">j</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>n
+        p<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> k<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>n
+            <span class="token keyword">if</span> k<span class="token operator">~=</span><span class="token number">j</span>
+                p<span class="token operator">=</span>p<span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>z<span class="token operator">-</span><span class="token function">x0</span><span class="token punctuation">(</span><span class="token number">j</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token function">x0</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token operator">-</span><span class="token function">x0</span><span class="token punctuation">(</span><span class="token number">j</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">end</span>
+        <span class="token keyword">end</span>
+        s<span class="token operator">=</span>p<span class="token operator">*</span><span class="token function">y0</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token operator">+</span>s<span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+    <span class="token function">y</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token operator">=</span>s<span class="token punctuation">;</span>
+<span class="token keyword">end</span></code></pre>
+
+<h4 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h4><p>可以将三维图变得更加平缓圆润</p>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/interp2.html?searchHighlight=interp2&s_tid=srchtitle">zi&#x3D;interp2(x,y,z,xi,yi,’method’)</a></p>
+<p>method: </p>
+<ul>
+<li>nearest 最邻近插值</li>
+<li>linear 双线性插值</li>
+<li>spline 双上次样条插值</li>
+<li>cubic 双立方插值</li>
+</ul>
+<h4 id="散乱插值"><a href="#散乱插值" class="headerlink" title="散乱插值"></a>散乱插值</h4><blockquote>
+<p>二维插值插值点都在网格点上，但是有时可能需要在格子内部插入散乱点，此时使用 散乱插值</p>
+</blockquote>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/griddata.html?searchHighlight=griddata&s_tid=srchtitle">griddata(x,y,z,xi,yi,’method’)</a></p>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
+        <tag>数据处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数学建模论文写作</title>
+    <url>/2021/08/17/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><blockquote>
+<p>摘要可以等完成作品之后再写<br>内容包括</p>
+<ul>
+<li>建模思想</li>
+<li>数学归类</li>
+<li>算法思想</li>
+<li>建模特点</li>
+<li>主要结果<br>突出方法算法，结论，创新点，特点，不要出现图表和数学公式。<br>尽量不要出现<code>我们</code>这样的词语，可以用本文代替</li>
+</ul>
+</blockquote>
+<h2 id="问题重述"><a href="#问题重述" class="headerlink" title="问题重述"></a>问题重述</h2><ul>
+<li>关键信息提取</li>
+<li>删除不必要信息</li>
+<li>语气转换（如请您……需要更改）</li>
+</ul>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><blockquote>
+<p>可以合到一起写也可以分开一小问一小问分析</p>
+</blockquote>
+<ul>
+<li>问题类型定位</li>
+<li>问题特点</li>
+<li>问题难点</li>
+<li>无关因素剔除</li>
+<li>求解完成之后回来重新改一下问题分析</li>
+</ul>
+<h2 id="提出假设"><a href="#提出假设" class="headerlink" title="提出假设"></a>提出假设</h2><blockquote>
+<p>目的：将问题理想化，简单化</p>
+</blockquote>
+<ul>
+<li>假设需要建立在题目的条件和要求之上</li>
+<li>不能缺少关键性假设</li>
+<li>用严格确切的数学语言来表达假设</li>
+<li>假设需要切合题意</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
       </tags>
   </entry>
   <entry>
@@ -3121,6 +3121,100 @@ string <span class="token function">preProcess</span><span class="token punctuat
       </tags>
   </entry>
   <entry>
+    <title>灰色理论</title>
+    <url>/2021/08/06/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/</url>
+    <content><![CDATA[<p>灰色预测模型是通过少量的、不完全的信息，建立数学模型做出预测的一种预测方法。其基于客观事物的过去和现在的发展规律，借助于科学的方法对未来的发展趋势和状况进行描述和分析，并形成科学的假设和判断。</p>
+<p>优势为：</p>
+<ul>
+<li>所需建模信息少</li>
+<li>运算方便</li>
+<li>建模精度高</li>
+<li>可以客服传统回归分析等方法存在的需求数据量大，计算量大，可能出现反常情况等的弊端。<span id="more"></span></li>
+</ul>
+<h2 id="常用预测模型"><a href="#常用预测模型" class="headerlink" title="常用预测模型"></a>常用预测模型</h2><ul>
+<li>微分方程</li>
+<li>差分方程</li>
+<li>马尔科夫预测方程</li>
+<li>灰色预测法</li>
+<li>时间序列</li>
+<li>插值拟合</li>
+<li>神经元拟合</li>
+</ul>
+<blockquote>
+<p>warning<br>没有万能的方法，需要根据实际场景选用合适的模型！！</p>
+</blockquote>
+<h2 id="什么是灰色系统"><a href="#什么是灰色系统" class="headerlink" title="什么是灰色系统"></a>什么是灰色系统</h2><p>灰色是指，我们的数据并不是完全确定的，既含有已知信息又含有未知信息的系统称为灰色系统。</p>
+<h3 id="白色系统"><a href="#白色系统" class="headerlink" title="白色系统"></a>白色系统</h3><blockquote>
+<p>系统内部特征完全已知，即系统的信息是完全充分的</p>
+</blockquote>
+<h3 id="黑色系统"><a href="#黑色系统" class="headerlink" title="黑色系统"></a>黑色系统</h3><blockquote>
+<p>内部特征完全未知，只可以通过与外界的联系来加一观测研究</p>
+</blockquote>
+<h3 id="灰色系统"><a href="#灰色系统" class="headerlink" title="灰色系统"></a>灰色系统</h3><blockquote>
+<p>部分信息已知，对一定范围内变化的与时间有关的灰色过程进行预测</p>
+</blockquote>
+<h2 id="灰色预测模型适用场景"><a href="#灰色预测模型适用场景" class="headerlink" title="灰色预测模型适用场景"></a>灰色预测模型适用场景</h2><p>比如：根据前几天的降雨量，预测明天的降雨量；根据近几年河水污染程度，预测未来污染走势。</p>
+<p>应用范畴：</p>
+<ul>
+<li>灰色关联分析</li>
+<li>灰色预测：人口预测，灾难预测等</li>
+<li>灰色决策</li>
+<li>灰色预测控制</li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>鉴别系统因素之间发展趋势的相异程度，进行关联分析，找出规律，生成有较强规律性的数据序列，然后建立相应的微分方程模型，从而预测事物未来发展趋势的状况</p>
+<p>利用等时距观测到的反应预测对象特征的一系列数量值构造模型</p>
+<h2 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h2><ul>
+<li>灰色时间序列预测</li>
+<li>畸变预测（通过已有异常值出现时间预测未来异常值出现的时间）</li>
+<li>系统预测</li>
+<li>拓扑预测（将原始数据做成曲线，在曲线上按照定值寻找该定值发生的所有时间点，构成点时序列，然后预测未来该定值发生时间）</li>
+</ul>
+<h2 id="灰色关联度与优势分析"><a href="#灰色关联度与优势分析" class="headerlink" title="灰色关联度与优势分析"></a>灰色关联度与优势分析</h2><blockquote>
+<p>需要分析哪些因素是对系统来说是主要的，哪些是次要的，哪些是需要抑制的。<br>关注点应该在于，因素间的关联性，关联程度和如何量化。</p>
+</blockquote>
+<h2 id="灰色关联度"><a href="#灰色关联度" class="headerlink" title="灰色关联度"></a>灰色关联度</h2><blockquote>
+<p>可以选最优有点类似层次分析法</p>
+</blockquote>
+<ul>
+<li>选取参考数列</li>
+<li>m个比较数列</li>
+<li>算出m个关联度</li>
+</ul>
+<h2 id="灰色生成数列"><a href="#灰色生成数列" class="headerlink" title="灰色生成数列"></a>灰色生成数列</h2><blockquote>
+<p>目的：弱化数据的随机性<br>方法：</p>
+<ul>
+<li>累加法 -》能使任意非负数列转化为非减递增的。</li>
+<li>累减法 -》具有求导性质</li>
+<li>加权邻值生成</li>
+</ul>
+</blockquote>
+<h2 id="灰色模型-G-M（1-1）"><a href="#灰色模型-G-M（1-1）" class="headerlink" title="灰色模型 G M（1,1）"></a>灰色模型 G M（1,1）</h2><blockquote>
+<p>G表示灰色 M表示模型</p>
+</blockquote>
+<h3 id="建模步骤"><a href="#建模步骤" class="headerlink" title="建模步骤"></a>建模步骤</h3><ol>
+<li>数据检验和处理（<code>级比检验</code>）<blockquote>
+<p>目的为保证建模方法的可行性<br>如果所有的前一个数除下一个数都落在一个区间内即可进行灰色预测。<br>如果不可以的话可以尝试对数据进行平移变换（一般为统一加上一个数）再进行检验<br>如果还是不行，马上改用其他方法模型。</p>
+</blockquote>
+</li>
+<li>建立GM模型</li>
+<li>利用最小二乘法求解a,b</li>
+<li>建立微分方程</li>
+<li>累减法获得预测值</li>
+<li>检验！！<ol>
+<li>残差检验</li>
+<li>级比偏差值检验</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数学建模</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习数据集划分方法</title>
     <url>/2022/03/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -3144,182 +3238,6 @@ string <span class="token function">preProcess</span><span class="token punctuat
 </blockquote>
 <p>适合小数据量，保证了足够的训练数据，同时也留出了足够的测试数据。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>计组实验：乘法器</title>
-    <url>/2021/09/26/%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%EF%BC%9A%E4%B9%98%E6%B3%95%E5%99%A8/</url>
-    <content><![CDATA[<p>计组第二次实验 乘法器</p>
-<span id="more"></span>
-
-<h2 id="乘法器模块设计"><a href="#乘法器模块设计" class="headerlink" title="乘法器模块设计"></a>乘法器模块设计</h2><h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token keyword">input</span>         clk<span class="token punctuation">,</span>        <span class="token comment">// 时钟</span>
-<span class="token keyword">input</span>         mult_begin<span class="token punctuation">,</span> <span class="token comment">// 乘法开始信号</span>
-<span class="token keyword">input</span>  <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> mult_op1<span class="token punctuation">,</span>   <span class="token comment">// 乘法源操作数1</span>
-<span class="token keyword">input</span>  <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> mult_op2<span class="token punctuation">,</span>   <span class="token comment">// 乘法源操作数2</span></code></pre>
-<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token keyword">output</span> <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> product<span class="token punctuation">,</span>    <span class="token comment">// 乘积</span>
-<span class="token keyword">output</span>        mult_end   <span class="token comment">// 乘法结束信号</span></code></pre>
-
-<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><blockquote>
-<p>输入两个32位数mult_op1作为被乘数，mult_op2作为乘数<br>两个数都认为是有符号数所以需要取出符号进行处理<br>mult_begin作为开始信号，还需设置一个乘法进行中的标志信号，开始信号刚变成1时，对初始数据进行处理将进行信号设为1<br>当进行信号为1时每次上升沿到来就进行一次相加，结束后被乘数左移，乘数右移</p>
-</blockquote>
-<pre class="language-verilog" data-language="verilog"><code class="language-verilog">
-
-<span class="token comment">//乘法正在运算信号和结束信号</span>
-    <span class="token keyword">reg</span> mult_valid<span class="token punctuation">;</span>
-    <span class="token keyword">assign</span> mult_end <span class="token operator">=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token operator">|</span>multiplier<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//乘法结束信号：乘数全0</span>
-    <span class="token important">always @</span><span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>   <span class="token comment">//①</span>
-    <span class="token keyword">begin</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>mult_begin<span class="token punctuation">)</span>    <span class="token comment">//如果没有开始或者已经结束了</span>
-        <span class="token keyword">begin</span>
-            mult_valid <span class="token operator">&lt;=</span> <span class="token number">1'b0</span><span class="token punctuation">;</span>     <span class="token comment">//mult_valid 赋值成0，说明现在没有进行有效的乘法运算</span>
-        <span class="token keyword">end</span>
-        <span class="token keyword">else</span>
-        <span class="token keyword">begin</span>
-            mult_valid <span class="token operator">&lt;=</span> <span class="token number">1'b1</span><span class="token punctuation">;</span>
-        <span class="token keyword">end</span>
-    <span class="token keyword">end</span>
-
-    <span class="token comment">//两个源操作取绝对值，正数的绝对值为其本身，负数的绝对值为取反加1</span>
-    <span class="token keyword">wire</span>        op1_sign<span class="token punctuation">;</span>      <span class="token comment">//操作数1的符号位</span>
-    <span class="token keyword">wire</span>        op2_sign<span class="token punctuation">;</span>      <span class="token comment">//操作数2的符号位</span>
-    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> op1_absolute<span class="token punctuation">;</span>  <span class="token comment">//操作数1的绝对值</span>
-    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> op2_absolute<span class="token punctuation">;</span>  <span class="token comment">//操作数2的绝对值</span>
-    <span class="token keyword">assign</span> op1_sign <span class="token operator">=</span> mult_op1<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">assign</span> op2_sign <span class="token operator">=</span> mult_op2<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">assign</span> op1_absolute <span class="token operator">=</span> op1_sign <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">~</span>mult_op1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> mult_op1<span class="token punctuation">;</span>
-    <span class="token keyword">assign</span> op2_absolute <span class="token operator">=</span> op2_sign <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">~</span>mult_op2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> mult_op2<span class="token punctuation">;</span>
-    <span class="token comment">//加载被乘数，运算时每次左移一位</span>
-    <span class="token keyword">reg</span>  <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> multiplicand<span class="token punctuation">;</span>
-    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">//②</span>
-    <span class="token keyword">begin</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
-        <span class="token keyword">begin</span>    <span class="token comment">// 如果正在进行乘法，则被乘数每时钟左移一位</span>
-            multiplicand <span class="token operator">&lt;=</span> <span class="token operator">&#123;</span>multiplicand<span class="token punctuation">[</span><span class="token number">62</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">1'b0</span><span class="token operator">&#125;</span><span class="token punctuation">;</span>  <span class="token comment">//被乘数x每次左移一位。</span>
-        <span class="token keyword">end</span>
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_begin<span class="token punctuation">)</span> 
-        <span class="token keyword">begin</span>   <span class="token comment">// 乘法开始，加载被乘数，为乘数1的绝对值</span>
-            multiplicand <span class="token operator">&lt;=</span> <span class="token operator">&#123;</span><span class="token number">32'd0</span><span class="token punctuation">,</span>op1_absolute<span class="token operator">&#125;</span><span class="token punctuation">;</span>
-        <span class="token keyword">end</span>
-    <span class="token keyword">end</span>
-
-    <span class="token comment">//加载乘数，运算时每次右移一位，相当于y</span>
-    <span class="token keyword">reg</span>  <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> multiplier<span class="token punctuation">;</span>
-    
-    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">//③</span>
-    <span class="token keyword">begin</span>
-    <span class="token function">if</span><span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
-    <span class="token keyword">begin</span>       <span class="token comment">//如果正在进行乘法，则乘数每时钟右移一位</span>
-         multiplier <span class="token operator">&lt;=</span> <span class="token operator">&#123;</span><span class="token number">1'b0</span><span class="token punctuation">,</span>multiplier<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">&#125;</span><span class="token punctuation">;</span> <span class="token comment">//相当于乘数y右移一位</span>
-    <span class="token keyword">end</span>
-    <span class="token keyword">else</span> <span class="token function">if</span><span class="token punctuation">(</span>mult_begin<span class="token punctuation">)</span>
-    <span class="token keyword">begin</span>   <span class="token comment">//乘法开始，加载乘数，为乘数2的绝对值</span>
-        multiplier <span class="token operator">&lt;=</span> op2_absolute<span class="token punctuation">;</span>
-        <span class="token keyword">end</span>
-    <span class="token keyword">end</span>
-    <span class="token comment">// 部分积：乘数末位为1，由被乘数左移得到；乘数末位为0，部分积为0</span>
-    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> partial_product<span class="token punctuation">;</span>
-    <span class="token keyword">assign</span> partial_product <span class="token operator">=</span> multiplier<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">?</span> multiplicand<span class="token punctuation">:</span><span class="token number">64'd0</span><span class="token punctuation">;</span>        <span class="token comment">//若此时y的最低位为1，则把x赋值给部分积partial_product，否则把0赋值给partial_product</span>
-    
-    <span class="token comment">//累加器</span>
-    <span class="token keyword">reg</span> <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> product_temp<span class="token punctuation">;</span>		<span class="token comment">//临时结果</span>
-    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">//④//clk信号从0变为1时，激发此段语句的执行，但语句的执行需要时间</span>
-    <span class="token keyword">begin</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
-        <span class="token keyword">begin</span>
-            product_temp <span class="token operator">&lt;=</span> product_temp <span class="token operator">+</span> partial_product<span class="token punctuation">;</span>
-        <span class="token keyword">end</span>      
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_begin<span class="token punctuation">)</span>
-        <span class="token keyword">begin</span>
-        product_temp <span class="token operator">&lt;=</span> <span class="token number">64'd0</span><span class="token punctuation">;</span>
-        <span class="token keyword">end</span>
-     <span class="token keyword">end</span>
-
-    <span class="token comment">//乘法结果的符号位和乘法结果</span>
-    <span class="token keyword">reg</span> product_sign<span class="token punctuation">;</span>	<span class="token comment">//乘积结果的符号</span>
-    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">// 乘积⑤</span>
-    <span class="token keyword">begin</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
-        <span class="token keyword">begin</span>
-              product_sign <span class="token operator">&lt;=</span> op1_sign <span class="token operator">^</span> op2_sign<span class="token punctuation">;</span>
-        <span class="token keyword">end</span>
-    <span class="token keyword">end</span>
-    <span class="token comment">//若乘法结果为负数，则需要对结果取反+1</span>
-    <span class="token keyword">assign</span> product <span class="token operator">=</span> product_sign <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">~</span>product_temp<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> product_temp<span class="token punctuation">;</span></code></pre>]]></content>
-      <categories>
-        <category>计算机组成原理与体系结构</category>
-      </categories>
-      <tags>
-        <tag>计算机组成原理与体系结构</tag>
-        <tag>龙芯实验平台</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计组实验：定点加法</title>
-    <url>/2021/09/07/%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%EF%BC%9A%E5%AE%9A%E7%82%B9%E5%8A%A0%E6%B3%95/</url>
-    <content><![CDATA[<p>计组第一次实验 定点加法</p>
-<span id="more"></span>
-
-<h2 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h2><blockquote>
-<p>设备选择中 family选择Artix 7  package选择fbg676 型号为：xc7a200tfbg676-2</p>
-</blockquote>
-<h2 id="添加加法器程序"><a href="#添加加法器程序" class="headerlink" title="添加加法器程序"></a>添加加法器程序</h2><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps
-<span class="token keyword">module</span> <span class="token function">adder</span><span class="token punctuation">(</span>
-        <span class="token keyword">input</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand1<span class="token punctuation">,</span>
-        <span class="token keyword">input</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand2<span class="token punctuation">,</span>
-        <span class="token keyword">input</span>        cin<span class="token punctuation">,</span>
-        <span class="token keyword">output</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> result<span class="token punctuation">,</span>
-        <span class="token keyword">output</span> cout
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">assign</span> <span class="token operator">&#123;</span>cout<span class="token punctuation">,</span>result<span class="token operator">&#125;</span> <span class="token operator">=</span> operand1<span class="token operator">+</span>operand2<span class="token operator">+</span>cin<span class="token punctuation">;</span>
-<span class="token keyword">endmodule</span></code></pre>
-<ul>
-<li>两个32位操作数输入和一个进位信号输入</li>
-<li>一个32位结果输入和一位进位信号输出</li>
-</ul>
-<h2 id="进行仿真"><a href="#进行仿真" class="headerlink" title="进行仿真"></a>进行仿真</h2><h3 id="添加仿真文件"><a href="#添加仿真文件" class="headerlink" title="添加仿真文件"></a>添加仿真文件</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps   <span class="token comment">//仿真单位时间为1ns，精度为1ps</span>
-<span class="token keyword">module</span> testbench<span class="token punctuation">;</span>
-
-    <span class="token comment">// Inputs</span>
-    <span class="token keyword">reg</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand1<span class="token punctuation">;</span>
-    <span class="token keyword">reg</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand2<span class="token punctuation">;</span>
-    <span class="token keyword">reg</span> cin<span class="token punctuation">;</span>
-
-    <span class="token comment">// Outputs</span>
-    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> result<span class="token punctuation">;</span>
-    <span class="token keyword">wire</span> cout<span class="token punctuation">;</span>
-    <span class="token comment">// Instantiate the Unit Under Test (UUT)</span>
-    adder uut <span class="token punctuation">(</span>
-        <span class="token punctuation">.</span><span class="token function">operand1</span><span class="token punctuation">(</span>operand1<span class="token punctuation">)</span><span class="token punctuation">,</span> 
-        <span class="token punctuation">.</span><span class="token function">operand2</span><span class="token punctuation">(</span>operand2<span class="token punctuation">)</span><span class="token punctuation">,</span> 
-        <span class="token punctuation">.</span><span class="token function">cin</span><span class="token punctuation">(</span>cin<span class="token punctuation">)</span><span class="token punctuation">,</span> 
-        <span class="token punctuation">.</span><span class="token function">result</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">,</span> 
-        <span class="token punctuation">.</span><span class="token function">cout</span><span class="token punctuation">(</span>cout<span class="token punctuation">)</span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">initial</span> <span class="token keyword">begin</span>
-        <span class="token comment">// Initialize Inputs</span>
-        operand1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        operand2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        cin <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token comment">// Wait 100 ns for global reset to finish</span>
-        <span class="token number">#100</span><span class="token punctuation">;</span>
-        <span class="token comment">// Add stimulus here</span>
-    <span class="token keyword">end</span>
-    <span class="token important">always</span> <span class="token number">#10</span> operand1 <span class="token operator">=</span> <span class="token kernel-function property">$random</span><span class="token punctuation">;</span>  <span class="token comment">//$random为系统任务，产生一个随机的32位数</span>
-    <span class="token important">always</span> <span class="token number">#10</span> operand2 <span class="token operator">=</span> <span class="token kernel-function property">$random</span><span class="token punctuation">;</span>  <span class="token comment">//#10 表示等待10个单位时间(10ns)，即每过10ns，赋值一个随机的32位数</span>
-    <span class="token important">always</span> <span class="token number">#10</span> cin <span class="token operator">=</span> <span class="token operator">&#123;</span><span class="token kernel-function property">$random</span><span class="token operator">&#125;</span> <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">//加了拼接符，&#123;$random&#125;产生一个非负数，除2取余得到0或1</span>
-<span class="token keyword">endmodule</span></code></pre>
-<p>目的是进行一个随机模拟输入信号，以验证程序正确</p>
-<h3 id="进行仿真-1"><a href="#进行仿真-1" class="headerlink" title="进行仿真"></a>进行仿真</h3><p>点击 Run simulation 可以看到波形图，右键信号源可更改颜色和数制等</p>
-<h2 id="添加外围模块"><a href="#添加外围模块" class="headerlink" title="添加外围模块"></a>添加外围模块</h2><blockquote>
-<p>到板子上需要用触摸屏显示，所以需要加一个触摸屏模块，并将输入输出信号与之联系起来</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>计算机组成原理与体系结构</category>
-      </categories>
-      <tags>
-        <tag>计算机组成原理与体系结构</tag>
-        <tag>龙芯实验平台</tag>
-      </tags>
   </entry>
   <entry>
     <title>耦合与内聚</title>
@@ -3437,160 +3355,110 @@ void fun2()
 ]]></content>
   </entry>
   <entry>
-    <title>灰色理论</title>
-    <url>/2021/08/06/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/</url>
-    <content><![CDATA[<p>灰色预测模型是通过少量的、不完全的信息，建立数学模型做出预测的一种预测方法。其基于客观事物的过去和现在的发展规律，借助于科学的方法对未来的发展趋势和状况进行描述和分析，并形成科学的假设和判断。</p>
-<p>优势为：</p>
-<ul>
-<li>所需建模信息少</li>
-<li>运算方便</li>
-<li>建模精度高</li>
-<li>可以客服传统回归分析等方法存在的需求数据量大，计算量大，可能出现反常情况等的弊端。<span id="more"></span></li>
-</ul>
-<h2 id="常用预测模型"><a href="#常用预测模型" class="headerlink" title="常用预测模型"></a>常用预测模型</h2><ul>
-<li>微分方程</li>
-<li>差分方程</li>
-<li>马尔科夫预测方程</li>
-<li>灰色预测法</li>
-<li>时间序列</li>
-<li>插值拟合</li>
-<li>神经元拟合</li>
-</ul>
-<blockquote>
-<p>warning<br>没有万能的方法，需要根据实际场景选用合适的模型！！</p>
-</blockquote>
-<h2 id="什么是灰色系统"><a href="#什么是灰色系统" class="headerlink" title="什么是灰色系统"></a>什么是灰色系统</h2><p>灰色是指，我们的数据并不是完全确定的，既含有已知信息又含有未知信息的系统称为灰色系统。</p>
-<h3 id="白色系统"><a href="#白色系统" class="headerlink" title="白色系统"></a>白色系统</h3><blockquote>
-<p>系统内部特征完全已知，即系统的信息是完全充分的</p>
-</blockquote>
-<h3 id="黑色系统"><a href="#黑色系统" class="headerlink" title="黑色系统"></a>黑色系统</h3><blockquote>
-<p>内部特征完全未知，只可以通过与外界的联系来加一观测研究</p>
-</blockquote>
-<h3 id="灰色系统"><a href="#灰色系统" class="headerlink" title="灰色系统"></a>灰色系统</h3><blockquote>
-<p>部分信息已知，对一定范围内变化的与时间有关的灰色过程进行预测</p>
-</blockquote>
-<h2 id="灰色预测模型适用场景"><a href="#灰色预测模型适用场景" class="headerlink" title="灰色预测模型适用场景"></a>灰色预测模型适用场景</h2><p>比如：根据前几天的降雨量，预测明天的降雨量；根据近几年河水污染程度，预测未来污染走势。</p>
-<p>应用范畴：</p>
-<ul>
-<li>灰色关联分析</li>
-<li>灰色预测：人口预测，灾难预测等</li>
-<li>灰色决策</li>
-<li>灰色预测控制</li>
-</ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>鉴别系统因素之间发展趋势的相异程度，进行关联分析，找出规律，生成有较强规律性的数据序列，然后建立相应的微分方程模型，从而预测事物未来发展趋势的状况</p>
-<p>利用等时距观测到的反应预测对象特征的一系列数量值构造模型</p>
-<h2 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h2><ul>
-<li>灰色时间序列预测</li>
-<li>畸变预测（通过已有异常值出现时间预测未来异常值出现的时间）</li>
-<li>系统预测</li>
-<li>拓扑预测（将原始数据做成曲线，在曲线上按照定值寻找该定值发生的所有时间点，构成点时序列，然后预测未来该定值发生时间）</li>
-</ul>
-<h2 id="灰色关联度与优势分析"><a href="#灰色关联度与优势分析" class="headerlink" title="灰色关联度与优势分析"></a>灰色关联度与优势分析</h2><blockquote>
-<p>需要分析哪些因素是对系统来说是主要的，哪些是次要的，哪些是需要抑制的。<br>关注点应该在于，因素间的关联性，关联程度和如何量化。</p>
-</blockquote>
-<h2 id="灰色关联度"><a href="#灰色关联度" class="headerlink" title="灰色关联度"></a>灰色关联度</h2><blockquote>
-<p>可以选最优有点类似层次分析法</p>
-</blockquote>
-<ul>
-<li>选取参考数列</li>
-<li>m个比较数列</li>
-<li>算出m个关联度</li>
-</ul>
-<h2 id="灰色生成数列"><a href="#灰色生成数列" class="headerlink" title="灰色生成数列"></a>灰色生成数列</h2><blockquote>
-<p>目的：弱化数据的随机性<br>方法：</p>
-<ul>
-<li>累加法 -》能使任意非负数列转化为非减递增的。</li>
-<li>累减法 -》具有求导性质</li>
-<li>加权邻值生成</li>
-</ul>
-</blockquote>
-<h2 id="灰色模型-G-M（1-1）"><a href="#灰色模型-G-M（1-1）" class="headerlink" title="灰色模型 G M（1,1）"></a>灰色模型 G M（1,1）</h2><blockquote>
-<p>G表示灰色 M表示模型</p>
-</blockquote>
-<h3 id="建模步骤"><a href="#建模步骤" class="headerlink" title="建模步骤"></a>建模步骤</h3><ol>
-<li>数据检验和处理（<code>级比检验</code>）<blockquote>
-<p>目的为保证建模方法的可行性<br>如果所有的前一个数除下一个数都落在一个区间内即可进行灰色预测。<br>如果不可以的话可以尝试对数据进行平移变换（一般为统一加上一个数）再进行检验<br>如果还是不行，马上改用其他方法模型。</p>
-</blockquote>
-</li>
-<li>建立GM模型</li>
-<li>利用最小二乘法求解a,b</li>
-<li>建立微分方程</li>
-<li>累减法获得预测值</li>
-<li>检验！！<ol>
-<li>残差检验</li>
-<li>级比偏差值检验</li>
-</ol>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数学建模</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>查课表功能的实现</title>
-    <url>/2022/08/07/%E8%AF%BE%E8%A1%A8%E5%88%B6%E4%BD%9C/</url>
-    <content><![CDATA[<p>需要为新生设计一个查课表的应用（入学一段时间内无法登陆教务系统，所以课表获取难），基本思路用自己的账号模拟登陆学校的教务系统，爬取课表，根据输入的班级查询，并存储数据库。</p>
-<p>难点：<br>    - 数据的获取<br>    - 课表界面的设计</p>
-<p>技术：<code>php</code> <code>html&amp;js&amp;css</code> <code>curl</code></p>
+    <title>计组实验：乘法器</title>
+    <url>/2021/09/26/%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%EF%BC%9A%E4%B9%98%E6%B3%95%E5%99%A8/</url>
+    <content><![CDATA[<p>计组第二次实验 乘法器</p>
 <span id="more"></span>
 
+<h2 id="乘法器模块设计"><a href="#乘法器模块设计" class="headerlink" title="乘法器模块设计"></a>乘法器模块设计</h2><h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token keyword">input</span>         clk<span class="token punctuation">,</span>        <span class="token comment">// 时钟</span>
+<span class="token keyword">input</span>         mult_begin<span class="token punctuation">,</span> <span class="token comment">// 乘法开始信号</span>
+<span class="token keyword">input</span>  <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> mult_op1<span class="token punctuation">,</span>   <span class="token comment">// 乘法源操作数1</span>
+<span class="token keyword">input</span>  <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> mult_op2<span class="token punctuation">,</span>   <span class="token comment">// 乘法源操作数2</span></code></pre>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token keyword">output</span> <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> product<span class="token punctuation">,</span>    <span class="token comment">// 乘积</span>
+<span class="token keyword">output</span>        mult_end   <span class="token comment">// 乘法结束信号</span></code></pre>
 
-<h2 id="模拟登陆教务系统并存储cookie"><a href="#模拟登陆教务系统并存储cookie" class="headerlink" title="模拟登陆教务系统并存储cookie"></a>模拟登陆教务系统并存储cookie</h2><p>本项目的爬虫使用php curl实现，这部分没啥好记录的</p>
-<h2 id="获取班级列表"><a href="#获取班级列表" class="headerlink" title="获取班级列表"></a>获取班级列表</h2><blockquote>
-<p>由于班级列表时分页的，懒得爬了，而且里面也有好多无用信息，所以直接手动导出了一份班级信息的js文件。由于我校专业太多，按照学院进行一个划分，（数据中每一条包括班级名和所属学院名），利用了js的set提取出了不重复的学院数组。<br>前端用了两个select下拉列表（使用的<a href="https://developer.snapappointments.com/bootstrap-select/">bootstrap-select</a>框架，这个功能比较多，主要是可以指定下拉列表每一页显示几条数据，来防止下拉菜单过长）<br>首先将学院数组逐条加入到select中作为option，然后添加监听器，当select改变时，动态更改该学院下的班级列表，<br>至此可以获取到前台用户想要查询的班级号（我校课表接口需要班级号），用Ajax与后台进行交互</p>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><blockquote>
+<p>输入两个32位数mult_op1作为被乘数，mult_op2作为乘数<br>两个数都认为是有符号数所以需要取出符号进行处理<br>mult_begin作为开始信号，还需设置一个乘法进行中的标志信号，开始信号刚变成1时，对初始数据进行处理将进行信号设为1<br>当进行信号为1时每次上升沿到来就进行一次相加，结束后被乘数左移，乘数右移</p>
 </blockquote>
-<h2 id="后台爬虫"><a href="#后台爬虫" class="headerlink" title="后台爬虫"></a>后台爬虫</h2><blockquote>
-<p>利用前台传过来的班级号，带着前面存储下来的cookie（不带的话会被踢出去<del>.</del>）进行请求，<br>由于每一次请求需要较长时间，所以使用了MySQL存下来每个班的课表信息，以后如果要查的信息数据库中有就不用了爬了！！</p>
-</blockquote>
-<h3 id="此部分遇到的问题"><a href="#此部分遇到的问题" class="headerlink" title="此部分遇到的问题"></a>此部分遇到的问题</h3><ul>
-<li><p>爬取的数据怎么处理emm？</p>
-<ul>
-<li>只能说好乱又是数组又是对象的，只能静下心来一层一层分析，将无用数据剔除</li>
-</ul>
-</li>
-<li><p>存数据库(此问题纯粹是因为数据库没学好)</p>
-<ul>
-<li>最开始用的<code>varchar</code>然后发现只存了一部分，才发现存不下！！我以为这个就是无限制的，但是都想改用文件存了~，然后发现字段改成<code>txt</code>就好了</li>
-</ul>
-</li>
-<li><p>有的时候由于网络问题爬取失败</p>
-<ul>
-<li>用了一个try catch</li>
-</ul>
-</li>
-</ul>
-<h2 id="课表界面的编写"><a href="#课表界面的编写" class="headerlink" title="课表界面的编写"></a>课表界面的编写</h2><blockquote>
-<p>先简单说一下传回来的数据主要字段内容：课程名，课程地点，上课时间（周几），开始节数，持续节数<br>界面设计，用了table 给格子设置了固定的宽高（宽是百分比平分的）<br>遍历数据，根据持续时间将开始节数与下面的单元格合并，并写上课程信息。<br>设计样式：主要是一个多颜色背景，使用了颜色数组，每一个课程的背景从数组中选一个(用的取余方式，没用随机)，添加一个<code>border-radius</code><br>添加点击事件点击后使用bootstrap的弹窗进行一个详细信息的展示</p>
-</blockquote>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><blockquote>
-<p>表格边框设定<br>字体太大了（因为手机端为主，浏览器有默认最小字体12px）采用了12px 再利用css进行缩小</p>
-</blockquote>
-<pre class="language-css" data-language="css"><code class="language-css"> <span class="token property">font-size</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
- <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">scale</span><span class="token punctuation">(</span>0.83<span class="token punctuation">,</span> 0.83<span class="token punctuation">)</span><span class="token punctuation">;</span>
-*<span class="token property">font-size</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span></code></pre>
+<pre class="language-verilog" data-language="verilog"><code class="language-verilog">
 
-<blockquote>
-<p>由于课程块的展示会改变原有样式，下次查询的时候如果不清除就会错乱，方便起见，将初始内容用字符串保存，每次查询将固定的内容插入，之后想咋改咋改，也不会影响下一次内容</p>
-</blockquote>
-<h3 id="待解决问题"><a href="#待解决问题" class="headerlink" title="待解决问题"></a>待解决问题</h3><blockquote>
-<p>明知有bug却解决不了哎，就是课程冲突问题，如果同一时间段课表上有两个课程，就会错乱，暂未解决，目前大概思路有两条<br>一是提前处理数据，将同一时间的数据合并；二是再对单元格进行切分，并排显示<br>由于最近要准备国电赛，不想写了，而且看了看新生课表绝大部分不会出现这个bug，之后有时间再改吧（啊不就是懒）<br>默默的加上了一句，请以开学后的实际课表为主，防止到时候按这个上课导致上错课或不知道上课，罪过罪过</p>
-</blockquote>
-]]></content>
+<span class="token comment">//乘法正在运算信号和结束信号</span>
+    <span class="token keyword">reg</span> mult_valid<span class="token punctuation">;</span>
+    <span class="token keyword">assign</span> mult_end <span class="token operator">=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token operator">|</span>multiplier<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//乘法结束信号：乘数全0</span>
+    <span class="token important">always @</span><span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>   <span class="token comment">//①</span>
+    <span class="token keyword">begin</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>mult_begin<span class="token punctuation">)</span>    <span class="token comment">//如果没有开始或者已经结束了</span>
+        <span class="token keyword">begin</span>
+            mult_valid <span class="token operator">&lt;=</span> <span class="token number">1'b0</span><span class="token punctuation">;</span>     <span class="token comment">//mult_valid 赋值成0，说明现在没有进行有效的乘法运算</span>
+        <span class="token keyword">end</span>
+        <span class="token keyword">else</span>
+        <span class="token keyword">begin</span>
+            mult_valid <span class="token operator">&lt;=</span> <span class="token number">1'b1</span><span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+
+    <span class="token comment">//两个源操作取绝对值，正数的绝对值为其本身，负数的绝对值为取反加1</span>
+    <span class="token keyword">wire</span>        op1_sign<span class="token punctuation">;</span>      <span class="token comment">//操作数1的符号位</span>
+    <span class="token keyword">wire</span>        op2_sign<span class="token punctuation">;</span>      <span class="token comment">//操作数2的符号位</span>
+    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> op1_absolute<span class="token punctuation">;</span>  <span class="token comment">//操作数1的绝对值</span>
+    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> op2_absolute<span class="token punctuation">;</span>  <span class="token comment">//操作数2的绝对值</span>
+    <span class="token keyword">assign</span> op1_sign <span class="token operator">=</span> mult_op1<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">assign</span> op2_sign <span class="token operator">=</span> mult_op2<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">assign</span> op1_absolute <span class="token operator">=</span> op1_sign <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">~</span>mult_op1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> mult_op1<span class="token punctuation">;</span>
+    <span class="token keyword">assign</span> op2_absolute <span class="token operator">=</span> op2_sign <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">~</span>mult_op2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> mult_op2<span class="token punctuation">;</span>
+    <span class="token comment">//加载被乘数，运算时每次左移一位</span>
+    <span class="token keyword">reg</span>  <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> multiplicand<span class="token punctuation">;</span>
+    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">//②</span>
+    <span class="token keyword">begin</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
+        <span class="token keyword">begin</span>    <span class="token comment">// 如果正在进行乘法，则被乘数每时钟左移一位</span>
+            multiplicand <span class="token operator">&lt;=</span> <span class="token operator">&#123;</span>multiplicand<span class="token punctuation">[</span><span class="token number">62</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">1'b0</span><span class="token operator">&#125;</span><span class="token punctuation">;</span>  <span class="token comment">//被乘数x每次左移一位。</span>
+        <span class="token keyword">end</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_begin<span class="token punctuation">)</span> 
+        <span class="token keyword">begin</span>   <span class="token comment">// 乘法开始，加载被乘数，为乘数1的绝对值</span>
+            multiplicand <span class="token operator">&lt;=</span> <span class="token operator">&#123;</span><span class="token number">32'd0</span><span class="token punctuation">,</span>op1_absolute<span class="token operator">&#125;</span><span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+
+    <span class="token comment">//加载乘数，运算时每次右移一位，相当于y</span>
+    <span class="token keyword">reg</span>  <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> multiplier<span class="token punctuation">;</span>
+    
+    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">//③</span>
+    <span class="token keyword">begin</span>
+    <span class="token function">if</span><span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
+    <span class="token keyword">begin</span>       <span class="token comment">//如果正在进行乘法，则乘数每时钟右移一位</span>
+         multiplier <span class="token operator">&lt;=</span> <span class="token operator">&#123;</span><span class="token number">1'b0</span><span class="token punctuation">,</span>multiplier<span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">&#125;</span><span class="token punctuation">;</span> <span class="token comment">//相当于乘数y右移一位</span>
+    <span class="token keyword">end</span>
+    <span class="token keyword">else</span> <span class="token function">if</span><span class="token punctuation">(</span>mult_begin<span class="token punctuation">)</span>
+    <span class="token keyword">begin</span>   <span class="token comment">//乘法开始，加载乘数，为乘数2的绝对值</span>
+        multiplier <span class="token operator">&lt;=</span> op2_absolute<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+    <span class="token comment">// 部分积：乘数末位为1，由被乘数左移得到；乘数末位为0，部分积为0</span>
+    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> partial_product<span class="token punctuation">;</span>
+    <span class="token keyword">assign</span> partial_product <span class="token operator">=</span> multiplier<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">?</span> multiplicand<span class="token punctuation">:</span><span class="token number">64'd0</span><span class="token punctuation">;</span>        <span class="token comment">//若此时y的最低位为1，则把x赋值给部分积partial_product，否则把0赋值给partial_product</span>
+    
+    <span class="token comment">//累加器</span>
+    <span class="token keyword">reg</span> <span class="token punctuation">[</span><span class="token number">63</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> product_temp<span class="token punctuation">;</span>		<span class="token comment">//临时结果</span>
+    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">//④//clk信号从0变为1时，激发此段语句的执行，但语句的执行需要时间</span>
+    <span class="token keyword">begin</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
+        <span class="token keyword">begin</span>
+            product_temp <span class="token operator">&lt;=</span> product_temp <span class="token operator">+</span> partial_product<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>      
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_begin<span class="token punctuation">)</span>
+        <span class="token keyword">begin</span>
+        product_temp <span class="token operator">&lt;=</span> <span class="token number">64'd0</span><span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+     <span class="token keyword">end</span>
+
+    <span class="token comment">//乘法结果的符号位和乘法结果</span>
+    <span class="token keyword">reg</span> product_sign<span class="token punctuation">;</span>	<span class="token comment">//乘积结果的符号</span>
+    <span class="token important">always @</span> <span class="token punctuation">(</span><span class="token keyword">posedge</span> clk<span class="token punctuation">)</span>  <span class="token comment">// 乘积⑤</span>
+    <span class="token keyword">begin</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>mult_valid<span class="token punctuation">)</span>
+        <span class="token keyword">begin</span>
+              product_sign <span class="token operator">&lt;=</span> op1_sign <span class="token operator">^</span> op2_sign<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+    <span class="token comment">//若乘法结果为负数，则需要对结果取反+1</span>
+    <span class="token keyword">assign</span> product <span class="token operator">=</span> product_sign <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">~</span>product_temp<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> product_temp<span class="token punctuation">;</span></code></pre>]]></content>
       <categories>
-        <category>开发经历</category>
+        <category>计算机组成原理与体系结构</category>
       </categories>
       <tags>
-        <tag>前端</tag>
-        <tag>HTML</tag>
-        <tag>CSS</tag>
-        <tag>JS</tag>
-        <tag>后端</tag>
-        <tag>PHP</tag>
-        <tag>MySQL</tag>
+        <tag>计算机组成原理与体系结构</tag>
+        <tag>龙芯实验平台</tag>
       </tags>
   </entry>
   <entry>
@@ -3709,43 +3577,72 @@ void fun2()
       </tags>
   </entry>
   <entry>
-    <title>超标量总结</title>
-    <url>/2022/07/16/%E8%B6%85%E6%A0%87%E9%87%8F%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="五级流水"><a href="#五级流水" class="headerlink" title="五级流水"></a>五级流水</h2><p>五级流水阶段:</p>
-<ol>
-<li>取值IF </li>
-<li>指令译码 ID</li>
-<li>执行部分 EX</li>
-<li>访存 MEM</li>
-<li>寄存器堆写回 WB</li>
-</ol>
-<p>参考<a href="https://blog.csdn.net/Accelerato/article/details/92847394">Verilog 流水线CPU 设计</a></p>
-<h2 id="七级流水"><a href="#七级流水" class="headerlink" title="七级流水"></a>七级流水</h2><ol>
-<li>将IF段划分成IFA、和IFB<ol>
-<li>IFA 确定下一拍的指令地址PC</li>
-<li>IFB 从ICache中取出指令</li>
-</ol>
-</li>
-<li>将MEM瓜分成MA，和MB<ol>
-<li>MA处理异常，确定访存地址，写内存，通知协处理器处理异常。MA段标记延迟槽。访问外存时，MA发出访存虚拟地址给MB</li>
-<li>MB将虚拟地址转换成物理地址并访存。处理异常，更改CPU状态寄存器</li>
-</ol>
-</li>
-</ol>
-<p>使用<code>Monitor</code>来控制流水线的暂停和清除</p>
-<p>？异常处理</p>
-<h3 id="冲突处理"><a href="#冲突处理" class="headerlink" title="冲突处理"></a>冲突处理</h3><p>参考：<a href="https://www.jianshu.com/p/ffd7ccf672ea">数据冒险的解决</a></p>
-<p>单发射仅需考虑先写后读问题，可采用数据前递和流水线暂停方式（产生bubble）来处理冲突。</p>
-<p><img src="https://img.qylh.xyz/blog/1657937875769.png" loading="lazy"></p>
-<p>数据前递更为高效：</p>
-<p>当发生先写后读问题时，虽然前一条指令还没有写进去，但是运算结果早就已经出来了，所以这个时候可以通过旁路将结果直接传递给下一条指令<br><img src="https://img.qylh.xyz/blog/1657938419610.png" loading="lazy"></p>
-<p><img src="https://img.qylh.xyz/blog/1657937707451.png" loading="lazy"></p>
-<p>但是如果前一条指令是load，而下一条指令需要使用load的数据，那数据前递是无法处理的，这个时候可以通过插入空泡处理。</p>
-<h2 id="双发射"><a href="#双发射" class="headerlink" title="双发射"></a>双发射</h2>]]></content>
+    <title>计组实验：定点加法</title>
+    <url>/2021/09/07/%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%EF%BC%9A%E5%AE%9A%E7%82%B9%E5%8A%A0%E6%B3%95/</url>
+    <content><![CDATA[<p>计组第一次实验 定点加法</p>
+<span id="more"></span>
+
+<h2 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h2><blockquote>
+<p>设备选择中 family选择Artix 7  package选择fbg676 型号为：xc7a200tfbg676-2</p>
+</blockquote>
+<h2 id="添加加法器程序"><a href="#添加加法器程序" class="headerlink" title="添加加法器程序"></a>添加加法器程序</h2><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps
+<span class="token keyword">module</span> <span class="token function">adder</span><span class="token punctuation">(</span>
+        <span class="token keyword">input</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand1<span class="token punctuation">,</span>
+        <span class="token keyword">input</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand2<span class="token punctuation">,</span>
+        <span class="token keyword">input</span>        cin<span class="token punctuation">,</span>
+        <span class="token keyword">output</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> result<span class="token punctuation">,</span>
+        <span class="token keyword">output</span> cout
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">assign</span> <span class="token operator">&#123;</span>cout<span class="token punctuation">,</span>result<span class="token operator">&#125;</span> <span class="token operator">=</span> operand1<span class="token operator">+</span>operand2<span class="token operator">+</span>cin<span class="token punctuation">;</span>
+<span class="token keyword">endmodule</span></code></pre>
+<ul>
+<li>两个32位操作数输入和一个进位信号输入</li>
+<li>一个32位结果输入和一位进位信号输出</li>
+</ul>
+<h2 id="进行仿真"><a href="#进行仿真" class="headerlink" title="进行仿真"></a>进行仿真</h2><h3 id="添加仿真文件"><a href="#添加仿真文件" class="headerlink" title="添加仿真文件"></a>添加仿真文件</h3><pre class="language-verilog" data-language="verilog"><code class="language-verilog"><span class="token constant">`timescale</span> <span class="token number">1</span>ns <span class="token operator">/</span> <span class="token number">1</span>ps   <span class="token comment">//仿真单位时间为1ns，精度为1ps</span>
+<span class="token keyword">module</span> testbench<span class="token punctuation">;</span>
+
+    <span class="token comment">// Inputs</span>
+    <span class="token keyword">reg</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand1<span class="token punctuation">;</span>
+    <span class="token keyword">reg</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> operand2<span class="token punctuation">;</span>
+    <span class="token keyword">reg</span> cin<span class="token punctuation">;</span>
+
+    <span class="token comment">// Outputs</span>
+    <span class="token keyword">wire</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span> result<span class="token punctuation">;</span>
+    <span class="token keyword">wire</span> cout<span class="token punctuation">;</span>
+    <span class="token comment">// Instantiate the Unit Under Test (UUT)</span>
+    adder uut <span class="token punctuation">(</span>
+        <span class="token punctuation">.</span><span class="token function">operand1</span><span class="token punctuation">(</span>operand1<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        <span class="token punctuation">.</span><span class="token function">operand2</span><span class="token punctuation">(</span>operand2<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        <span class="token punctuation">.</span><span class="token function">cin</span><span class="token punctuation">(</span>cin<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        <span class="token punctuation">.</span><span class="token function">result</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        <span class="token punctuation">.</span><span class="token function">cout</span><span class="token punctuation">(</span>cout<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">initial</span> <span class="token keyword">begin</span>
+        <span class="token comment">// Initialize Inputs</span>
+        operand1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        operand2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        cin <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">// Wait 100 ns for global reset to finish</span>
+        <span class="token number">#100</span><span class="token punctuation">;</span>
+        <span class="token comment">// Add stimulus here</span>
+    <span class="token keyword">end</span>
+    <span class="token important">always</span> <span class="token number">#10</span> operand1 <span class="token operator">=</span> <span class="token kernel-function property">$random</span><span class="token punctuation">;</span>  <span class="token comment">//$random为系统任务，产生一个随机的32位数</span>
+    <span class="token important">always</span> <span class="token number">#10</span> operand2 <span class="token operator">=</span> <span class="token kernel-function property">$random</span><span class="token punctuation">;</span>  <span class="token comment">//#10 表示等待10个单位时间(10ns)，即每过10ns，赋值一个随机的32位数</span>
+    <span class="token important">always</span> <span class="token number">#10</span> cin <span class="token operator">=</span> <span class="token operator">&#123;</span><span class="token kernel-function property">$random</span><span class="token operator">&#125;</span> <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">//加了拼接符，&#123;$random&#125;产生一个非负数，除2取余得到0或1</span>
+<span class="token keyword">endmodule</span></code></pre>
+<p>目的是进行一个随机模拟输入信号，以验证程序正确</p>
+<h3 id="进行仿真-1"><a href="#进行仿真-1" class="headerlink" title="进行仿真"></a>进行仿真</h3><p>点击 Run simulation 可以看到波形图，右键信号源可更改颜色和数制等</p>
+<h2 id="添加外围模块"><a href="#添加外围模块" class="headerlink" title="添加外围模块"></a>添加外围模块</h2><blockquote>
+<p>到板子上需要用触摸屏显示，所以需要加一个触摸屏模块，并将输入输出信号与之联系起来</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>计算机组成原理与体系结构</category>
+      </categories>
       <tags>
-        <tag>龙芯杯</tag>
-        <tag>多级流水</tag>
-        <tag>双发射</tag>
+        <tag>计算机组成原理与体系结构</tag>
+        <tag>龙芯实验平台</tag>
       </tags>
   </entry>
   <entry>
@@ -3785,35 +3682,106 @@ void fun2()
       </tags>
   </entry>
   <entry>
-    <title>跨源资源共享CORS</title>
-    <url>/2022/04/25/%E8%B7%A8%E6%BA%90%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%ABCORS/</url>
-    <content><![CDATA[<p>跨源资源共享 (CORS)（或通俗地译为跨域资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其它 origin（域，协议和端口），使得浏览器允许这些 origin 访问加载自己的资源。</p>
+    <title>查课表功能的实现</title>
+    <url>/2022/08/07/%E8%AF%BE%E8%A1%A8%E5%88%B6%E4%BD%9C/</url>
+    <content><![CDATA[<p>需要为新生设计一个查课表的应用（入学一段时间内无法登陆教务系统，所以课表获取难），基本思路用自己的账号模拟登陆学校的教务系统，爬取课表，根据输入的班级查询，并存储数据库。</p>
+<p>难点：<br>    - 数据的获取<br>    - 课表界面的设计</p>
+<p>技术：<code>php</code> <code>html&amp;js&amp;css</code> <code>curl</code></p>
 <span id="more"></span>
 
-<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><blockquote>
-<p>运行在 <a href="https://domain-a.com/">https://domain-a.com</a> 的 JavaScript 代码使用 XMLHttpRequest 来发起一个到 <a href="https://domain-b.com/data.json">https://domain-b.com/data.json</a> 的请求。出于安全性，浏览器限制脚本内发起的跨源HTTP请求,这就返回了CORS错误。</p>
+
+<h2 id="模拟登陆教务系统并存储cookie"><a href="#模拟登陆教务系统并存储cookie" class="headerlink" title="模拟登陆教务系统并存储cookie"></a>模拟登陆教务系统并存储cookie</h2><p>本项目的爬虫使用php curl实现，这部分没啥好记录的</p>
+<h2 id="获取班级列表"><a href="#获取班级列表" class="headerlink" title="获取班级列表"></a>获取班级列表</h2><blockquote>
+<p>由于班级列表时分页的，懒得爬了，而且里面也有好多无用信息，所以直接手动导出了一份班级信息的js文件。由于我校专业太多，按照学院进行一个划分，（数据中每一条包括班级名和所属学院名），利用了js的set提取出了不重复的学院数组。<br>前端用了两个select下拉列表（使用的<a href="https://developer.snapappointments.com/bootstrap-select/">bootstrap-select</a>框架，这个功能比较多，主要是可以指定下拉列表每一页显示几条数据，来防止下拉菜单过长）<br>首先将学院数组逐条加入到select中作为option，然后添加监听器，当select改变时，动态更改该学院下的班级列表，<br>至此可以获取到前台用户想要查询的班级号（我校课表接口需要班级号），用Ajax与后台进行交互</p>
 </blockquote>
-<p><img src="http://img.qylh.xyz/blog/1650890683308.png" alt="示意图" loading="lazy"></p>
-<p>跨源域资源共享（CORS）机制允许 Web 应用服务器进行跨源访问控制，从而使跨源数据传输得以安全进行。</p>
-<p>有些请求（非简单请求）会出发CORS预检，浏览器使用OPTIONS方法发起，获得此服务端是否允许该跨源请求，服务器确认允许后才发送实际的HTTP请求。</p>
-<h2 id="如何应对跨域问题"><a href="#如何应对跨域问题" class="headerlink" title="如何应对跨域问题"></a>如何应对跨域问题</h2><h3 id="后端解决"><a href="#后端解决" class="headerlink" title="后端解决"></a>后端解决</h3><p>注：待实践后完善</p>
-<p>利用预检获知服务端对跨源请求支持的HTTP方法。再以实际的HTTP请求方法发送那个真正的请求</p>
-<p>优点：</p>
-<ol>
-<li>前端方便</li>
-<li>一劳永逸</li>
-<li>开发环境和正式环境都可以使用</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>后端稍麻烦</li>
-</ol>
-<h3 id="前端解决"><a href="#前端解决" class="headerlink" title="前端解决"></a>前端解决</h3><p>开发环境使用webpack的proxy解决，正式环境使用Nginx反向代理</p>
-<p>参考资料</p>
-<p><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/cors.html#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98">vue-element-admin 文档</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">MDN</a></p>
+<h2 id="后台爬虫"><a href="#后台爬虫" class="headerlink" title="后台爬虫"></a>后台爬虫</h2><blockquote>
+<p>利用前台传过来的班级号，带着前面存储下来的cookie（不带的话会被踢出去<del>.</del>）进行请求，<br>由于每一次请求需要较长时间，所以使用了MySQL存下来每个班的课表信息，以后如果要查的信息数据库中有就不用了爬了！！</p>
+</blockquote>
+<h3 id="此部分遇到的问题"><a href="#此部分遇到的问题" class="headerlink" title="此部分遇到的问题"></a>此部分遇到的问题</h3><ul>
+<li><p>爬取的数据怎么处理emm？</p>
+<ul>
+<li>只能说好乱又是数组又是对象的，只能静下心来一层一层分析，将无用数据剔除</li>
+</ul>
+</li>
+<li><p>存数据库(此问题纯粹是因为数据库没学好)</p>
+<ul>
+<li>最开始用的<code>varchar</code>然后发现只存了一部分，才发现存不下！！我以为这个就是无限制的，但是都想改用文件存了~，然后发现字段改成<code>txt</code>就好了</li>
+</ul>
+</li>
+<li><p>有的时候由于网络问题爬取失败</p>
+<ul>
+<li>用了一个try catch</li>
+</ul>
+</li>
+</ul>
+<h2 id="课表界面的编写"><a href="#课表界面的编写" class="headerlink" title="课表界面的编写"></a>课表界面的编写</h2><blockquote>
+<p>先简单说一下传回来的数据主要字段内容：课程名，课程地点，上课时间（周几），开始节数，持续节数<br>界面设计，用了table 给格子设置了固定的宽高（宽是百分比平分的）<br>遍历数据，根据持续时间将开始节数与下面的单元格合并，并写上课程信息。<br>设计样式：主要是一个多颜色背景，使用了颜色数组，每一个课程的背景从数组中选一个(用的取余方式，没用随机)，添加一个<code>border-radius</code><br>添加点击事件点击后使用bootstrap的弹窗进行一个详细信息的展示</p>
+</blockquote>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><blockquote>
+<p>表格边框设定<br>字体太大了（因为手机端为主，浏览器有默认最小字体12px）采用了12px 再利用css进行缩小</p>
+</blockquote>
+<pre class="language-css" data-language="css"><code class="language-css"> <span class="token property">font-size</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
+ <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">scale</span><span class="token punctuation">(</span>0.83<span class="token punctuation">,</span> 0.83<span class="token punctuation">)</span><span class="token punctuation">;</span>
+*<span class="token property">font-size</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span></code></pre>
+
+<blockquote>
+<p>由于课程块的展示会改变原有样式，下次查询的时候如果不清除就会错乱，方便起见，将初始内容用字符串保存，每次查询将固定的内容插入，之后想咋改咋改，也不会影响下一次内容</p>
+</blockquote>
+<h3 id="待解决问题"><a href="#待解决问题" class="headerlink" title="待解决问题"></a>待解决问题</h3><blockquote>
+<p>明知有bug却解决不了哎，就是课程冲突问题，如果同一时间段课表上有两个课程，就会错乱，暂未解决，目前大概思路有两条<br>一是提前处理数据，将同一时间的数据合并；二是再对单元格进行切分，并排显示<br>由于最近要准备国电赛，不想写了，而且看了看新生课表绝大部分不会出现这个bug，之后有时间再改吧（啊不就是懒）<br>默默的加上了一句，请以开学后的实际课表为主，防止到时候按这个上课导致上错课或不知道上课，罪过罪过</p>
+</blockquote>
 ]]></content>
+      <categories>
+        <category>开发经历</category>
+      </categories>
       <tags>
-        <tag>WEB</tag>
+        <tag>前端</tag>
+        <tag>HTML</tag>
+        <tag>CSS</tag>
+        <tag>JS</tag>
+        <tag>后端</tag>
+        <tag>PHP</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>超标量总结</title>
+    <url>/2022/07/16/%E8%B6%85%E6%A0%87%E9%87%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="五级流水"><a href="#五级流水" class="headerlink" title="五级流水"></a>五级流水</h2><p>五级流水阶段:</p>
+<ol>
+<li>取值IF </li>
+<li>指令译码 ID</li>
+<li>执行部分 EX</li>
+<li>访存 MEM</li>
+<li>寄存器堆写回 WB</li>
+</ol>
+<p>参考<a href="https://blog.csdn.net/Accelerato/article/details/92847394">Verilog 流水线CPU 设计</a></p>
+<h2 id="七级流水"><a href="#七级流水" class="headerlink" title="七级流水"></a>七级流水</h2><ol>
+<li>将IF段划分成IFA、和IFB<ol>
+<li>IFA 确定下一拍的指令地址PC</li>
+<li>IFB 从ICache中取出指令</li>
+</ol>
+</li>
+<li>将MEM瓜分成MA，和MB<ol>
+<li>MA处理异常，确定访存地址，写内存，通知协处理器处理异常。MA段标记延迟槽。访问外存时，MA发出访存虚拟地址给MB</li>
+<li>MB将虚拟地址转换成物理地址并访存。处理异常，更改CPU状态寄存器</li>
+</ol>
+</li>
+</ol>
+<p>使用<code>Monitor</code>来控制流水线的暂停和清除</p>
+<p>？异常处理</p>
+<h3 id="冲突处理"><a href="#冲突处理" class="headerlink" title="冲突处理"></a>冲突处理</h3><p>参考：<a href="https://www.jianshu.com/p/ffd7ccf672ea">数据冒险的解决</a></p>
+<p>单发射仅需考虑先写后读问题，可采用数据前递和流水线暂停方式（产生bubble）来处理冲突。</p>
+<p><img src="https://img.qylh.xyz/blog/1657937875769.png" loading="lazy"></p>
+<p>数据前递更为高效：</p>
+<p>当发生先写后读问题时，虽然前一条指令还没有写进去，但是运算结果早就已经出来了，所以这个时候可以通过旁路将结果直接传递给下一条指令<br><img src="https://img.qylh.xyz/blog/1657938419610.png" loading="lazy"></p>
+<p><img src="https://img.qylh.xyz/blog/1657937707451.png" loading="lazy"></p>
+<p>但是如果前一条指令是load，而下一条指令需要使用load的数据，那数据前递是无法处理的，这个时候可以通过插入空泡处理。</p>
+<h2 id="双发射"><a href="#双发射" class="headerlink" title="双发射"></a>双发射</h2>]]></content>
+      <tags>
+        <tag>龙芯杯</tag>
+        <tag>多级流水</tag>
+        <tag>双发射</tag>
       </tags>
   </entry>
   <entry>
@@ -4169,6 +4137,38 @@ void fun2()
 ]]></content>
       <tags>
         <tag>软件工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨源资源共享CORS</title>
+    <url>/2022/04/25/%E8%B7%A8%E6%BA%90%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%ABCORS/</url>
+    <content><![CDATA[<p>跨源资源共享 (CORS)（或通俗地译为跨域资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其它 origin（域，协议和端口），使得浏览器允许这些 origin 访问加载自己的资源。</p>
+<span id="more"></span>
+
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><blockquote>
+<p>运行在 <a href="https://domain-a.com/">https://domain-a.com</a> 的 JavaScript 代码使用 XMLHttpRequest 来发起一个到 <a href="https://domain-b.com/data.json">https://domain-b.com/data.json</a> 的请求。出于安全性，浏览器限制脚本内发起的跨源HTTP请求,这就返回了CORS错误。</p>
+</blockquote>
+<p><img src="http://img.qylh.xyz/blog/1650890683308.png" alt="示意图" loading="lazy"></p>
+<p>跨源域资源共享（CORS）机制允许 Web 应用服务器进行跨源访问控制，从而使跨源数据传输得以安全进行。</p>
+<p>有些请求（非简单请求）会出发CORS预检，浏览器使用OPTIONS方法发起，获得此服务端是否允许该跨源请求，服务器确认允许后才发送实际的HTTP请求。</p>
+<h2 id="如何应对跨域问题"><a href="#如何应对跨域问题" class="headerlink" title="如何应对跨域问题"></a>如何应对跨域问题</h2><h3 id="后端解决"><a href="#后端解决" class="headerlink" title="后端解决"></a>后端解决</h3><p>注：待实践后完善</p>
+<p>利用预检获知服务端对跨源请求支持的HTTP方法。再以实际的HTTP请求方法发送那个真正的请求</p>
+<p>优点：</p>
+<ol>
+<li>前端方便</li>
+<li>一劳永逸</li>
+<li>开发环境和正式环境都可以使用</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>后端稍麻烦</li>
+</ol>
+<h3 id="前端解决"><a href="#前端解决" class="headerlink" title="前端解决"></a>前端解决</h3><p>开发环境使用webpack的proxy解决，正式环境使用Nginx反向代理</p>
+<p>参考资料</p>
+<p><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/cors.html#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98">vue-element-admin 文档</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">MDN</a></p>
+]]></content>
+      <tags>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
