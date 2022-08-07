@@ -81,13 +81,13 @@ IconifyProviders = {
 </ul>
 <h4 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h4><ol>
 <li>首先下载适合服务器端系统的压缩包，将其解压到合适的路径。</li>
-<li>修改frps.ini 文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind_port = 2345</span><br><span class="line">vhost_http_port = 8001</span><br></pre></td></tr></table></figure>
+<li>修改frps.ini 文件<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bind_port = 2345</span><br><span class="line">vhost_http_port = 8001</span><br></pre></td></tr></table></figure>
 选择的端口可自定义（但也不要选择已经被占用的端口啊啊啊），但记得对端口进行放行（如果你配置完发现不能用，很有可能是没有放行相关端口）</li>
 <li>启动服务 :在安装目录下输入命令 <code>./frps -c ./frps.ini</code></li>
 </ol>
 <h4 id="内网电脑"><a href="#内网电脑" class="headerlink" title="内网电脑"></a>内网电脑</h4><ol>
 <li>下载适合自己电脑的压缩包（一般都是windows叭）</li>
-<li>修改frpc.ini文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server_addr = 服务器IP</span><br><span class="line">server_port = 2345（与上面的bind_port相对应）</span><br><span class="line">[web]</span><br><span class="line">type = http</span><br><span class="line">local_ip = 192.168.3.43（本机的话就是127.0.0.1就好了，我这里是穿透到了同一局域网内的esp8266）</span><br><span class="line">local_port = 80 (对应HTTP服务)</span><br><span class="line">custom_domains = 自己的域名</span><br></pre></td></tr></table></figure></li>
+<li>修改frpc.ini文件<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server_addr = 服务器IP</span><br><span class="line">server_port = 2345（与上面的bind_port相对应）</span><br><span class="line">[web]</span><br><span class="line">type = http</span><br><span class="line">local_ip = 192.168.3.43（本机的话就是127.0.0.1就好了，我这里是穿透到了同一局域网内的esp8266）</span><br><span class="line">local_port = 80 (对应HTTP服务)</span><br><span class="line">custom_domains = 自己的域名</span><br></pre></td></tr></table></figure></li>
 <li>将域名解析到服务器IP（域名购买商会提供服务，比如我的是在阿里云买的，就可以在阿里云进行解析）</li>
 <li>启动服务 <code>./frpc -c ./frpc.ini</code> <strong>注意这里时frpc代表客户端，俄日frps代表服务端</strong></li>
 <li>成功启动后命令行会提示连接成功</li>

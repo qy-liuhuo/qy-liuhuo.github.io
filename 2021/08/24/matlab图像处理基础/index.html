@@ -59,7 +59,7 @@ IconifyProviders = {
 <blockquote>
 <p>此函数本质就是去计算两个矩阵的相关系数</p>
 </blockquote>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I = imread(<span class="string">&#x27;pout.tif&#x27;</span>);</span><br><span class="line">J = medfilt2(I);</span><br><span class="line">R = corr2(I,J)</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">I = imread(<span class="string">&#x27;pout.tif&#x27;</span>);</span><br><span class="line">J = medfilt2(I);</span><br><span class="line">R = corr2(I,J)</span><br></pre></td></tr></table></figure>
 
 <h2 id="像素值的获取"><a href="#像素值的获取" class="headerlink" title="像素值的获取"></a>像素值的获取</h2><p><code>impixel()</code></p>
 <blockquote>
@@ -69,7 +69,7 @@ IconifyProviders = {
 <blockquote>
 <p>实质也就是获取的二维矩阵元素的平均值和标准差</p>
 </blockquote>
-<h2 id="图片展示窗口上显示图片信息"><a href="#图片展示窗口上显示图片信息" class="headerlink" title="图片展示窗口上显示图片信息"></a>图片展示窗口上显示图片信息</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imshow(I);</span><br><span class="line">impixelinfo;</span><br></pre></td></tr></table></figure>
+<h2 id="图片展示窗口上显示图片信息"><a href="#图片展示窗口上显示图片信息" class="headerlink" title="图片展示窗口上显示图片信息"></a>图片展示窗口上显示图片信息</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">imshow(I);</span><br><span class="line">impixelinfo;</span><br></pre></td></tr></table></figure>
 
 <h2 id="图片的缩放，裁剪和旋转"><a href="#图片的缩放，裁剪和旋转" class="headerlink" title="图片的缩放，裁剪和旋转"></a>图片的缩放，裁剪和旋转</h2><p><code>imresize(I,倍数)</code></p>
 <p><code>imcrop(I,rec)</code>  rec为一个向量[左上角x 左上角y 右下角x 右下角y]</p>
