@@ -33,7 +33,7 @@ html.dark {
   --prism-selector: #c3e88d;
 }
 :root {
-  --hty-primary-color: #0078e7;
+  --hty-primary-color: #2f3542;
   --hty-success-color: #21ba45;
   --hty-warning-color: #f2711c;
   --hty-danger-color: #db2828;
@@ -44,9 +44,9 @@ html.dark {
   --blockquote-border-left-color: var(--smc-border-color);
 }
 .primary {
-  color: #005eb4;
+  color: #1a1d24;
   --blockquote-border-left-color: var(--hty-primary-color);
-  --blockquote-bg-color: rgba(0,120,231,0.1);
+  --blockquote-bg-color: rgba(47,53,66,0.1);
 }
 .success {
   color: #198f35;
@@ -123,8 +123,8 @@ html.dark {
   --hty-text-color: #333;
   --hty-secondary-text-color: #555;
   --post-block-bg-color: #fff;
-  --smc-link-color: #0078e7;
-  --yun-bg-image: url("https://cdn.yunyoujun.cn/img/bg/stars-timing-0-blur-30px.jpg");
+  --smc-link-color: #2f3542;
+  --yun-bg-image: url("/images/sun.jpg");
   --banner-line-color: #000;
   --banner-char-color: #000;
 }
@@ -134,8 +134,8 @@ html.dark {
   --hty-text-color: #f2f2f2;
   --hty-secondary-text-color: #eee;
   --post-block-bg-color: #1b1f2e;
-  --smc-link-color: #3ca1ff;
-  --yun-bg-image: url("https://cdn.yunyoujun.cn/img/bg/galaxy.jpg");
+  --smc-link-color: #616d88;
+  --yun-bg-image: url("/images/dark.jpg");
   --banner-line-color: #fff;
   --banner-char-color: #fff;
   --banner-char-bg-color: rgba(0,0,0,0.5);
@@ -145,8 +145,8 @@ html.dark {
   --sidebar-bg-color: rgba(27,31,46,0.95);
   --sidebar-bg-image: url("");
   --page-btn-bg-color: rgba(0,0,0,0.5);
-  --page-btn-hover-bg-color: rgba(199,228,255,0.9);
-  --page-btn-active-bg-color: #0078e7;
+  --page-btn-hover-bg-color: rgba(209,213,222,0.9);
+  --page-btn-active-bg-color: #2f3542;
 }
 .disable-hover,
 .disable-hover * {
@@ -199,7 +199,7 @@ body {
 }
 ::selection {
   color: #fff;
-  background: #8e71c1;
+  background: #70a1ff;
 }
 a {
   color: var(--smc-link-color);
@@ -268,7 +268,7 @@ details[open] {
 summary {
   font-weight: bold;
   padding: 0.8rem 0.8rem 0.8rem 1rem;
-  background-color: rgba(0,120,231,0.1);
+  background-color: rgba(47,53,66,0.1);
 }
 details[open] summary {
   border-bottom: 1px solid var(--smc-secondary);
@@ -328,6 +328,21 @@ body::before {
     opacity: 1;
   }
 }
+body {
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur"), auto;
+}
+a {
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/link.cur"), auto;
+}
+a:hover {
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/link.cur"), auto;
+}
+.hty-icon-button {
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/link.cur"), pointer;
+}
+input {
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/text.cur"), auto;
+}
 :root {
   --banner-char-bg-color: rgba(255,255,255,0.5);
   --banner-char-hover-color: #fff;
@@ -361,7 +376,7 @@ body::before {
 }
 #banner .char-left {
   border-left: 1px solid var(--banner-line-color);
-  border-right: 0px solid rgba(0,120,231,0.1);
+  border-right: 0px solid rgba(47,53,66,0.1);
   border-right-width: 0px;
   animation-duration: 0.4s;
   animation-delay: 0.4s;
@@ -369,7 +384,7 @@ body::before {
   animation-timing-function: ease-out;
 }
 #banner .char-right {
-  border-left: 0px solid rgba(0,120,231,0.1);
+  border-left: 0px solid rgba(47,53,66,0.1);
   border-right: 1px solid var(--banner-line-color);
   border-left-width: 0px;
   animation-duration: 0.4s;
@@ -477,7 +492,7 @@ body::before {
   animation: float 2s ease-in-out infinite;
 }
 #goDown .icon {
-  color: #0078e7;
+  color: #2f3542;
   width: 3rem;
   height: 3rem;
 }
@@ -881,7 +896,7 @@ body::before {
 }
 .wordcloud #wordcloud-canvas,
 .wordcloud #wordcloud-sidebar-canvas {
-  cursor: url("$cursor-pointer"), pointer;
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/link.cur"), pointer;
 }
 .wordcloud #wordbox {
   pointer-events: none;
@@ -895,8 +910,8 @@ body::before {
 }
 :root {
   --page-btn-bg-color: rgba(255,255,255,0.5);
-  --page-btn-hover-bg-color: rgba(0,120,231,0.7);
-  --page-btn-active-bg-color: rgba(32,148,255,0.9);
+  --page-btn-hover-bg-color: rgba(47,53,66,0.7);
+  --page-btn-active-bg-color: rgba(80,90,112,0.9);
 }
 .page-number-basic,
 .pagination .space,
@@ -1054,7 +1069,7 @@ body::before {
   margin: 0 1rem;
   padding: 0 0.5rem;
   border-radius: 2px;
-  color: #0078e7;
+  color: #2f3542;
   transition-property: all;
   transition-duration: 0.3s;
   transition-delay: 0s;
@@ -1072,10 +1087,10 @@ body::before {
   -webkit-font-smoothing: antialiased;
 }
 .hty-button:hover {
-  background-color: rgba(0,120,231,0.05);
+  background-color: rgba(47,53,66,0.05);
 }
 .hty-button--raised {
-  background-color: var(--hty-primary-color, #0078e7);
+  background-color: var(--hty-primary-color, #2f3542);
   box-shadow: 0px 2px 10px -1px rgba(0,0,0,0.3);
   color: #fff;
 }
@@ -1084,7 +1099,7 @@ body::before {
 }
 .hty-button--raised:hover {
   color: #fff;
-  background-color: rgba(0,120,231,0.9);
+  background-color: rgba(47,53,66,0.9);
 }
 .hty-icon-button {
   display: inline-flex;
@@ -1100,10 +1115,10 @@ body::before {
   transition-delay: 0s;
 }
 .hty-icon-button:hover {
-  background-color: rgba(0,120,231,0.1);
+  background-color: rgba(47,53,66,0.1);
 }
 .hty-icon-button:active {
-  background-color: rgba(0,120,231,0.3);
+  background-color: rgba(47,53,66,0.3);
 }
 .button-glow {
   animation-duration: 2s;
@@ -1116,7 +1131,7 @@ body::before {
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
   to {
-    box-shadow: 0 0 20px rgba(0,120,231,0.3);
+    box-shadow: 0 0 20px rgba(47,53,66,0.3);
   }
 }
 @-webkit-keyframes glowing {
@@ -1124,7 +1139,7 @@ body::before {
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
   to {
-    box-shadow: 0 0 20px rgba(0,120,231,0.3);
+    box-shadow: 0 0 20px rgba(47,53,66,0.3);
   }
 }
 @-o-keyframes glowing {
@@ -1132,7 +1147,7 @@ body::before {
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
   to {
-    box-shadow: 0 0 20px rgba(0,120,231,0.3);
+    box-shadow: 0 0 20px rgba(47,53,66,0.3);
   }
 }
 @keyframes glowing {
@@ -1140,7 +1155,7 @@ body::before {
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
   to {
-    box-shadow: 0 0 20px rgba(0,120,231,0.3);
+    box-shadow: 0 0 20px rgba(47,53,66,0.3);
   }
 }
 .hty-card {
@@ -1165,16 +1180,16 @@ body::before {
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 2px;
-  background-color: rgba(0,120,231,0.5);
+  background-color: rgba(47,53,66,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-  background-color: rgba(0,120,231,0.3);
+  background-color: rgba(47,53,66,0.3);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0,120,231,0.7);
+  background-color: rgba(47,53,66,0.7);
 }
 ::-webkit-scrollbar-thumb:active {
-  background-color: rgba(0,120,231,0.9);
+  background-color: rgba(47,53,66,0.9);
 }
 .iconfont {
   font-size: 1.2rem;
@@ -1196,7 +1211,7 @@ body::before {
 .spinner {
   width: 60px;
   height: 60px;
-  border: 1px solid #0078e7;
+  border: 1px solid #2f3542;
   margin: 100px auto;
   animation: rotateplane 1.2s infinite ease-in-out;
 }
@@ -1293,7 +1308,7 @@ body::before {
   display: flex;
   align-items: center;
   min-height: 3rem;
-  border-top: 1px solid rgba(0,120,231,0.05);
+  border-top: 1px solid rgba(47,53,66,0.05);
   padding-left: 1rem;
   padding-right: 1rem;
   justify-content: space-between;
@@ -1320,7 +1335,7 @@ body::before {
   height: 100%;
   width: 0;
   right: 0;
-  background: rgba(0,120,231,0.08);
+  background: rgba(47,53,66,0.08);
   border-radius: 4px;
   transition: width 0.2s ease;
 }
@@ -1387,7 +1402,7 @@ body::before {
 .post-collapse .collection-title {
   position: relative;
   margin: 0;
-  border-bottom: 2px solid rgba(0,120,231,0.6);
+  border-bottom: 2px solid rgba(47,53,66,0.6);
 }
 .post-collapse .collection-title::before {
   content: '';
@@ -1395,11 +1410,11 @@ body::before {
   top: 50%;
   width: 2px;
   height: 50%;
-  background: rgba(0,120,231,0.3);
+  background: rgba(47,53,66,0.3);
 }
 .post-collapse .collection-title .archive-year {
   font-family: 'Source Code Pro', Consolas, Monaco, SFMono-Regular, 'Ubuntu Mono', Menlo, monospace;
-  color: #0078e7;
+  color: #2f3542;
   margin: 0 1.5rem;
 }
 .post-collapse .collection-title .archive-year::before {
@@ -1411,7 +1426,7 @@ body::before {
   margin-top: -4px;
   width: 1.5rem;
   height: 1.5rem;
-  background: #0078e7;
+  background: #2f3542;
   border-radius: 50%;
 }
 .post-collapse .post-item {
@@ -1422,11 +1437,11 @@ body::before {
   position: absolute;
   width: 2px;
   height: 100%;
-  background: rgba(0,120,231,0.3);
+  background: rgba(47,53,66,0.3);
 }
 .post-collapse .post-header {
   position: relative;
-  border-bottom: 2px solid rgba(0,120,231,0.3);
+  border-bottom: 2px solid rgba(47,53,66,0.3);
   display: flex;
 }
 .post-collapse .post-header::before {
@@ -1438,7 +1453,7 @@ body::before {
   height: 0.5rem;
   margin-left: -4px;
   border-radius: 50%;
-  border: 1px solid #0078e7;
+  border: 1px solid #2f3542;
   background-color: #fff;
   z-index: 1;
   transition-property: all;
@@ -1447,7 +1462,7 @@ body::before {
   transition-property: background;
 }
 .post-collapse .post-header:hover::before {
-  background: #0078e7;
+  background: #2f3542;
 }
 .post-collapse .post-header .post-title {
   margin-left: 0.1rem;
@@ -1545,7 +1560,7 @@ body::before {
 .markdown-body blockquote {
   padding: 0.6rem 1rem;
   border-left: 4px solid var(--blockquote-border-left-color, --smc-border-color);
-  background-color: var(--blockquote-bg-color, rgba(0,120,231,0.05));
+  background-color: var(--blockquote-bg-color, rgba(47,53,66,0.05));
 }
 .markdown-body blockquote p {
   margin: 0;
@@ -1577,7 +1592,7 @@ body::before {
   transition: 0.4s;
 }
 .post-nav-item:hover {
-  background-color: rgba(0,120,231,0.1);
+  background-color: rgba(47,53,66,0.1);
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 .post-nav-prev {
@@ -1681,7 +1696,7 @@ body::before {
 .hamburger.is-active .hamburger-inner,
 .hamburger.is-active .hamburger-inner::before,
 .hamburger.is-active .hamburger-inner::after {
-  background-color: #0078e7;
+  background-color: #2f3542;
 }
 .hamburger-box {
   outline: none;
@@ -1699,7 +1714,7 @@ body::before {
 .hamburger-inner::after {
   width: 25px;
   height: 2px;
-  background-color: #0078e7;
+  background-color: #2f3542;
   border-radius: 3px;
   position: absolute;
 }
@@ -1745,15 +1760,15 @@ body::before {
   margin-bottom: 0;
 }
 .sidebar-nav .sidebar-nav-item {
-  border: 1px solid #0078e7;
-  color: #0078e7;
+  border: 1px solid #2f3542;
+  color: #2f3542;
   margin: 0 1.25rem;
 }
 .sidebar-nav .sidebar-nav-item:hover {
   transition-property: all;
   transition-duration: 0.3s;
   transition-delay: 0s;
-  background-color: #0078e7;
+  background-color: #2f3542;
   color: #fff;
 }
 .sidebar-nav .sidebar-nav-item .icon {
@@ -1761,9 +1776,9 @@ body::before {
   height: 1.5rem;
 }
 .sidebar-nav .sidebar-nav-active {
-  background-color: #0078e7;
+  background-color: #2f3542;
   color: #fff;
-  box-shadow: 0 0 10px rgba(0,120,231,0.2);
+  box-shadow: 0 0 10px rgba(47,53,66,0.2);
 }
 .post-toc {
   line-height: 1.8;
@@ -1800,7 +1815,7 @@ body::before {
   max-height: 10000px;
 }
 :root {
-  --sidebar-bg-image: url("https://cdn.yunyoujun.cn/img/bg/alpha-stars-timing-1.webp");
+  --sidebar-bg-image: url("/images/side.png");
 }
 #menu-btn {
   display: none;
@@ -1853,7 +1868,7 @@ body::before {
   background-color: var(--sidebar-bg-color, #fff);
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: bottom 1rem center;
+  background-position: bottom 3rem center;
   text-align: center;
   z-index: 10;
   transition-property: all;
@@ -1944,7 +1959,7 @@ body::before {
   transition: 0.4s;
 }
 .site-author-avatar img:hover {
-  box-shadow: 0 0 30px rgba(0,120,231,0.2);
+  box-shadow: 0 0 30px rgba(47,53,66,0.2);
 }
 .site-author-avatar img {
   border-radius: 50%;
@@ -1953,6 +1968,17 @@ body::before {
   margin-top: 0;
   margin-bottom: 1rem;
   line-height: 1.5;
+}
+.site-author-status {
+  position: absolute;
+  height: 1.8rem;
+  width: 1.8rem;
+  bottom: 0;
+  right: 0;
+  line-height: 1.8rem;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  background-color: #fff;
 }
 .site-name {
   color: var(--hty-text-color);
@@ -2018,7 +2044,7 @@ body::before {
   bottom: 1.1rem;
   z-index: 20;
   opacity: 0;
-  color: #0078e7;
+  color: #2f3542;
   transition-property: all;
   transition-duration: 0.3s;
   transition-delay: 0s;
@@ -2038,6 +2064,101 @@ body::before {
 }
 .progress-circle-container {
   position: absolute;
+}
+#local-search-input {
+  outline: none;
+}
+.search-result-container {
+  overflow: auto;
+  margin: 0;
+  padding: 0.5rem 0 1rem 0;
+  height: calc(100% - 160px);
+}
+.search-result-container ul.search-result-list {
+  margin: 0;
+  padding: 0;
+}
+.search-result-container ul.search-result-list li {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0;
+}
+.search-result-container ul.search-result-list li .search-result-title {
+  font-family: 'Songti SC', 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+.search-result-container ul.search-result-list li .search-result {
+  margin: 0;
+  font-size: 0.8rem;
+}
+.search-result-container ul.search-result-list li .search-result .search-keyword {
+  background: transparent;
+  color: #f00;
+  font-style: normal;
+  text-decoration: underline;
+}
+.search-popup {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 4.5rem;
+  margin: 0;
+  opacity: 0;
+  z-index: 30;
+  transition: 0.6s;
+  visibility: hidden;
+}
+.search-popup.show {
+  visibility: visible;
+  opacity: 1;
+}
+.search-header .close-icon {
+  position: fixed;
+  top: 0.6rem;
+  right: 0.8rem;
+}
+.search-input {
+  background: transparent;
+  color: var(--hty-text-color);
+  font-size: 1.5rem;
+  border-radius: 3rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid #999;
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 800px;
+  font-family: 'Songti SC', 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  font-weight: 900;
+  text-align: center;
+}
+.popup .search-icon,
+.popup .close-icon {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+}
+.popup .search-icon .icon,
+.popup .close-icon .icon {
+  width: 2rem;
+  height: 2rem;
+}
+#search {
+  position: fixed;
+  top: 0.6rem;
+  right: 0.8rem;
+}
+#search .icon {
+  color: #2f3542;
 }
 #comment {
   margin: 0 1rem;
@@ -2121,4 +2242,163 @@ body::before {
   display: none;
   padding: 1rem;
   border: 1px solid #d3d3d3;
+}
+.album-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.album-list-item {
+  display: inline-flex;
+}
+.album-list-item figure {
+  position: relative;
+  width: 15rem;
+  margin: 2rem;
+}
+.album-list-item figure::before {
+  content: '';
+  position: absolute;
+  top: 1%;
+  left: 0.5%;
+  width: 100%;
+  height: 96%;
+  border: 0.25rem solid #fff;
+  background-color: #666;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  transform: rotate(-3deg);
+}
+.album-list-item figure img {
+  vertical-align: bottom;
+  display: inline-flex;
+  border: 0.25rem solid #fff;
+  box-shadow: 0 8px 10px rgba(0,0,0,0.3);
+  padding: 0;
+  transform: rotate(2deg);
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  background-color: #eee;
+}
+.album-list-item figure figcaption {
+  position: absolute;
+  bottom: -2.5rem;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+.photo-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.photo-list-item {
+  display: inline-flex;
+  position: relative;
+  width: 15rem;
+  margin: 1.5rem;
+  cursor: url("https://cdn.yunyoujun.cn/css/md-cursors/link.cur"), pointer;
+}
+.photo-list-item img {
+  box-sizing: border-box;
+  vertical-align: bottom;
+  display: inline-flex;
+  border: 0.25rem solid #fff;
+  box-shadow: 0 8px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  background-color: #eee;
+}
+.photo-list-item figcaption {
+  position: absolute;
+  bottom: -1.8rem;
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 0.9rem;
+}
+#decryptContainer {
+  display: flex;
+  height: 10rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#decrypt-password {
+  outline: none;
+  font-size: 1.5rem;
+  border-radius: 3rem;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #999;
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 800px;
+  font-family: 'Songti SC', 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  font-weight: 900;
+  text-align: center;
+}
+#decryptButton {
+  color: #2f3542;
+  background-color: rgba(47,53,66,0.08);
+}
+#decryptButton:active {
+  background-color: rgba(47,53,66,0.3);
+}
+#decryptButton .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+#girls {
+  text-align: center;
+}
+.girls-number {
+  color: #fff;
+}
+.girl-items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-left: 0;
+}
+.girl-item {
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  width: 8rem;
+  margin: 1rem;
+}
+.girl-item .girl-info {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.girl-item .girl-avatar {
+  object-fit: cover;
+  object-position: center top;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  padding: 0.2rem;
+  background-color: #fff;
+  box-shadow: 0 0 1rem rgba(0,0,0,0.12);
+  transition: 0.5s;
+}
+.girl-item .girl-avatar:hover {
+  box-shadow: 0 0 2rem rgba(0,0,0,0.12);
+}
+.girl-item .girl-name {
+  font-size: 0.9rem;
+}
+.girl-item .girl-from {
+  font-size: 12px;
+  font-family: 'Songti SC', 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  font-weight: bold;
+  color: var(--hty-secondary-text-color);
+}
+.girl-item .girl-from::before {
+  content: '「';
+}
+.girl-item .girl-from::after {
+  content: '」';
 }
