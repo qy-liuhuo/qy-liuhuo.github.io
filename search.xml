@@ -1161,37 +1161,6 @@
     
     <entry>
       <title>ESP32使用VLGL(arduino)</title>
-      <link href="/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/"/>
-      <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/</url>
-      
-        <content type="html"><![CDATA[<span id="more"></span>]]></content>
-      
-      
-      <categories>
-          
-          <category> 硬件开发 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 硬件开发 </tag>
-            
-            <tag> Arduino </tag>
-            
-            <tag> ESP32 </tag>
-            
-            <tag> MPU6050 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>ESP32使用VLGL(arduino)</title>
       <link href="/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/"/>
       <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8VLGL(arduino)/</url>
       
@@ -1214,6 +1183,37 @@
             <tag> ESP32 </tag>
             
             <tag> VLGL图形库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ESP32使用VLGL(arduino)</title>
+      <link href="/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/"/>
+      <url>/2021/07/25/ESP32%E4%BD%BF%E7%94%A8MPU6050/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 硬件开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 硬件开发 </tag>
+            
+            <tag> Arduino </tag>
+            
+            <tag> ESP32 </tag>
+            
+            <tag> MPU6050 </tag>
             
         </tags>
       
