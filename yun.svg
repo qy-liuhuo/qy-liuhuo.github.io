@@ -1,21 +1,2 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="yun-logo" width="400" height="400" viewBox="40 40 320 320" stroke-width="16">
-    <style>
-        #yun-logo {
-            stroke: black;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            #yun-logo {
-                stroke: white;
-            }
-        }
-    </style>
-    <defs>
-        <line id="eye" x1="0" y1="-35" x2="0" y2="35" stroke-linecap="round">
-            <animateTransform attributeName="transform" additive="sum" attributeType="XML" type="scale" from="1 1" to="1 0" dur="0.15s" repeatCount="2"/>
-        </line>
-    </defs>
-    <polygon stroke-linejoin="round" fill="none" points="50,250 50,150 100,150 100,100 300,100 300,150 350,150 350,250 300,250 300,300 100,300 100,250 50,250"/>
-    <use xlink:href="#eye" transform="translate(150,200)"/>
-    <use xlink:href="#eye" transform="translate(250,200)"/>
-</svg>
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1659866401390" class="icon" viewBox="0 0 1105 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4250" xmlns:xlink="http://www.w3.org/1999/xlink" width="215.8203125" height="200"><defs><style type="text/css">@font-face { font-family: feedback-iconfont; src: url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.woff2?t=1630033759944") format("woff2"), url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.woff?t=1630033759944") format("woff"), url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.ttf?t=1630033759944") format("truetype"); }
+</style></defs><path d="M221.24544 855.83872c-49.8688 0-92.20096 42.47552-92.20096 94.04416v28.83584a40.96 40.96 0 0 0 40.96 40.96h778.19904a40.96 40.96 0 0 0 40.96-40.96V949.8624c1.51552-51.56864-39.30112-94.04416-90.70592-94.04416H221.24544zM19.456 647.76192c0 64.02048 51.4048 116.736 116.1216 116.736h850.90304c62.81216 0 116.1216-52.71552 116.1216-116.736V57.79456a40.96 40.96 0 0 0-40.96-40.96H60.39552a40.96 40.96 0 0 0-40.96 40.96v589.9264z m751.9232-352.17408c-15.23712-15.07328-15.23712-37.6832 0-52.736 15.21664-15.07328 38.07232-15.07328 51.4048 0l133.24288 137.48224c15.21664 15.0528 15.21664 37.66272 0 52.71552l-133.26336 137.48224c-15.21664 15.07328-38.07232 15.07328-51.4048 0-15.21664-15.07328-15.21664-37.6832 0-52.736l108.52352-111.104-108.50304-111.104zM485.7856 570.53184l93.2864-354.05824c5.71392-20.70528 24.73984-32.01024 45.6704-26.35776 19.0464 5.65248 30.47424 26.35776 26.66496 47.08352L558.14144 591.2576c-5.71392 20.70528-24.73984 32.01024-45.6704 26.35776-20.95104-7.53664-32.3584-28.2624-26.66496-47.08352zM329.728 240.96768c15.23712-15.07328 38.0928-15.07328 51.4048 0 15.23712 15.0528 15.23712 37.66272 0 52.736l-108.50304 111.104 108.50304 111.104c15.23712 15.07328 15.23712 37.6832 0 52.736-15.23712 15.07328-38.07232 15.07328-51.4048 0l-133.24288-137.48224c-15.23712-15.0528-15.23712-37.66272 0-52.71552l133.24288-137.48224z" fill="#979797" p-id="4251"></path></svg>
