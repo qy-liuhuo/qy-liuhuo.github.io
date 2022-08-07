@@ -140,7 +140,7 @@ html.dark {
   --banner-char-color: #fff;
   --banner-char-bg-color: rgba(0,0,0,0.5);
   --banner-char-hover-color: #000;
-  --post-card-bg-color: rgba(27,31,46,0.9);
+  --post-card-bg-color: rgba(27,31,46,0.8);
   --post-card-shadow: 0 1px 8px rgba(27,31,46,0.1);
   --sidebar-bg-color: rgba(27,31,46,0.95);
   --sidebar-bg-image: url("");
@@ -1272,7 +1272,7 @@ input {
   }
 }
 :root {
-  --post-card-bg-color: rgba(255,255,255,0.9);
+  --post-card-bg-color: rgba(255,255,255,0.8);
   --post-card-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 .post-card {
@@ -1960,9 +1960,6 @@ input {
 }
 .site-author-avatar img:hover {
   box-shadow: 0 0 30px rgba(47,53,66,0.2);
-}
-.site-author-avatar img {
-  border-radius: 50%;
 }
 .site-author-name {
   margin-top: 0;
