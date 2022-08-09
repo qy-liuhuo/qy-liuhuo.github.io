@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#2f3542"><meta name="author" content="Ma Haotian"><meta name="copyright" content="Ma Haotian"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>软件工程总结_4 总体设计 | MaHaotian's blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><script src="https://fastly.jsdelivr.net/npm/pjax@latest/pjax.min.js" defer></script><script src="/js/pjax.js" defer type="module"></script><script src="https://fastly.jsdelivr.net/npm/vue@2.6.14"></script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#2f3542"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"qylh.xyz","root":"/","title":"七月流火","version":"1.10.6","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M9KWR9L');</script><!-- End Google Tag Manager --><meta name="description" content="总体设计软件设计的任务 以软件需求规格说明书为依据，着手实现软件的需求，并将设计的结果反应在“设计规格说明书”的文档中  总体设计（概要设计） 根据软件需求，设计软件系统结构和数据结构确定程序的组成模块之间的关系，从抽象的层次上分析对比多种可能的系统实现方案和软件结构，从中选取最佳方案和最合理的软件结构，从而用较低成本开发出高质量的软件系统  详细设计（过程设计） 确定模块内部的算法和数据结构，选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程总结_4 总体设计">
+<meta property="og:url" content="https://qylh.xyz/posts/f0cb5b2b/index.html">
+<meta property="og:site_name" content="MaHaotian&#39;s blog">
+<meta property="og:description" content="总体设计软件设计的任务 以软件需求规格说明书为依据，着手实现软件的需求，并将设计的结果反应在“设计规格说明书”的文档中  总体设计（概要设计） 根据软件需求，设计软件系统结构和数据结构确定程序的组成模块之间的关系，从抽象的层次上分析对比多种可能的系统实现方案和软件结构，从中选取最佳方案和最合理的软件结构，从而用较低成本开发出高质量的软件系统  详细设计（过程设计） 确定模块内部的算法和数据结构，选">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.qylh.xyz/blog/1653620191748.png">
+<meta property="article:published_time" content="2022-05-21T13:25:24.000Z">
+<meta property="article:modified_time" content="2022-08-09T07:56:45.404Z">
+<meta property="article:author" content="Ma Haotian">
+<meta property="article:tag" content="软件工程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.qylh.xyz/blog/1653620191748.png"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Ma Haotian"><img width="96" loading="lazy" src="https://img.qylh.xyz/blog/v2-d39a2afc22963be458e0311cb0965dc3_r.jpg" alt="Ma Haotian"><span class="site-author-status" title="永远相信美好的事情即将发生">😎</span></a><div class="site-author-name"><a href="/about/">Ma Haotian</a></div><span class="site-name">MaHaotian's blog</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">51</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">12</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">58</span></a></div><a class="site-state-item hty-icon-button" href="/about/" title="about"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2499094347&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/qy-liuhuo" title="GitHub" target="_blank" style="color:#95a5a6"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="http://hdyb.hbu.cn/git/Mahaotian" title="Gitee" target="_blank" style="color:#ff4757"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:maht2001@163.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1553883989" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">总体设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">软件设计的任务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1%EF%BC%88%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">总体设计（概要设计）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E8%BF%87%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">详细设计（过程设计）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">设计过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">设计原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">1.3.1.</span> <span class="toc-text">模块化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%EF%BC%9F"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">什么是模块？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E6%80%9D%E6%83%B3"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">模块化思想</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">模块化的优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%88%90%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">模块化与软件成本的关系</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1"><span class="toc-number">1.3.2.</span> <span class="toc-text">抽象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8A%BD%E8%B1%A1%EF%BC%9F"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">什么是抽象？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%90%E6%AD%A5%E6%B1%82%E7%B2%BE"><span class="toc-number">1.3.3.</span> <span class="toc-text">逐步求精</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#miller%E5%8E%9F%E5%88%99"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">miller原则</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8C%96"><span class="toc-number">1.3.4.</span> <span class="toc-text">信息隐藏和局部化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E7%8B%AC%E7%AB%8B%EF%BC%88%E4%BD%8E%E8%80%A6%E5%90%88%EF%BC%8C%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%89"><span class="toc-number">1.3.5.</span> <span class="toc-text">模块独立（低耦合，高内聚）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%8E%9F%E5%88%99"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">两个原则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8F%91%E8%A7%84%E5%88%99"><span class="toc-number">1.4.</span> <span class="toc-text">启发规则</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#2f3542;"><link itemprop="mainEntityOfPage" href="https://qylh.xyz/posts/f0cb5b2b/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Ma Haotian"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="MaHaotian's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">软件工程总结_4 总体设计</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2022-05-21 21:25:24" itemprop="dateCreated datePublished" datetime="2022-05-21T21:25:24+08:00">2022-05-21</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2022-08-09 15:56:45" itemprop="dateModified" datetime="2022-08-09T15:56:45+08:00">2022-08-09</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">912</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">3m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">软件工程</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">软件工程</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h2><h3 id="软件设计的任务"><a href="#软件设计的任务" class="headerlink" title="软件设计的任务"></a>软件设计的任务</h3><blockquote>
+<p>以软件需求规格说明书为依据，着手实现软件的需求，并将设计的结果反应在“设计规格说明书”的文档中</p>
+</blockquote>
+<h4 id="总体设计（概要设计）"><a href="#总体设计（概要设计）" class="headerlink" title="总体设计（概要设计）"></a>总体设计（概要设计）</h4><blockquote>
+<p>根据软件需求，设计软件系统结构和数据结构确定程序的组成模块之间的关系，从抽象的层次上分析对比多种可能的系统实现方案和软件结构，从中选取最佳方案和最合理的软件结构，从而用较低成本开发出高质量的软件系统</p>
+</blockquote>
+<h4 id="详细设计（过程设计）"><a href="#详细设计（过程设计）" class="headerlink" title="详细设计（过程设计）"></a>详细设计（过程设计）</h4><blockquote>
+<p>确定模块内部的算法和数据结构，选定某种过程的表达形式来描述算法，生成详细文档</p>
+</blockquote>
+<h3 id="设计过程"><a href="#设计过程" class="headerlink" title="设计过程"></a>设计过程</h3><ol>
+<li>提供选择方案<ol>
+<li>从需求阶段的数据流图出发</li>
+</ol>
+</li>
+<li>选取合理方案<ol>
+<li>系统流程图</li>
+<li>组成系统的物理元素清单</li>
+<li>成本效益分析</li>
+<li>实现系统的进度计划</li>
+</ol>
+</li>
+<li>推荐最佳方案</li>
+<li>功能分解</li>
+<li>设计软件结构</li>
+<li>设计数据库</li>
+<li>制定测试计划</li>
+<li>书写文档<ol>
+<li>系统说明</li>
+<li>用户手册</li>
+<li>测试计划</li>
+<li>详细的实现计划</li>
+<li>数据库设计结果</li>
+</ol>
+</li>
+<li>审查和复审</li>
+</ol>
+<h3 id="设计原理"><a href="#设计原理" class="headerlink" title="设计原理"></a>设计原理</h3><h4 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h4><h5 id="什么是模块？"><a href="#什么是模块？" class="headerlink" title="什么是模块？"></a>什么是模块？</h5><blockquote>
+<p>模块是数据说明和可执行语句等程序对象的集合，每个模块单独命名并且可以通过名字对模块进行访问</p>
+</blockquote>
+<h5 id="模块化思想"><a href="#模块化思想" class="headerlink" title="模块化思想"></a>模块化思想</h5><blockquote>
+<p>采用自顶向下的方式，逐层把软件系统划分成若干个可单独命名和可编址的模块，每个模块完成一个特定的子功能，所有模块按照某种方法组成一个整体，完成整个系统所要求的的功能。</p>
+</blockquote>
+<h5 id="模块化的优点"><a href="#模块化的优点" class="headerlink" title="模块化的优点"></a>模块化的优点</h5><ol>
+<li>降低软件复杂性</li>
+<li>减少开发工作量</li>
+<li>降低成本</li>
+<li>提高软件生产率</li>
+</ol>
+<h5 id="模块化与软件成本的关系"><a href="#模块化与软件成本的关系" class="headerlink" title="模块化与软件成本的关系"></a>模块化与软件成本的关系</h5><p><img src="https://img.qylh.xyz/blog/1653620191748.png" loading="lazy"></p>
+<p>并非模块越多越好！</p>
+<h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><h5 id="什么是抽象？"><a href="#什么是抽象？" class="headerlink" title="什么是抽象？"></a>什么是抽象？</h5><p>认识复杂事物和现象时，抽出事物本质的共同特性而暂不考虑他们的细节</p>
+<h4 id="逐步求精"><a href="#逐步求精" class="headerlink" title="逐步求精"></a>逐步求精</h4><blockquote>
+<p>为了能集中精力解决主要问题而尽量推迟对问题细节的考虑。可以看做把一个时期内必须解决的问题按照优先级排序的技术，是一种自顶向下的设计策略</p>
+</blockquote>
+<h5 id="miller原则"><a href="#miller原则" class="headerlink" title="miller原则"></a>miller原则</h5><blockquote>
+<p>一个人在任何时候都只能把注意力集中在5-9个知识块上</p>
+</blockquote>
+<h4 id="信息隐藏和局部化"><a href="#信息隐藏和局部化" class="headerlink" title="信息隐藏和局部化"></a>信息隐藏和局部化</h4><blockquote>
+<p>在设计和确定模块时，使得一个模块内包含的信息（过程或数据），不允许其它不需要这些信息的模块访问，独立的模块间仅仅交换为完成系统功能而必项交换的信息。</p>
+</blockquote>
+<blockquote>
+<p>局部化：将一些关系密切的软件元素物理地彼此靠近：如局部变量</p>
+</blockquote>
+<h4 id="模块独立（低耦合，高内聚）"><a href="#模块独立（低耦合，高内聚）" class="headerlink" title="模块独立（低耦合，高内聚）"></a>模块独立（低耦合，高内聚）</h4><blockquote>
+<p>模块只完成系统要求的相对独立的功能，符合信息隐蔽原则，模块间关联和依赖程度尽量小</p>
+</blockquote>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>容易开发测试和维护</p>
+<h5 id="两个原则"><a href="#两个原则" class="headerlink" title="两个原则"></a>两个原则</h5><p>低耦合、高内聚</p>
+<p>详见另一篇博客：<a href="https://qylh.xyz/2022/01/26/%E8%80%A6%E5%90%88%E4%B8%8E%E5%86%85%E8%81%9A/">耦合与内聚</a></p>
+<h3 id="启发规则"><a href="#启发规则" class="headerlink" title="启发规则"></a>启发规则</h3><ol>
+<li>改进软件结构提高模块独立性</li>
+<li>模块规模应该适中</li>
+<li>深度、宽度、扇出、扇入应适当</li>
+<li>模块的作用域应在控制域之内</li>
+<li>力争降低模块接口的复杂程度</li>
+<li>设计单入口单出口的模块</li>
+<li>模块功能应该可以预测</li>
+</ol>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Ma Haotian</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://qylh.xyz/posts/f0cb5b2b/" title="软件工程总结_4 总体设计">https://qylh.xyz/posts/f0cb5b2b/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/281be91d/" rel="prev" title="软件工程总结_3 需求分析"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">软件工程总结_3 需求分析</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/eb46ecd9/" rel="next" title="ip查询工具"><span class="post-nav-text">ip查询工具</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎通过Email:maht2001@163.com与我交流。</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="beian"><a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2021012791号</a></div><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Ma Haotian</span></div><div class="live-time"><span>本博客已运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2021-07-18T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = ` ${passDay} 天 ${passHour} 小时 ${passMinute} 分 ${passSecond} 秒`;
+}
+blog_live_time();
+</script></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#2f3542" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
