@@ -4450,4 +4450,340 @@ void fun2()
 </ol>
 ]]></content>
   </entry>
+  <entry>
+    <title>二叉搜索树—BST</title>
+    <url>/posts/290cda51/</url>
+    <content><![CDATA[<p>二叉搜索树又称二叉排序树(Binary Search Tree)，简称BST。主要用于查找搜索。</p>
+<span id="more"></span>
+
+<p>如果理解起来有些抽象，可以尝试这个网站，可视化演示操作过程：<a href="https://visualgo.net/zh/bst">visualgo</a></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>二叉搜索树或者为空树或者满足如下条件：</p>
+<ol>
+<li>若左子树非空，左子树全部节点小于根节点</li>
+<li>若右子树非空，右子树全部节点大于根节点</li>
+<li>左右子树均满足以上两点（递归定义的）</li>
+</ol>
+<p>二叉搜索树是没有重复元素的。</p>
+<p>优势在于查找和插入，时间复杂度可以达到O(logn)。</p>
+<p><img src="https://img.qylh.xyz/blog/1661671342883.png" loading="lazy"></p>
+<p>如上图即为一颗BST树。</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>如图为查找50的过程</p>
+<p><img src="https://img.qylh.xyz/blog/1661672587888.png" loading="lazy"></p>
+<blockquote>
+<p>从根节点开始，若节点为NULL，否则比较根节点与搜索值的大小关系，如果相等则查找成功，如果小于根节点值则转到左子树上继续查找，同理若大于节点值则转到右节点上继续查找。</p>
+</blockquote>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> left<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> right<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>如图为插入8的过程：</p>
+<p><img src="https://img.qylh.xyz/blog/1661672518947.png" loading="lazy"></p>
+<blockquote>
+<p>插入的关键是找到插入的位置, 可以在查找的基础上改装成插入，即若查找成功代表插入值已存在于BST中无需再次插入，查找失败（找到了NULL），则该位置即为需要插入的位置。</p>
+</blockquote>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            left<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            right<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            right<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>首先定义两个概念：</p>
+<blockquote>
+<p>前驱结点：节点val值小于该节点val值并且值最大的节点<br>后继节点：节点val值大于该节点val值并且值最小的节点</p>
+</blockquote>
+<blockquote>
+<p>相比较而言删除操作较为复杂，需要考虑多种情况：</p>
+</blockquote>
+<p>假设待删除节点为d</p>
+<ol>
+<li>若d为叶节点，则直接删除即可。</li>
+<li>若节点只有左子树，则将左子树改为d父节点的子树。（右节点同理）</li>
+<li>若d有两棵子树,则让d的后继（或者前驱）节点x取代d的位置，并将原位置的x删除掉（此时会转换成1或2的情况）</li>
+</ol>
+<p>由于前两者情况较为简单，这里演示第三种情况：</p>
+<p>删除如图BST中值为7的节点：</p>
+<p><img src="https://img.qylh.xyz/blog/1661673121716.png" loading="lazy"></p>
+<p>首先查找到6：<br><img src="https://img.qylh.xyz/blog/1661673157065.png" loading="lazy"></p>
+<p>然后发现6的左右子树均非空，这里选择右子树，查找到后继节点8<br><img src="https://img.qylh.xyz/blog/1661673183449.png" loading="lazy"><br>用8替代7的位置<br><img src="https://img.qylh.xyz/blog/1661673223963.png" loading="lazy"><br>由于8节点为叶节点，因此直接删除。</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">
+<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        BSTNode <span class="token operator">*</span>temp <span class="token operator">=</span> left<span class="token operator">-></span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        value <span class="token operator">=</span> temp<span class="token operator">-></span>value<span class="token punctuation">;</span>
+        temp<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                right<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">BSTNode</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> value<span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>left<span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>right<span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>parent<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">BSTNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">findMin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findMin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    BSTNode <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>tmp<span class="token operator">-></span>left <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        tmp <span class="token operator">=</span> tmp<span class="token operator">-></span>left<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    BSTNode <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>tmp<span class="token operator">-></span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        tmp <span class="token operator">=</span> tmp<span class="token operator">-></span>right<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        BSTNode <span class="token operator">*</span>temp <span class="token operator">=</span> left<span class="token operator">-></span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        value <span class="token operator">=</span> temp<span class="token operator">-></span>value<span class="token punctuation">;</span>
+        temp<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                right<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">BSTNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    value <span class="token operator">=</span> val<span class="token punctuation">;</span>
+    left <span class="token operator">=</span> right <span class="token operator">=</span> parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> left<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> right<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            left<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            right<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            right<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/**
+ * @brief
+ *
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">BST</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">BST</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">BST</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>root<span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> <span class="token function">del</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">BST</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">BST</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        root<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+BSTNode <span class="token operator">*</span><span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> root<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        root<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">bool</span> <span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">del</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    BSTNode <span class="token operator">*</span>findNode <span class="token operator">=</span> <span class="token function">find</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>findNode <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>findNode <span class="token operator">==</span> root<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>left <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> root<span class="token operator">-></span>right<span class="token punctuation">;</span>
+            root<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> root<span class="token operator">-></span>left<span class="token punctuation">;</span>
+            root<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            root<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        root<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建就是按顺序的插入过程</p>
+<p>参考文档<a href="https://www.imooc.com/article/13463">二叉搜索树BST在C++类中的实现（增删改查）【Van0512】</a></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
 </search>
