@@ -458,6 +458,53 @@ EOF</span>
       </tags>
   </entry>
   <entry>
+    <title>Docker学习Day3--容器命令</title>
+    <url>/posts/b66167be/</url>
+    <content><![CDATA[<h2 id="安装一个centos镜像学习"><a href="#安装一个centos镜像学习" class="headerlink" title="安装一个centos镜像学习"></a>安装一个centos镜像学习</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull centos
+Using default tag: latest
+latest: Pulling from library/centos
+a1d0c7532777: Pull complete 
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image <span class="token keyword">for</span> centos:latest
+docker.io/library/centos:latest</code></pre>
+
+<h3 id="docker-run-可选参数-image"><a href="#docker-run-可选参数-image" class="headerlink" title="docker run [可选参数] image"></a><code>docker run [可选参数] image</code></h3><blockquote>
+<p>参数说明</p>
+</blockquote>
+<ul>
+<li>–name&#x3D;”name” 给容器起名字</li>
+<li>-d 后台方式运行</li>
+<li>-it 使用交互方式运行，进入容器查看内容</li>
+<li>-P  指定容器的端口（大写）<ul>
+<li>-p 主机端口：容器端口 映射</li>
+<li>-p 容器端口</li>
+</ul>
+</li>
+<li>-p 随机端口（小写）</li>
+</ul>
+<p><code>docker run -it centos /bin/bash</code> 启动容器并用bash交互,可见内部也还是一个独立的centos系统</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@iZ8vbioqlrpr01woefafo2Z ~<span class="token punctuation">]</span><span class="token comment"># docker run -it centos /bin/bash</span>
+<span class="token punctuation">[</span>root@4a4d1f89c446 /<span class="token punctuation">]</span><span class="token comment"># ls</span>
+bin  etc   lib	  lost+found  mnt  proc  run   srv  tmp  var
+dev  home  lib64  media       opt  root  sbin  sys  usr
+<span class="token punctuation">[</span>root@4a4d1f89c446 /<span class="token punctuation">]</span><span class="token comment"># </span></code></pre>
+
+<h3 id="exit-退出主机"><a href="#exit-退出主机" class="headerlink" title="exit 退出主机"></a><code>exit</code> 退出主机</h3><h3 id="ctrl-p-q-容器不停止退出"><a href="#ctrl-p-q-容器不停止退出" class="headerlink" title="ctrl+p+q 容器不停止退出"></a><code>ctrl+p+q</code> 容器不停止退出</h3><h3 id="docker-ps-查看在运行的所有容器"><a href="#docker-ps-查看在运行的所有容器" class="headerlink" title="docker ps  查看在运行的所有容器"></a><code>docker ps </code> 查看在运行的所有容器</h3><ul>
+<li>-a 也会列出历史运行的容器</li>
+<li>-n&#x3D;? 显示最近创建的n个容器</li>
+<li>-q 只显示id</li>
+</ul>
+<h3 id="docker-rm-容器id-删除容器"><a href="#docker-rm-容器id-删除容器" class="headerlink" title="docker rm 容器id 删除容器"></a><code>docker rm 容器id</code> 删除容器</h3><p>不能删除正在运行的容器，如需要强制删除可以加-f<br>rmi是删除镜像 没有i是容器</p>
+<p>docker rm -f $(docker ps -aq) 删除所有容器</p>
+<h3 id="docker-start-id-开启容器"><a href="#docker-start-id-开启容器" class="headerlink" title="docker start id 开启容器"></a><code>docker start id</code> 开启容器</h3><h3 id="docker-restart-id-重启容器"><a href="#docker-restart-id-重启容器" class="headerlink" title="docker restart id 重启容器"></a><code>docker restart id</code> 重启容器</h3><h3 id="docker-stop-id-停止容器"><a href="#docker-stop-id-停止容器" class="headerlink" title="docker stop id 停止容器"></a><code>docker stop id</code> 停止容器</h3>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker学习Day2——镜像命令</title>
     <url>/posts/51f03386/</url>
     <content><![CDATA[<h2 id="Docker工作原理"><a href="#Docker工作原理" class="headerlink" title="Docker工作原理"></a>Docker工作原理</h2><p>Docker是一个C&#x2F;S结构的系统，Docker的守护进程运行在主机上，通过Socket从客户端访问。</p>
@@ -594,53 +641,6 @@ hello-world   latest    feb5d9fea6a5   <span class="token number">7</span> month
       </categories>
       <tags>
         <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker学习Day3--容器命令</title>
-    <url>/posts/b66167be/</url>
-    <content><![CDATA[<h2 id="安装一个centos镜像学习"><a href="#安装一个centos镜像学习" class="headerlink" title="安装一个centos镜像学习"></a>安装一个centos镜像学习</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull centos
-Using default tag: latest
-latest: Pulling from library/centos
-a1d0c7532777: Pull complete 
-Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
-Status: Downloaded newer image <span class="token keyword">for</span> centos:latest
-docker.io/library/centos:latest</code></pre>
-
-<h3 id="docker-run-可选参数-image"><a href="#docker-run-可选参数-image" class="headerlink" title="docker run [可选参数] image"></a><code>docker run [可选参数] image</code></h3><blockquote>
-<p>参数说明</p>
-</blockquote>
-<ul>
-<li>–name&#x3D;”name” 给容器起名字</li>
-<li>-d 后台方式运行</li>
-<li>-it 使用交互方式运行，进入容器查看内容</li>
-<li>-P  指定容器的端口（大写）<ul>
-<li>-p 主机端口：容器端口 映射</li>
-<li>-p 容器端口</li>
-</ul>
-</li>
-<li>-p 随机端口（小写）</li>
-</ul>
-<p><code>docker run -it centos /bin/bash</code> 启动容器并用bash交互,可见内部也还是一个独立的centos系统</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@iZ8vbioqlrpr01woefafo2Z ~<span class="token punctuation">]</span><span class="token comment"># docker run -it centos /bin/bash</span>
-<span class="token punctuation">[</span>root@4a4d1f89c446 /<span class="token punctuation">]</span><span class="token comment"># ls</span>
-bin  etc   lib	  lost+found  mnt  proc  run   srv  tmp  var
-dev  home  lib64  media       opt  root  sbin  sys  usr
-<span class="token punctuation">[</span>root@4a4d1f89c446 /<span class="token punctuation">]</span><span class="token comment"># </span></code></pre>
-
-<h3 id="exit-退出主机"><a href="#exit-退出主机" class="headerlink" title="exit 退出主机"></a><code>exit</code> 退出主机</h3><h3 id="ctrl-p-q-容器不停止退出"><a href="#ctrl-p-q-容器不停止退出" class="headerlink" title="ctrl+p+q 容器不停止退出"></a><code>ctrl+p+q</code> 容器不停止退出</h3><h3 id="docker-ps-查看在运行的所有容器"><a href="#docker-ps-查看在运行的所有容器" class="headerlink" title="docker ps  查看在运行的所有容器"></a><code>docker ps </code> 查看在运行的所有容器</h3><ul>
-<li>-a 也会列出历史运行的容器</li>
-<li>-n&#x3D;? 显示最近创建的n个容器</li>
-<li>-q 只显示id</li>
-</ul>
-<h3 id="docker-rm-容器id-删除容器"><a href="#docker-rm-容器id-删除容器" class="headerlink" title="docker rm 容器id 删除容器"></a><code>docker rm 容器id</code> 删除容器</h3><p>不能删除正在运行的容器，如需要强制删除可以加-f<br>rmi是删除镜像 没有i是容器</p>
-<p>docker rm -f $(docker ps -aq) 删除所有容器</p>
-<h3 id="docker-start-id-开启容器"><a href="#docker-start-id-开启容器" class="headerlink" title="docker start id 开启容器"></a><code>docker start id</code> 开启容器</h3><h3 id="docker-restart-id-重启容器"><a href="#docker-restart-id-重启容器" class="headerlink" title="docker restart id 重启容器"></a><code>docker restart id</code> 重启容器</h3><h3 id="docker-stop-id-停止容器"><a href="#docker-stop-id-停止容器" class="headerlink" title="docker stop id 停止容器"></a><code>docker stop id</code> 停止容器</h3>]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -804,6 +804,64 @@ success: (res)&#x3D;&gt;&#123;
 <p>时间复杂度为n</p>
 <h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>需要时<code>sorted merkle tree</code> 即树是根据hash值排序的（比特币没有证明不存在的需求，所以未排序）</p>
 <p>可以根据待验证交易的hash 算得其处于哪两个交易节点之间，然后证明这两个交易节点是正确的，name该交易自然就是不存在的。</p>
+]]></content>
+      <categories>
+        <category>区块链</category>
+      </categories>
+      <tags>
+        <tag>区块链</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>区块链3-BTC实现</title>
+    <url>/posts/16476e6e/</url>
+    <content><![CDATA[<h2 id="transaction-based-ledger"><a href="#transaction-based-ledger" class="headerlink" title="transaction-based ledger"></a>transaction-based ledger</h2><blockquote>
+<p>比特币采用基于交易的账本模式，并不直接记录账户余额，每次交易都要说明币的来源 </p>
+</blockquote>
+<h3 id="UTXO"><a href="#UTXO" class="headerlink" title="UTXO"></a>UTXO</h3><p>全节点维护的数据结构（Unspent Transaction Output）</p>
+<p>所有没有被花出去的交易输出集合。</p>
+<p><img src="https://img.qylh.xyz/blog/utxo.png" loading="lazy"></p>
+<p>可以用于检测交易是否合法，即待交易的货币是否存在于该集合中。</p>
+<h3 id="transaction-fee"><a href="#transaction-fee" class="headerlink" title="transaction fee"></a>transaction fee</h3><blockquote>
+<p>为了提高全节点记账的积极性，每笔交易都要给予其一定的交易费</p>
+</blockquote>
+<p>当矿被挖完了之后，这仍然是一种激励机制</p>
+<h3 id="挖矿问题"><a href="#挖矿问题" class="headerlink" title="挖矿问题"></a>挖矿问题</h3><blockquote>
+<p>Bitcoin is secured by mining</p>
+</blockquote>
+<p>由于挖矿难度增加，很可能nonce（4字节，32位）找不到一个满足条件的，这时可以调整merkle tree的根哈希值？</p>
+<blockquote>
+<p>merkle tree中的铸币交易有一个被称为coinbase的区域可以写入任意内容，以影响根哈希值。也就是将coinbase的一部分作为extra nonce。</p>
+</blockquote>
+<h4 id="Bernoulli-trial"><a href="#Bernoulli-trial" class="headerlink" title="Bernoulli trial"></a>Bernoulli trial</h4><blockquote>
+<p>a random experiment with binary outcome</p>
+</blockquote>
+<p>无记忆性：memoryless</p>
+<h4 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a>Bernoulli process</h4><blockquote>
+<p>a sequence of independent bernoulli trials</p>
+</blockquote>
+<p>挖矿尝试次数很多，但每次概率很小可以用（Poison process）泊松过程来近似。</p>
+<p>可推导出出块时间服从指数分布。</p>
+<p>（progress free）将来还要挖多长时间与已经挖了多长时间是没有关系的。假如已经挖了10分钟了，没有挖出，那么平均还需要再挖10分钟才能挖出。这保证了不同算力挖矿机器的公平性，否则会导致高算力机器不成比例的挖矿成功概率上升。</p>
+<p>系统会一直调整让出块时间维持在十分钟左右，而对于每个矿工来说出块时间是根据其算力占该系统的比例来决定的。</p>
+<h3 id="比特币数量"><a href="#比特币数量" class="headerlink" title="比特币数量"></a>比特币数量</h3><p>出块奖励每隔四年（21万个区块）会减半</p>
+<p>比特币总量多少？</p>
+<p>21万*(50+25+12.5+6.25+….)&#x3D;2100万个比特币</p>
+<h3 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h3><blockquote>
+<p>假设大多数算力都是合法的</p>
+</blockquote>
+<p>恶意节点从概率上有可能获得记账权</p>
+<h4 id="伪造转账？"><a href="#伪造转账？" class="headerlink" title="伪造转账？"></a>伪造转账？</h4><p>不可行，因为其没有转账方的私钥。如果非要写的话，其他节点也不会接受，善意节点会沿着合法的区块继续延伸。非法区块被作废。</p>
+<h4 id="双重支付问题？"><a href="#双重支付问题？" class="headerlink" title="双重支付问题？"></a>双重支付问题？</h4><p>两种方式</p>
+<h5 id="将区块插在最后面？"><a href="#将区块插在最后面？" class="headerlink" title="将区块插在最后面？"></a>将区块插在最后面？</h5><p>其他节点不会承认</p>
+<h5 id="插在与第一次支付平行的位置"><a href="#插在与第一次支付平行的位置" class="headerlink" title="插在与第一次支付平行的位置"></a>插在与第一次支付平行的位置</h5><p><img src="https://img.qylh.xyz/blog/1656750639439.png" loading="lazy"></p>
+<p>若正常区块发生某种问题，造成回滚，则非法区块可能会取代正常区块。</p>
+<p>如何防范？</p>
+<p>多等几个确认（比特币默认需要等6个）才能认为其实正确且不可篡改的。也就是要等一个小时。这样非法节点取代正常区块的难度大大降低。</p>
+<h4 id="故意不写某些节点？"><a href="#故意不写某些节点？" class="headerlink" title="故意不写某些节点？"></a>故意不写某些节点？</h4><p>总有其他节点会把交易写到其他节点中去（其实比特币系统中每个区块大小是有限制的，实际上也有可能会写入之后的区块）</p>
+<h5 id="藏着发？"><a href="#藏着发？" class="headerlink" title="藏着发？"></a>藏着发？</h5><p>selfish mining</p>
+<p>挖到之后不发布，积攒一定长度之后再发布，使其长度长于现有链，以覆盖正常区块。</p>
+<p>但前提是有足够大的算力。</p>
 ]]></content>
       <categories>
         <category>区块链</category>
@@ -1006,138 +1064,339 @@ block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前�
       </tags>
   </entry>
   <entry>
-    <title>ip查询工具</title>
-    <url>/posts/eb46ecd9/</url>
-    <content><![CDATA[<p>实现两个功能：</p>
+    <title>二叉搜索树—BST</title>
+    <url>/posts/290cda51/</url>
+    <content><![CDATA[<p>二叉搜索树又称二叉排序树(Binary Search Tree)，简称BST。主要用于查找搜索。</p>
+<span id="more"></span>
+
+<p>如果理解起来有些抽象，可以尝试这个网站，可视化演示操作过程：<a href="https://visualgo.net/zh/bst">visualgo</a></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>二叉搜索树或者为空树或者满足如下条件：</p>
 <ol>
-<li>从服务器日志等文本中提取出IP</li>
-<li>调用接口获取IP位置<br>可根据实际需求自由选择<span id="more"></span></li>
+<li>若左子树非空，左子树全部节点小于根节点</li>
+<li>若右子树非空，右子树全部节点大于根节点</li>
+<li>左右子树均满足以上两点（递归定义的）</li>
 </ol>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li>python<ul>
-<li>re</li>
-<li>requests</li>
-<li>json</li>
-</ul>
-</li>
-<li>百度ip查询API</li>
-</ul>
-<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p><img src="https://img.qylh.xyz/blog/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%20(20).png" alt="程序流程图" loading="lazy"></p>
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><code>\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b</code></p>
-<h2 id="百度查询API"><a href="#百度查询API" class="headerlink" title="百度查询API"></a>百度查询API</h2><p><code>&quot;http://opendata.baidu.com/api.php?query=[ip]&amp;co=&amp;resource_id=6006&amp;oe=utf8&quot;</code></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>git地址：<a href="http://hdyb.hbu.cn/git/Mahaotian/IpSearch">http://hdyb.hbu.cn/git/Mahaotian/IpSearch</a></p>
-<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: UTF-8 -*-</span>
-<span class="token keyword">import</span> re
-<span class="token keyword">from</span> time <span class="token keyword">import</span> sleep
-<span class="token keyword">import</span> requests
-<span class="token keyword">import</span> json
-
-<span class="token comment"># 读取日志文件</span>
-
-
-<span class="token keyword">def</span> <span class="token function">readFile</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
-    text <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> text
-
-<span class="token comment"># 提取IP</span>
-
-
-<span class="token keyword">def</span> <span class="token function">extractIP</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    l <span class="token operator">=</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>
-        <span class="token string">r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span>
-    <span class="token comment"># 去重</span>
-    <span class="token keyword">return</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">set</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 获取定位</span>
-
-
-<span class="token keyword">def</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>ipList<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> item <span class="token keyword">in</span> ipList<span class="token punctuation">:</span>
-        url <span class="token operator">=</span> <span class="token string">"http://opendata.baidu.com/api.php?query="</span> <span class="token operator">+</span> \
-            item<span class="token operator">+</span><span class="token string">"&amp;co=&amp;resource_id=6006&amp;oe=utf8"</span>
-        response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> <span class="token string">": "</span><span class="token punctuation">,</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'location'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token comment"># 加个延时</span>
-        sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    text <span class="token operator">=</span> readFile<span class="token punctuation">(</span><span class="token string">"./file.txt"</span><span class="token punctuation">)</span>
-    ipList <span class="token operator">=</span> extractIP<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
-    getPosition<span class="token punctuation">(</span>ipList<span class="token punctuation">)</span>
-
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-
-
-]]></content>
-      <categories>
-        <category>开发经验</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>区块链3-BTC实现</title>
-    <url>/posts/16476e6e/</url>
-    <content><![CDATA[<h2 id="transaction-based-ledger"><a href="#transaction-based-ledger" class="headerlink" title="transaction-based ledger"></a>transaction-based ledger</h2><blockquote>
-<p>比特币采用基于交易的账本模式，并不直接记录账户余额，每次交易都要说明币的来源 </p>
-</blockquote>
-<h3 id="UTXO"><a href="#UTXO" class="headerlink" title="UTXO"></a>UTXO</h3><p>全节点维护的数据结构（Unspent Transaction Output）</p>
-<p>所有没有被花出去的交易输出集合。</p>
-<p><img src="https://img.qylh.xyz/blog/utxo.png" loading="lazy"></p>
-<p>可以用于检测交易是否合法，即待交易的货币是否存在于该集合中。</p>
-<h3 id="transaction-fee"><a href="#transaction-fee" class="headerlink" title="transaction fee"></a>transaction fee</h3><blockquote>
-<p>为了提高全节点记账的积极性，每笔交易都要给予其一定的交易费</p>
-</blockquote>
-<p>当矿被挖完了之后，这仍然是一种激励机制</p>
-<h3 id="挖矿问题"><a href="#挖矿问题" class="headerlink" title="挖矿问题"></a>挖矿问题</h3><blockquote>
-<p>Bitcoin is secured by mining</p>
-</blockquote>
-<p>由于挖矿难度增加，很可能nonce（4字节，32位）找不到一个满足条件的，这时可以调整merkle tree的根哈希值？</p>
+<p>二叉搜索树是没有重复元素的。</p>
+<p>优势在于查找和插入，时间复杂度可以达到O(logn)。</p>
+<p><img src="https://img.qylh.xyz/blog/1661671342883.png" loading="lazy"></p>
+<p>如上图即为一颗BST树。</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>如图为查找50的过程</p>
+<p><img src="https://img.qylh.xyz/blog/1661672587888.png" loading="lazy"></p>
 <blockquote>
-<p>merkle tree中的铸币交易有一个被称为coinbase的区域可以写入任意内容，以影响根哈希值。也就是将coinbase的一部分作为extra nonce。</p>
+<p>从根节点开始，若节点为NULL，否则比较根节点与搜索值的大小关系，如果相等则查找成功，如果小于根节点值则转到左子树上继续查找，同理若大于节点值则转到右节点上继续查找。</p>
 </blockquote>
-<h4 id="Bernoulli-trial"><a href="#Bernoulli-trial" class="headerlink" title="Bernoulli trial"></a>Bernoulli trial</h4><blockquote>
-<p>a random experiment with binary outcome</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> left<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> right<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>如图为插入8的过程：</p>
+<p><img src="https://img.qylh.xyz/blog/1661672518947.png" loading="lazy"></p>
+<blockquote>
+<p>插入的关键是找到插入的位置, 可以在查找的基础上改装成插入，即若查找成功代表插入值已存在于BST中无需再次插入，查找失败（找到了NULL），则该位置即为需要插入的位置。</p>
 </blockquote>
-<p>无记忆性：memoryless</p>
-<h4 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a>Bernoulli process</h4><blockquote>
-<p>a sequence of independent bernoulli trials</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            left<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            right<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            right<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>首先定义两个概念：</p>
+<blockquote>
+<p>前驱结点：节点val值小于该节点val值并且值最大的节点<br>后继节点：节点val值大于该节点val值并且值最小的节点</p>
 </blockquote>
-<p>挖矿尝试次数很多，但每次概率很小可以用（Poison process）泊松过程来近似。</p>
-<p>可推导出出块时间服从指数分布。</p>
-<p>（progress free）将来还要挖多长时间与已经挖了多长时间是没有关系的。假如已经挖了10分钟了，没有挖出，那么平均还需要再挖10分钟才能挖出。这保证了不同算力挖矿机器的公平性，否则会导致高算力机器不成比例的挖矿成功概率上升。</p>
-<p>系统会一直调整让出块时间维持在十分钟左右，而对于每个矿工来说出块时间是根据其算力占该系统的比例来决定的。</p>
-<h3 id="比特币数量"><a href="#比特币数量" class="headerlink" title="比特币数量"></a>比特币数量</h3><p>出块奖励每隔四年（21万个区块）会减半</p>
-<p>比特币总量多少？</p>
-<p>21万*(50+25+12.5+6.25+….)&#x3D;2100万个比特币</p>
-<h3 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h3><blockquote>
-<p>假设大多数算力都是合法的</p>
+<blockquote>
+<p>相比较而言删除操作较为复杂，需要考虑多种情况：</p>
 </blockquote>
-<p>恶意节点从概率上有可能获得记账权</p>
-<h4 id="伪造转账？"><a href="#伪造转账？" class="headerlink" title="伪造转账？"></a>伪造转账？</h4><p>不可行，因为其没有转账方的私钥。如果非要写的话，其他节点也不会接受，善意节点会沿着合法的区块继续延伸。非法区块被作废。</p>
-<h4 id="双重支付问题？"><a href="#双重支付问题？" class="headerlink" title="双重支付问题？"></a>双重支付问题？</h4><p>两种方式</p>
-<h5 id="将区块插在最后面？"><a href="#将区块插在最后面？" class="headerlink" title="将区块插在最后面？"></a>将区块插在最后面？</h5><p>其他节点不会承认</p>
-<h5 id="插在与第一次支付平行的位置"><a href="#插在与第一次支付平行的位置" class="headerlink" title="插在与第一次支付平行的位置"></a>插在与第一次支付平行的位置</h5><p><img src="https://img.qylh.xyz/blog/1656750639439.png" loading="lazy"></p>
-<p>若正常区块发生某种问题，造成回滚，则非法区块可能会取代正常区块。</p>
-<p>如何防范？</p>
-<p>多等几个确认（比特币默认需要等6个）才能认为其实正确且不可篡改的。也就是要等一个小时。这样非法节点取代正常区块的难度大大降低。</p>
-<h4 id="故意不写某些节点？"><a href="#故意不写某些节点？" class="headerlink" title="故意不写某些节点？"></a>故意不写某些节点？</h4><p>总有其他节点会把交易写到其他节点中去（其实比特币系统中每个区块大小是有限制的，实际上也有可能会写入之后的区块）</p>
-<h5 id="藏着发？"><a href="#藏着发？" class="headerlink" title="藏着发？"></a>藏着发？</h5><p>selfish mining</p>
-<p>挖到之后不发布，积攒一定长度之后再发布，使其长度长于现有链，以覆盖正常区块。</p>
-<p>但前提是有足够大的算力。</p>
+<p>假设待删除节点为d</p>
+<ol>
+<li>若d为叶节点，则直接删除即可。</li>
+<li>若节点只有左子树，则将左子树改为d父节点的子树。（右节点同理）</li>
+<li>若d有两棵子树,则让d的后继（或者前驱）节点x取代d的位置，并将原位置的x删除掉（此时会转换成1或2的情况）</li>
+</ol>
+<p>由于前两者情况较为简单，这里演示第三种情况：</p>
+<p>删除如图BST中值为7的节点：</p>
+<p><img src="https://img.qylh.xyz/blog/1661673121716.png" loading="lazy"></p>
+<p>首先查找到6：<br><img src="https://img.qylh.xyz/blog/1661673157065.png" loading="lazy"></p>
+<p>然后发现6的左右子树均非空，这里选择右子树，查找到后继节点8<br><img src="https://img.qylh.xyz/blog/1661673183449.png" loading="lazy"><br>用8替代7的位置<br><img src="https://img.qylh.xyz/blog/1661673223963.png" loading="lazy"><br>由于8节点为叶节点，因此直接删除。</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">
+<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        BSTNode <span class="token operator">*</span>temp <span class="token operator">=</span> left<span class="token operator">-></span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        value <span class="token operator">=</span> temp<span class="token operator">-></span>value<span class="token punctuation">;</span>
+        temp<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                right<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">BSTNode</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> value<span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>left<span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>right<span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>parent<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">BSTNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">findMin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findMin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    BSTNode <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>tmp<span class="token operator">-></span>left <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        tmp <span class="token operator">=</span> tmp<span class="token operator">-></span>left<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    BSTNode <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>tmp<span class="token operator">-></span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        tmp <span class="token operator">=</span> tmp<span class="token operator">-></span>right<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        BSTNode <span class="token operator">*</span>temp <span class="token operator">=</span> left<span class="token operator">-></span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        value <span class="token operator">=</span> temp<span class="token operator">-></span>value<span class="token punctuation">;</span>
+        temp<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                right<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">&#123;</span>
+                parent<span class="token operator">-></span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">BSTNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    value <span class="token operator">=</span> val<span class="token punctuation">;</span>
+    left <span class="token operator">=</span> right <span class="token operator">=</span> parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> left<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> right<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            left<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            right<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            right<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/**
+ * @brief
+ *
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">BST</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">BST</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">BST</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BSTNode <span class="token operator">*</span>root<span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> <span class="token function">del</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">BST</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">BST</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        root<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+BSTNode <span class="token operator">*</span><span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> root<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        root<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">bool</span> <span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">del</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    BSTNode <span class="token operator">*</span>findNode <span class="token operator">=</span> <span class="token function">find</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>findNode <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>findNode <span class="token operator">==</span> root<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>left <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> root<span class="token operator">-></span>right<span class="token punctuation">;</span>
+            root<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> root<span class="token operator">-></span>left<span class="token punctuation">;</span>
+            root<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            root<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        root<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建就是按顺序的插入过程</p>
+<p>参考文档<a href="https://www.imooc.com/article/13463">二叉搜索树BST在C++类中的实现（增删改查）【Van0512】</a></p>
 ]]></content>
-      <categories>
-        <category>区块链</category>
-      </categories>
       <tags>
-        <tag>区块链</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -2012,6 +2271,83 @@ block: bool &#x3D; False # 若为True当前插件执行完毕后会停止当前�
       </tags>
   </entry>
   <entry>
+    <title>ip查询工具</title>
+    <url>/posts/eb46ecd9/</url>
+    <content><![CDATA[<p>实现两个功能：</p>
+<ol>
+<li>从服务器日志等文本中提取出IP</li>
+<li>调用接口获取IP位置<br>可根据实际需求自由选择<span id="more"></span></li>
+</ol>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li>python<ul>
+<li>re</li>
+<li>requests</li>
+<li>json</li>
+</ul>
+</li>
+<li>百度ip查询API</li>
+</ul>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p><img src="https://img.qylh.xyz/blog/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%20(20).png" alt="程序流程图" loading="lazy"></p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><code>\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b</code></p>
+<h2 id="百度查询API"><a href="#百度查询API" class="headerlink" title="百度查询API"></a>百度查询API</h2><p><code>&quot;http://opendata.baidu.com/api.php?query=[ip]&amp;co=&amp;resource_id=6006&amp;oe=utf8&quot;</code></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>git地址：<a href="http://hdyb.hbu.cn/git/Mahaotian/IpSearch">http://hdyb.hbu.cn/git/Mahaotian/IpSearch</a></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: UTF-8 -*-</span>
+<span class="token keyword">import</span> re
+<span class="token keyword">from</span> time <span class="token keyword">import</span> sleep
+<span class="token keyword">import</span> requests
+<span class="token keyword">import</span> json
+
+<span class="token comment"># 读取日志文件</span>
+
+
+<span class="token keyword">def</span> <span class="token function">readFile</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
+    text <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> text
+
+<span class="token comment"># 提取IP</span>
+
+
+<span class="token keyword">def</span> <span class="token function">extractIP</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    l <span class="token operator">=</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>
+        <span class="token string">r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span>
+    <span class="token comment"># 去重</span>
+    <span class="token keyword">return</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">set</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 获取定位</span>
+
+
+<span class="token keyword">def</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>ipList<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> item <span class="token keyword">in</span> ipList<span class="token punctuation">:</span>
+        url <span class="token operator">=</span> <span class="token string">"http://opendata.baidu.com/api.php?query="</span> <span class="token operator">+</span> \
+            item<span class="token operator">+</span><span class="token string">"&amp;co=&amp;resource_id=6006&amp;oe=utf8"</span>
+        response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> <span class="token string">": "</span><span class="token punctuation">,</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'location'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token comment"># 加个延时</span>
+        sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    text <span class="token operator">=</span> readFile<span class="token punctuation">(</span><span class="token string">"./file.txt"</span><span class="token punctuation">)</span>
+    ipList <span class="token operator">=</span> extractIP<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+    getPosition<span class="token punctuation">(</span>ipList<span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+
+]]></content>
+      <categories>
+        <category>开发经验</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>matlab图像处理基础</title>
     <url>/posts/616f055e/</url>
     <content><![CDATA[<p>主要为matlab图像处理工具箱的基本使用</p>
@@ -2052,6 +2388,41 @@ impixelinfo<span class="token punctuation">;</span></code></pre>
       </categories>
       <tags>
         <tag>数字图像处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>各类数据可视化图应用场景</title>
+    <url>/posts/c90bae2/</url>
+    <content><![CDATA[<ol>
+<li><p>桑基图 用户路径</p>
+</li>
+<li><p>日历图 某段时间内每天的数据</p>
+</li>
+<li><p>层次型占比  嵌套饼图</p>
+</li>
+<li><p>面积图 所需数据涉及累计面积</p>
+</li>
+<li><p>箱型图 够通过5个数字来描述数据的分布的标准方式，这5个数字包括：最小值，第一分位，中位数，第三分位数，最大值，箱线图能够明确的展示离群点的信息，同时能够让我们了解数据是否对称，数据如何分组、数据的峰度；</p>
+</li>
+<li><p>热力图 可以理解为三维柱状图的俯视图</p>
+</li>
+<li><p>漏斗图  直接上图理解截图<br><img src="https://img.qylh.xyz/blog/bb679efd5640b354db792422352df23c.png" loading="lazy"></p>
+</li>
+<li><p>雷达图 多维度数据比较</p>
+</li>
+<li><p>象型柱状图 用logo取代传统的长条</p>
+</li>
+<li><p>旭日图不仅有饼图的优点，而且还能展示数据层级之间的关系，它通过矩形的面积、颜色和排列来显示数据关系，它超越了传统的饼图和环图，能在饼图上表示占比关系的基础上，增加表达了数据的层级和归属关系，能清晰的表达具有父子层次结构类型的数据。旭日图适合用于展示不同层级的数据。</p>
+</li>
+<li><p>词云图 用于分词统计等</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数据可视化</tag>
       </tags>
   </entry>
   <entry>
@@ -2102,41 +2473,6 @@ impixelinfo<span class="token punctuation">;</span></code></pre>
       </categories>
       <tags>
         <tag>数字图像处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>各类数据可视化图应用场景</title>
-    <url>/posts/c90bae2/</url>
-    <content><![CDATA[<ol>
-<li><p>桑基图 用户路径</p>
-</li>
-<li><p>日历图 某段时间内每天的数据</p>
-</li>
-<li><p>层次型占比  嵌套饼图</p>
-</li>
-<li><p>面积图 所需数据涉及累计面积</p>
-</li>
-<li><p>箱型图 够通过5个数字来描述数据的分布的标准方式，这5个数字包括：最小值，第一分位，中位数，第三分位数，最大值，箱线图能够明确的展示离群点的信息，同时能够让我们了解数据是否对称，数据如何分组、数据的峰度；</p>
-</li>
-<li><p>热力图 可以理解为三维柱状图的俯视图</p>
-</li>
-<li><p>漏斗图  直接上图理解截图<br><img src="https://img.qylh.xyz/blog/bb679efd5640b354db792422352df23c.png" loading="lazy"></p>
-</li>
-<li><p>雷达图 多维度数据比较</p>
-</li>
-<li><p>象型柱状图 用logo取代传统的长条</p>
-</li>
-<li><p>旭日图不仅有饼图的优点，而且还能展示数据层级之间的关系，它通过矩形的面积、颜色和排列来显示数据关系，它超越了传统的饼图和环图，能在饼图上表示占比关系的基础上，增加表达了数据的层级和归属关系，能清晰的表达具有父子层次结构类型的数据。旭日图适合用于展示不同层级的数据。</p>
-</li>
-<li><p>词云图 用于分词统计等</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数据可视化</tag>
       </tags>
   </entry>
   <entry>
@@ -2356,366 +2692,6 @@ n<span class="token operator">=</span><span class="token function">length</span>
       </tags>
   </entry>
   <entry>
-    <title>二叉搜索树—BST</title>
-    <url>/posts/290cda51/</url>
-    <content><![CDATA[<p>二叉搜索树又称二叉排序树(Binary Search Tree)，简称BST。主要用于查找搜索。</p>
-<span id="more"></span>
-
-<p>如果理解起来有些抽象，可以尝试这个网站，可视化演示操作过程：<a href="https://visualgo.net/zh/bst">visualgo</a></p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>二叉搜索树或者为空树或者满足如下条件：</p>
-<ol>
-<li>若左子树非空，左子树全部节点小于根节点</li>
-<li>若右子树非空，右子树全部节点大于根节点</li>
-<li>左右子树均满足以上两点（递归定义的）</li>
-</ol>
-<p>二叉搜索树是没有重复元素的。</p>
-<p>优势在于查找和插入，时间复杂度可以达到O(logn)。</p>
-<p><img src="https://img.qylh.xyz/blog/1661671342883.png" loading="lazy"></p>
-<p>如上图即为一颗BST树。</p>
-<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>如图为查找50的过程</p>
-<p><img src="https://img.qylh.xyz/blog/1661672587888.png" loading="lazy"></p>
-<blockquote>
-<p>从根节点开始，若节点为NULL，否则比较根节点与搜索值的大小关系，如果相等则查找成功，如果小于根节点值则转到左子树上继续查找，同理若大于节点值则转到右节点上继续查找。</p>
-</blockquote>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp">BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> value<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> left<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> right<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>如图为插入8的过程：</p>
-<p><img src="https://img.qylh.xyz/blog/1661672518947.png" loading="lazy"></p>
-<blockquote>
-<p>插入的关键是找到插入的位置, 可以在查找的基础上改装成插入，即若查找成功代表插入值已存在于BST中无需再次插入，查找失败（找到了NULL），则该位置即为需要插入的位置。</p>
-</blockquote>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            left<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-            left<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            right<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-            right<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>首先定义两个概念：</p>
-<blockquote>
-<p>前驱结点：节点val值小于该节点val值并且值最大的节点<br>后继节点：节点val值大于该节点val值并且值最小的节点</p>
-</blockquote>
-<blockquote>
-<p>相比较而言删除操作较为复杂，需要考虑多种情况：</p>
-</blockquote>
-<p>假设待删除节点为d</p>
-<ol>
-<li>若d为叶节点，则直接删除即可。</li>
-<li>若节点只有左子树，则将左子树改为d父节点的子树。（右节点同理）</li>
-<li>若d有两棵子树,则让d的后继（或者前驱）节点x取代d的位置，并将原位置的x删除掉（此时会转换成1或2的情况）</li>
-</ol>
-<p>由于前两者情况较为简单，这里演示第三种情况：</p>
-<p>删除如图BST中值为7的节点：</p>
-<p><img src="https://img.qylh.xyz/blog/1661673121716.png" loading="lazy"></p>
-<p>首先查找到6：<br><img src="https://img.qylh.xyz/blog/1661673157065.png" loading="lazy"></p>
-<p>然后发现6的左右子树均非空，这里选择右子树，查找到后继节点8<br><img src="https://img.qylh.xyz/blog/1661673183449.png" loading="lazy"><br>用8替代7的位置<br><img src="https://img.qylh.xyz/blog/1661673223963.png" loading="lazy"><br>由于8节点为叶节点，因此直接删除。</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp">
-<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        BSTNode <span class="token operator">*</span>temp <span class="token operator">=</span> left<span class="token operator">-></span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        value <span class="token operator">=</span> temp<span class="token operator">-></span>value<span class="token punctuation">;</span>
-        temp<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                right<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            left<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-
-<span class="token keyword">class</span> <span class="token class-name">BSTNode</span>
-<span class="token punctuation">&#123;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> value<span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span>left<span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span>right<span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span>parent<span class="token punctuation">;</span>
-
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">BSTNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span><span class="token function">findMin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findMin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    BSTNode <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>tmp<span class="token operator">-></span>left <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        tmp <span class="token operator">=</span> tmp<span class="token operator">-></span>left<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    BSTNode <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>tmp<span class="token operator">-></span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        tmp <span class="token operator">=</span> tmp<span class="token operator">-></span>right<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        BSTNode <span class="token operator">*</span>temp <span class="token operator">=</span> left<span class="token operator">-></span><span class="token function">findMax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        value <span class="token operator">=</span> temp<span class="token operator">-></span>value<span class="token punctuation">;</span>
-        temp<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                right<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> parent<span class="token operator">-></span>left<span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">&#123;</span>
-                parent<span class="token operator">-></span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            left<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">BSTNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    value <span class="token operator">=</span> val<span class="token punctuation">;</span>
-    left <span class="token operator">=</span> right <span class="token operator">=</span> parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-BSTNode <span class="token operator">*</span><span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">findNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> value<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> left<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> right<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">void</span> <span class="token class-name">BSTNode</span><span class="token double-colon punctuation">::</span><span class="token function">insertNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">&lt;</span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            left<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-            left<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">></span> value<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            right<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-            right<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">/**
- * @brief
- *
- */</span>
-<span class="token keyword">class</span> <span class="token class-name">BST</span>
-<span class="token punctuation">&#123;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">BST</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">BST</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    BSTNode <span class="token operator">*</span>root<span class="token punctuation">;</span>
-    <span class="token keyword">bool</span> <span class="token function">del</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">BST</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">BST</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> v<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        root<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-BSTNode <span class="token operator">*</span><span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span>
-        <span class="token keyword">return</span> root<span class="token operator">-></span><span class="token function">findNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">void</span> <span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">BSTNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span>
-    <span class="token punctuation">&#123;</span>
-        root<span class="token operator">-></span><span class="token function">insertNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">bool</span> <span class="token class-name">BST</span><span class="token double-colon punctuation">::</span><span class="token function">del</span><span class="token punctuation">(</span><span class="token keyword">int</span> val<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    BSTNode <span class="token operator">*</span>findNode <span class="token operator">=</span> <span class="token function">find</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>findNode <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>findNode <span class="token operator">==</span> root<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>left <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            root <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>left <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            root <span class="token operator">=</span> root<span class="token operator">-></span>right<span class="token punctuation">;</span>
-            root<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>right <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            root <span class="token operator">=</span> root<span class="token operator">-></span>left<span class="token punctuation">;</span>
-            root<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-            <span class="token keyword">delete</span> findNode<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">else</span>
-        <span class="token punctuation">&#123;</span>
-            root<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span>
-    <span class="token punctuation">&#123;</span>
-        root<span class="token operator">-></span><span class="token function">delNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建就是按顺序的插入过程</p>
-<p>参考文档<a href="https://www.imooc.com/article/13463">二叉搜索树BST在C++类中的实现（增删改查）【Van0512】</a></p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STM32+keil5环境配置踩坑</title>
-    <url>/posts/15850ddd/</url>
-    <content><![CDATA[<p>环境配置主要参考了<a href="https://blog.csdn.net/daniaoxp/article/details/100101149">海创电子的教程</a>,但应该是keil5新版本问题，配置过程中出现了很多问题，本文将进行一个总结</p>
-<span id="more"></span>
-
-<h2 id="C-环境的Define填写"><a href="#C-环境的Define填写" class="headerlink" title="C++环境的Define填写"></a>C++环境的Define填写</h2><p>只需要填写<code>USE_STDPERIPH_DRIVER</code>即可，否则会有大量报错出现，好像是由于新版本默认会给添加这个东西</p>
-<h2 id="程序烧录后不自动复位"><a href="#程序烧录后不自动复位" class="headerlink" title="程序烧录后不自动复位"></a>程序烧录后不自动复位</h2><p>需要改两个地方：</p>
-<ol>
-<li>依次点击options for target -&gt; debug -&gt; setting</li>
-<li>在flashdownload中将reset and run 勾选上</li>
-<li>在pack中将enable取消勾选</li>
-<li>保存即可</li>
-</ol>
-]]></content>
-      <categories>
-        <category>硬件</category>
-      </categories>
-      <tags>
-        <tag>硬件</tag>
-        <tag>STM32</tag>
-        <tag>keil5</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ESP32使用VLGL(arduino)</title>
     <url>/posts/4229dde3/</url>
     <content><![CDATA[<p>LVGL 为免费开源的图形库，用于在嵌入式设备的屏幕上创建 GUI，也适用于触摸屏</p>
@@ -2745,6 +2721,30 @@ BSTNode <span class="token operator">*</span><span class="token class-name">BST<
         <tag>Arduino</tag>
         <tag>ESP32</tag>
         <tag>VLGL图形库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32+keil5环境配置踩坑</title>
+    <url>/posts/15850ddd/</url>
+    <content><![CDATA[<p>环境配置主要参考了<a href="https://blog.csdn.net/daniaoxp/article/details/100101149">海创电子的教程</a>,但应该是keil5新版本问题，配置过程中出现了很多问题，本文将进行一个总结</p>
+<span id="more"></span>
+
+<h2 id="C-环境的Define填写"><a href="#C-环境的Define填写" class="headerlink" title="C++环境的Define填写"></a>C++环境的Define填写</h2><p>只需要填写<code>USE_STDPERIPH_DRIVER</code>即可，否则会有大量报错出现，好像是由于新版本默认会给添加这个东西</p>
+<h2 id="程序烧录后不自动复位"><a href="#程序烧录后不自动复位" class="headerlink" title="程序烧录后不自动复位"></a>程序烧录后不自动复位</h2><p>需要改两个地方：</p>
+<ol>
+<li>依次点击options for target -&gt; debug -&gt; setting</li>
+<li>在flashdownload中将reset and run 勾选上</li>
+<li>在pack中将enable取消勾选</li>
+<li>保存即可</li>
+</ol>
+]]></content>
+      <categories>
+        <category>硬件</category>
+      </categories>
+      <tags>
+        <tag>硬件</tag>
+        <tag>STM32</tag>
+        <tag>keil5</tag>
       </tags>
   </entry>
   <entry>
@@ -2975,121 +2975,6 @@ BSTNode <span class="token operator">*</span><span class="token class-name">BST<
       </tags>
   </entry>
   <entry>
-    <title>计组总线</title>
-    <url>/posts/2b9e0476/</url>
-    <content><![CDATA[<p>计组总线部分知识点</p>
-<span id="more"></span>
-
-<h2 id="什么是总线"><a href="#什么是总线" class="headerlink" title="什么是总线"></a>什么是总线</h2><blockquote>
-<p>用来将计算机系统中各个功能部件连接起来，构成一个完整的系统的计算机重要组成部分<br>是一种能由多个部件分时共享的公共信息传送线路。</p>
-</blockquote>
-<h2 id="总线的作用"><a href="#总线的作用" class="headerlink" title="总线的作用"></a>总线的作用</h2><blockquote>
-<ol>
-<li>是各功能部件间传递各类信息的通道；</li>
-<li>是系统中各部件间的物理接口，能够减少各部件通信的复杂程度；</li>
-<li>提供信息交换时所需的数据、地址、时序和控制信息；</li>
-<li>提供一个共同遵循的协议或标准；</li>
-<li>不应成为整个计算机性能的瓶颈；</li>
-<li>方便计算机系统的集成、扩展和进化。</li>
-</ol>
-</blockquote>
-<h2 id="总线传输的特点"><a href="#总线传输的特点" class="headerlink" title="总线传输的特点"></a>总线传输的特点</h2><blockquote>
-<p>某一时刻只允许有一个部件向总线发送信息，但多个部件可以同时从总线上接收相同的信息。</p>
-</blockquote>
-<h2 id="如何减轻总线负载"><a href="#如何减轻总线负载" class="headerlink" title="如何减轻总线负载"></a>如何减轻总线负载</h2><blockquote>
-<p>总线上的部件应通过三态驱动缓冲电路与总线连通。</p>
-</blockquote>
-<h2 id="总线仲裁的目的"><a href="#总线仲裁的目的" class="headerlink" title="总线仲裁的目的"></a>总线仲裁的目的</h2><blockquote>
-<p>可以解决多个部件同时申请总线时的使用权分配问题。</p>
-</blockquote>
-<h2 id="集中式总线控制方式"><a href="#集中式总线控制方式" class="headerlink" title="集中式总线控制方式"></a>集中式总线控制方式</h2><h3 id="菊花链式总线仲裁"><a href="#菊花链式总线仲裁" class="headerlink" title="菊花链式总线仲裁"></a>菊花链式总线仲裁</h3><blockquote>
-<p>连线简单，易于扩充，<code>对电路故障最敏感</code></p>
-</blockquote>
-<h3 id="计数器查询"><a href="#计数器查询" class="headerlink" title="计数器查询"></a>计数器查询</h3><blockquote>
-<p>优先级设置较灵活，对故障不敏感，连线及控制过程较复杂</p>
-</blockquote>
-<h3 id="独立请求"><a href="#独立请求" class="headerlink" title="独立请求"></a>独立请求</h3><blockquote>
-<p><code>判优速度最快</code>，但硬件器件用量大，连线多，成本较高。</p>
-</blockquote>
-<h2 id="总线宽度"><a href="#总线宽度" class="headerlink" title="总线宽度"></a>总线宽度</h2><blockquote>
-<p>总线宽度一般指CPU中运算器与存储器之间进行互连的内部总线二进制位数，影响吞吐量。数据总线的位数（w），单位是b（位）是微型计算机的一个重要指标，通常与处理器的字长相一致；</p>
-</blockquote>
-<h2 id="总线带宽"><a href="#总线带宽" class="headerlink" title="总线带宽"></a>总线带宽</h2><blockquote>
-<p>总线的带宽指的是这条总线在单位时间内可以传输的数据总量，它等于总线位宽与工作频率的乘积，总线带宽指的就是它的数据传输率。</p>
-</blockquote>
-<h2 id="总线复用"><a href="#总线复用" class="headerlink" title="总线复用"></a>总线复用</h2><blockquote>
-<p>总线复用指的是数据和地址在同一个总线上传输的方式。</p>
-</blockquote>
-<h2 id="总线的主从设备"><a href="#总线的主从设备" class="headerlink" title="总线的主从设备"></a>总线的主从设备</h2><h3 id="主设备"><a href="#主设备" class="headerlink" title="主设备"></a>主设备</h3><blockquote>
-<p>能够提出申请并获得总线控制权的设备</p>
-</blockquote>
-<h3 id="从设备"><a href="#从设备" class="headerlink" title="从设备"></a>从设备</h3><blockquote>
-<p>只能被动接受总线控制传送数据的设备。</p>
-</blockquote>
-<h2 id="总线周期"><a href="#总线周期" class="headerlink" title="总线周期"></a>总线周期</h2><blockquote>
-<p>是指通过总线完成一次内存读写或完成一次输入输出设备读写所需要的的必须时间</p>
-</blockquote>
-<h2 id="总线传输周期"><a href="#总线传输周期" class="headerlink" title="总线传输周期"></a>总线传输周期</h2><blockquote>
-<p>指主设备和从设备之间完成完整地可靠的通信所需要的时间包括四个步骤</p>
-</blockquote>
-<ul>
-<li>申请分配阶段：主模块申请占用总线的请求，总线运用判优控制仲裁决定</li>
-<li>寻址阶段：主模块向从模块给出地址和命令</li>
-<li>传数阶段：主模块和从模块交换数据</li>
-<li>结束阶段：主模块撤销有关消息</li>
-</ul>
-<h2 id="总线的通信控制"><a href="#总线的通信控制" class="headerlink" title="总线的通信控制"></a>总线的通信控制</h2><blockquote>
-<p>解决主、从设备如何获知传输开始和传输结束，以及通信双方如何协调进行数据通信。</p>
-</blockquote>
-<h2 id="同步通信和异步通信（总线）"><a href="#同步通信和异步通信（总线）" class="headerlink" title="同步通信和异步通信（总线）"></a>同步通信和异步通信（总线）</h2><h3 id="同步通信"><a href="#同步通信" class="headerlink" title="同步通信"></a>同步通信</h3><blockquote>
-<p>信息传送由公共时钟控制，总线中包含时钟线</p>
-</blockquote>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>时序关系简单，实现简单。</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
-<li>在设备速度不一致时按最坏情况确定，</li>
-<li>传输线不能太长（时钟相移）</li>
-</ul>
-<h3 id="异步通信"><a href="#异步通信" class="headerlink" title="异步通信"></a>异步通信</h3><blockquote>
-<p>信息传送的每一个操作都是由主设备或从设备特定信号的跳变所确定，总线上每一个事件的发生取决于前一个事件的发生</p>
-</blockquote>
-<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
-<li>数据传输可靠，适用于传输周期不同的设备，</li>
-<li>对通讯线的长度没有严格的要求。</li>
-</ul>
-<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>速度较慢</p>
-<h3 id="半同步"><a href="#半同步" class="headerlink" title="半同步"></a>半同步</h3><blockquote>
-<p>总线上各操作之间的时间间隔可以变化，但仅允许为公共时钟周期的整数倍。信号的出现、采样和结束仍以公共时钟为基准。</p>
-</blockquote>
-<h2 id="为什么说半同步通信保留了同步和异步两者的特点"><a href="#为什么说半同步通信保留了同步和异步两者的特点" class="headerlink" title="为什么说半同步通信保留了同步和异步两者的特点"></a>为什么说半同步通信保留了同步和异步两者的特点</h2><blockquote>
-<p>半同步通信既能像同步通信那样由统一时钟控制，又能像异步通信那样允许传输时间不一致。</p>
-</blockquote>
-<h2 id="总线标准"><a href="#总线标准" class="headerlink" title="总线标准"></a>总线标准</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
-<p>计算机系统的各部件之间利用总线进行信息传输时应遵守的协议和规范，包括硬件和软件两个方面。</p>
-</blockquote>
-<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><blockquote>
-<p>计算机系统中各类模块品种及其复杂，往往一种模块要配一种总线，很难在总线上更换、组合各类模块和设备，解决设备之间总线复杂，传输速度慢等一系列问题。</p>
-</blockquote>
-<h3 id="常见总线标准"><a href="#常见总线标准" class="headerlink" title="常见总线标准"></a>常见总线标准</h3><ul>
-<li>ISA（Industrial Standard Architecture）</li>
-<li>EISA（Extended Industry Standard Architecture）</li>
-<li>VESA（Video Electronics Standard Association)</li>
-<li>PCI 分时复用，即插即用</li>
-<li>AGP（Accelerated Graphics Port）（PCI发展而来）</li>
-<li>PCIe（Peripheral Component Interconnect Express）</li>
-<li>USB</li>
-</ul>
-<h3 id="即插即用"><a href="#即插即用" class="headerlink" title="即插即用"></a>即插即用</h3><blockquote>
-<p>是指当板卡插入系统时，系统会自动对板卡所需资源进行分配，如基地址、中断号等，并自动寻找相应的驱动程序；而不象旧的ISA板卡，需要进行复杂的手动配置。<br>如 PCI，USB</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>硬件</category>
-      </categories>
-      <tags>
-        <tag>计算机组成原理与体系结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>超标量总结</title>
     <url>/posts/e3ead1b2/</url>
     <content><![CDATA[<h2 id="五级流水"><a href="#五级流水" class="headerlink" title="五级流水"></a>五级流水</h2><p>五级流水阶段:</p>
@@ -3130,35 +3015,6 @@ BSTNode <span class="token operator">*</span><span class="token class-name">BST<
         <tag>龙芯杯</tag>
         <tag>多级流水</tag>
         <tag>双发射</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计组复习</title>
-    <url>/posts/e868b80e/</url>
-    <content><![CDATA[<h2 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h2><h3 id="冯诺依曼机"><a href="#冯诺依曼机" class="headerlink" title="冯诺依曼机"></a>冯诺依曼机</h3><ol>
-<li>计算机由运算器、存储器、控制器、输入设备、输出设备五部分组成</li>
-<li>存储程序思想：指令和数据都存储在存储器中，可以按照地址访问</li>
-<li>指令和数据均以二进制表示。</li>
-<li>以运算器为核心（<strong>注意现代计算机的核心为存储</strong>）</li>
-</ol>
-<h3 id="计算机系统层次结构"><a href="#计算机系统层次结构" class="headerlink" title="计算机系统层次结构"></a>计算机系统层次结构</h3><ol>
-<li>第1级：微程序机器级。微指令由硬件直接执行。</li>
-<li>第2级：传统机器级(机器语言)。用微程序解释指令系统。</li>
-<li>第3级：操作系统级。用机器语言解释作业控制语句；</li>
-<li>第4级：汇编语言机器级。用汇编程序翻译成汇编语言程序；</li>
-<li>第5级：高级语言机器级。用编译程序翻译成汇编程序或直接翻译成机器语言。</li>
-</ol>
-<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p><img src="https://img.qylh.xyz/blog/36a26ed04a544d549a409fae8afee3be.png" loading="lazy"></p>
-<ul>
-<li>缓存-主存 主要缓解速度差异</li>
-<li>主存-辅存 主要解决存储容量问题</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机组成原理</category>
-      </categories>
-      <tags>
-        <tag>计算机组成原理</tag>
       </tags>
   </entry>
   <entry>
@@ -3327,6 +3183,121 @@ BSTNode <span class="token operator">*</span><span class="token class-name">BST<
       <tags>
         <tag>算法</tag>
         <tag>CSP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计组总线</title>
+    <url>/posts/2b9e0476/</url>
+    <content><![CDATA[<p>计组总线部分知识点</p>
+<span id="more"></span>
+
+<h2 id="什么是总线"><a href="#什么是总线" class="headerlink" title="什么是总线"></a>什么是总线</h2><blockquote>
+<p>用来将计算机系统中各个功能部件连接起来，构成一个完整的系统的计算机重要组成部分<br>是一种能由多个部件分时共享的公共信息传送线路。</p>
+</blockquote>
+<h2 id="总线的作用"><a href="#总线的作用" class="headerlink" title="总线的作用"></a>总线的作用</h2><blockquote>
+<ol>
+<li>是各功能部件间传递各类信息的通道；</li>
+<li>是系统中各部件间的物理接口，能够减少各部件通信的复杂程度；</li>
+<li>提供信息交换时所需的数据、地址、时序和控制信息；</li>
+<li>提供一个共同遵循的协议或标准；</li>
+<li>不应成为整个计算机性能的瓶颈；</li>
+<li>方便计算机系统的集成、扩展和进化。</li>
+</ol>
+</blockquote>
+<h2 id="总线传输的特点"><a href="#总线传输的特点" class="headerlink" title="总线传输的特点"></a>总线传输的特点</h2><blockquote>
+<p>某一时刻只允许有一个部件向总线发送信息，但多个部件可以同时从总线上接收相同的信息。</p>
+</blockquote>
+<h2 id="如何减轻总线负载"><a href="#如何减轻总线负载" class="headerlink" title="如何减轻总线负载"></a>如何减轻总线负载</h2><blockquote>
+<p>总线上的部件应通过三态驱动缓冲电路与总线连通。</p>
+</blockquote>
+<h2 id="总线仲裁的目的"><a href="#总线仲裁的目的" class="headerlink" title="总线仲裁的目的"></a>总线仲裁的目的</h2><blockquote>
+<p>可以解决多个部件同时申请总线时的使用权分配问题。</p>
+</blockquote>
+<h2 id="集中式总线控制方式"><a href="#集中式总线控制方式" class="headerlink" title="集中式总线控制方式"></a>集中式总线控制方式</h2><h3 id="菊花链式总线仲裁"><a href="#菊花链式总线仲裁" class="headerlink" title="菊花链式总线仲裁"></a>菊花链式总线仲裁</h3><blockquote>
+<p>连线简单，易于扩充，<code>对电路故障最敏感</code></p>
+</blockquote>
+<h3 id="计数器查询"><a href="#计数器查询" class="headerlink" title="计数器查询"></a>计数器查询</h3><blockquote>
+<p>优先级设置较灵活，对故障不敏感，连线及控制过程较复杂</p>
+</blockquote>
+<h3 id="独立请求"><a href="#独立请求" class="headerlink" title="独立请求"></a>独立请求</h3><blockquote>
+<p><code>判优速度最快</code>，但硬件器件用量大，连线多，成本较高。</p>
+</blockquote>
+<h2 id="总线宽度"><a href="#总线宽度" class="headerlink" title="总线宽度"></a>总线宽度</h2><blockquote>
+<p>总线宽度一般指CPU中运算器与存储器之间进行互连的内部总线二进制位数，影响吞吐量。数据总线的位数（w），单位是b（位）是微型计算机的一个重要指标，通常与处理器的字长相一致；</p>
+</blockquote>
+<h2 id="总线带宽"><a href="#总线带宽" class="headerlink" title="总线带宽"></a>总线带宽</h2><blockquote>
+<p>总线的带宽指的是这条总线在单位时间内可以传输的数据总量，它等于总线位宽与工作频率的乘积，总线带宽指的就是它的数据传输率。</p>
+</blockquote>
+<h2 id="总线复用"><a href="#总线复用" class="headerlink" title="总线复用"></a>总线复用</h2><blockquote>
+<p>总线复用指的是数据和地址在同一个总线上传输的方式。</p>
+</blockquote>
+<h2 id="总线的主从设备"><a href="#总线的主从设备" class="headerlink" title="总线的主从设备"></a>总线的主从设备</h2><h3 id="主设备"><a href="#主设备" class="headerlink" title="主设备"></a>主设备</h3><blockquote>
+<p>能够提出申请并获得总线控制权的设备</p>
+</blockquote>
+<h3 id="从设备"><a href="#从设备" class="headerlink" title="从设备"></a>从设备</h3><blockquote>
+<p>只能被动接受总线控制传送数据的设备。</p>
+</blockquote>
+<h2 id="总线周期"><a href="#总线周期" class="headerlink" title="总线周期"></a>总线周期</h2><blockquote>
+<p>是指通过总线完成一次内存读写或完成一次输入输出设备读写所需要的的必须时间</p>
+</blockquote>
+<h2 id="总线传输周期"><a href="#总线传输周期" class="headerlink" title="总线传输周期"></a>总线传输周期</h2><blockquote>
+<p>指主设备和从设备之间完成完整地可靠的通信所需要的时间包括四个步骤</p>
+</blockquote>
+<ul>
+<li>申请分配阶段：主模块申请占用总线的请求，总线运用判优控制仲裁决定</li>
+<li>寻址阶段：主模块向从模块给出地址和命令</li>
+<li>传数阶段：主模块和从模块交换数据</li>
+<li>结束阶段：主模块撤销有关消息</li>
+</ul>
+<h2 id="总线的通信控制"><a href="#总线的通信控制" class="headerlink" title="总线的通信控制"></a>总线的通信控制</h2><blockquote>
+<p>解决主、从设备如何获知传输开始和传输结束，以及通信双方如何协调进行数据通信。</p>
+</blockquote>
+<h2 id="同步通信和异步通信（总线）"><a href="#同步通信和异步通信（总线）" class="headerlink" title="同步通信和异步通信（总线）"></a>同步通信和异步通信（总线）</h2><h3 id="同步通信"><a href="#同步通信" class="headerlink" title="同步通信"></a>同步通信</h3><blockquote>
+<p>信息传送由公共时钟控制，总线中包含时钟线</p>
+</blockquote>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>时序关系简单，实现简单。</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>在设备速度不一致时按最坏情况确定，</li>
+<li>传输线不能太长（时钟相移）</li>
+</ul>
+<h3 id="异步通信"><a href="#异步通信" class="headerlink" title="异步通信"></a>异步通信</h3><blockquote>
+<p>信息传送的每一个操作都是由主设备或从设备特定信号的跳变所确定，总线上每一个事件的发生取决于前一个事件的发生</p>
+</blockquote>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>数据传输可靠，适用于传输周期不同的设备，</li>
+<li>对通讯线的长度没有严格的要求。</li>
+</ul>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>速度较慢</p>
+<h3 id="半同步"><a href="#半同步" class="headerlink" title="半同步"></a>半同步</h3><blockquote>
+<p>总线上各操作之间的时间间隔可以变化，但仅允许为公共时钟周期的整数倍。信号的出现、采样和结束仍以公共时钟为基准。</p>
+</blockquote>
+<h2 id="为什么说半同步通信保留了同步和异步两者的特点"><a href="#为什么说半同步通信保留了同步和异步两者的特点" class="headerlink" title="为什么说半同步通信保留了同步和异步两者的特点"></a>为什么说半同步通信保留了同步和异步两者的特点</h2><blockquote>
+<p>半同步通信既能像同步通信那样由统一时钟控制，又能像异步通信那样允许传输时间不一致。</p>
+</blockquote>
+<h2 id="总线标准"><a href="#总线标准" class="headerlink" title="总线标准"></a>总线标准</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
+<p>计算机系统的各部件之间利用总线进行信息传输时应遵守的协议和规范，包括硬件和软件两个方面。</p>
+</blockquote>
+<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><blockquote>
+<p>计算机系统中各类模块品种及其复杂，往往一种模块要配一种总线，很难在总线上更换、组合各类模块和设备，解决设备之间总线复杂，传输速度慢等一系列问题。</p>
+</blockquote>
+<h3 id="常见总线标准"><a href="#常见总线标准" class="headerlink" title="常见总线标准"></a>常见总线标准</h3><ul>
+<li>ISA（Industrial Standard Architecture）</li>
+<li>EISA（Extended Industry Standard Architecture）</li>
+<li>VESA（Video Electronics Standard Association)</li>
+<li>PCI 分时复用，即插即用</li>
+<li>AGP（Accelerated Graphics Port）（PCI发展而来）</li>
+<li>PCIe（Peripheral Component Interconnect Express）</li>
+<li>USB</li>
+</ul>
+<h3 id="即插即用"><a href="#即插即用" class="headerlink" title="即插即用"></a>即插即用</h3><blockquote>
+<p>是指当板卡插入系统时，系统会自动对板卡所需资源进行分配，如基地址、中断号等，并自动寻找相应的驱动程序；而不象旧的ISA板卡，需要进行复杂的手动配置。<br>如 PCI，USB</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>硬件</category>
+      </categories>
+      <tags>
+        <tag>计算机组成原理与体系结构</tag>
       </tags>
   </entry>
   <entry>
@@ -3527,6 +3498,74 @@ BSTNode <span class="token operator">*</span><span class="token class-name">BST<
       </tags>
   </entry>
   <entry>
+    <title>PAT甲级REcover the Smallest Number</title>
+    <url>/posts/undefined/</url>
+    <content><![CDATA[<h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.</p>
+</blockquote>
+<h3 id="输入要求"><a href="#输入要求" class="headerlink" title="输入要求"></a>输入要求</h3><blockquote>
+<p>Each input file contains one test case. Each case gives a positive integer <strong>N</strong> (<strong>≤</strong>1<strong>0</strong>4) followed by <strong>N</strong> number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.</p>
+</blockquote>
+<h3 id="输出要求"><a href="#输出要求" class="headerlink" title="输出要求"></a>输出要求</h3><blockquote>
+<p>each test case, print the smallest number in one line. Notice that the first digit must not be zero.</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
+<p>题意很简单，就是给定一个数字段，给他拼成一个最小的数。很容易想到贪心算法，但是贪的是什么？</p>
+<p>首先想到按从小到大的顺序输出不就好了嘛，但是仔细想想不是这样的比如321&gt;32但是321放前面才是正确的为什么呢？可以这样想假设我们下一个待选的只有a和b两个，两者是不是你在前我在后就是我在后你在前的关系，那么他们后面的数字位数一定是相同的即总位数-前面的位数-a的位数-b的位数，所以从a开始算两种选择的数字大小如下：</p>
+<ol>
+<li>a在前  ab*10^n</li>
+<li>b在前 ba*10^n</li>
+</ol>
+<p>这样就很容易看出了，决定a和b谁在前面的方法就是比较ab以及ba的大小。</p>
+<p>这里可能产生一个疑问，我在每一个位置的选择可不止两种啊，这么多个该怎么比较呢？</p>
+<p>有一个巧妙地方法就是借助sort 自己实现一个cmp规则，这样排出的一定符合规则！可以尝试证明一下：</p>
+<p>我们假设排完之后的顺序是 a b c d e f…………</p>
+<p>使用反证法：如果该顺序不是最优解，那么一定需要通过置换变成最优解，假设我们换了a和c 那么前面从 abc变成了cba（即cba&lt;abc） 而bc&lt;cb  bca&lt;cba  ab&lt;ba  bca&lt;cba&lt;cab同理 一直推到 bca&lt;cba&lt;cab&lt;acb&lt;abc; 两者相悖，所以我们的贪心策略能够得到最优解！</p>
+<p>注意输出没有前导零，还有一个测试点需要注意就是结果为0时还要输出0（也就是说不能单纯的不输出前面的0)</p>
+</blockquote>
+<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">bool</span> <span class="token function">cmp</span><span class="token punctuation">(</span>string a<span class="token punctuation">,</span> string b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">&lt;</span> b <span class="token operator">+</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+    string s<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    string result<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cin <span class="token operator">>></span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> s <span class="token operator">+</span> n<span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        result <span class="token operator">+=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'0'</span> <span class="token operator">||</span> <span class="token operator">!</span>flag<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>PAT</tag>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PAT甲级Maximum Subsequence Sum</title>
     <url>/posts/e1589103/</url>
     <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h3><blockquote>
@@ -3597,74 +3636,6 @@ int main()
         <tag>算法</tag>
         <tag>PAT</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PAT甲级REcover the Smallest Number</title>
-    <url>/posts/undefined/</url>
-    <content><![CDATA[<h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote>
-<p>Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.</p>
-</blockquote>
-<h3 id="输入要求"><a href="#输入要求" class="headerlink" title="输入要求"></a>输入要求</h3><blockquote>
-<p>Each input file contains one test case. Each case gives a positive integer <strong>N</strong> (<strong>≤</strong>1<strong>0</strong>4) followed by <strong>N</strong> number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.</p>
-</blockquote>
-<h3 id="输出要求"><a href="#输出要求" class="headerlink" title="输出要求"></a>输出要求</h3><blockquote>
-<p>each test case, print the smallest number in one line. Notice that the first digit must not be zero.</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
-<p>题意很简单，就是给定一个数字段，给他拼成一个最小的数。很容易想到贪心算法，但是贪的是什么？</p>
-<p>首先想到按从小到大的顺序输出不就好了嘛，但是仔细想想不是这样的比如321&gt;32但是321放前面才是正确的为什么呢？可以这样想假设我们下一个待选的只有a和b两个，两者是不是你在前我在后就是我在后你在前的关系，那么他们后面的数字位数一定是相同的即总位数-前面的位数-a的位数-b的位数，所以从a开始算两种选择的数字大小如下：</p>
-<ol>
-<li>a在前  ab*10^n</li>
-<li>b在前 ba*10^n</li>
-</ol>
-<p>这样就很容易看出了，决定a和b谁在前面的方法就是比较ab以及ba的大小。</p>
-<p>这里可能产生一个疑问，我在每一个位置的选择可不止两种啊，这么多个该怎么比较呢？</p>
-<p>有一个巧妙地方法就是借助sort 自己实现一个cmp规则，这样排出的一定符合规则！可以尝试证明一下：</p>
-<p>我们假设排完之后的顺序是 a b c d e f…………</p>
-<p>使用反证法：如果该顺序不是最优解，那么一定需要通过置换变成最优解，假设我们换了a和c 那么前面从 abc变成了cba（即cba&lt;abc） 而bc&lt;cb  bca&lt;cba  ab&lt;ba  bca&lt;cba&lt;cab同理 一直推到 bca&lt;cba&lt;cab&lt;acb&lt;abc; 两者相悖，所以我们的贪心策略能够得到最优解！</p>
-<p>注意输出没有前导零，还有一个测试点需要注意就是结果为0时还要输出0（也就是说不能单纯的不输出前面的0)</p>
-</blockquote>
-<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">bool</span> <span class="token function">cmp</span><span class="token punctuation">(</span>string a<span class="token punctuation">,</span> string b<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">&lt;</span> b <span class="token operator">+</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
-    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
-    string s<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    string result<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        cin <span class="token operator">>></span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> s <span class="token operator">+</span> n<span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        result <span class="token operator">+=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'0'</span> <span class="token operator">||</span> <span class="token operator">!</span>flag<span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    cout <span class="token operator">&lt;&lt;</span> result<span class="token punctuation">[</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>PAT</tag>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -4233,6 +4204,35 @@ string <span class="token function">preProcess</span><span class="token punctuat
       </tags>
   </entry>
   <entry>
+    <title>计组复习</title>
+    <url>/posts/e868b80e/</url>
+    <content><![CDATA[<h2 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h2><h3 id="冯诺依曼机"><a href="#冯诺依曼机" class="headerlink" title="冯诺依曼机"></a>冯诺依曼机</h3><ol>
+<li>计算机由运算器、存储器、控制器、输入设备、输出设备五部分组成</li>
+<li>存储程序思想：指令和数据都存储在存储器中，可以按照地址访问</li>
+<li>指令和数据均以二进制表示。</li>
+<li>以运算器为核心（<strong>注意现代计算机的核心为存储</strong>）</li>
+</ol>
+<h3 id="计算机系统层次结构"><a href="#计算机系统层次结构" class="headerlink" title="计算机系统层次结构"></a>计算机系统层次结构</h3><ol>
+<li>第1级：微程序机器级。微指令由硬件直接执行。</li>
+<li>第2级：传统机器级(机器语言)。用微程序解释指令系统。</li>
+<li>第3级：操作系统级。用机器语言解释作业控制语句；</li>
+<li>第4级：汇编语言机器级。用汇编程序翻译成汇编语言程序；</li>
+<li>第5级：高级语言机器级。用编译程序翻译成汇编程序或直接翻译成机器语言。</li>
+</ol>
+<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p><img src="https://img.qylh.xyz/blog/36a26ed04a544d549a409fae8afee3be.png" loading="lazy"></p>
+<ul>
+<li>缓存-主存 主要缓解速度差异</li>
+<li>主存-辅存 主要解决存储容量问题</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机组成原理</category>
+      </categories>
+      <tags>
+        <tag>计算机组成原理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HBU计网复习整理</title>
     <url>/posts/59d0a2d6/</url>
     <content><![CDATA[<p>计算机网络知识点个人总结，仅供参考，请勿过分解读</p>
@@ -4626,41 +4626,6 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
       </tags>
   </entry>
   <entry>
-    <title>跨源资源共享CORS</title>
-    <url>/posts/299e0af6/</url>
-    <content><![CDATA[<p>跨源资源共享 (CORS)（或通俗地译为跨域资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其它 origin（域，协议和端口），使得浏览器允许这些 origin 访问加载自己的资源。</p>
-<span id="more"></span>
-
-<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><blockquote>
-<p>运行在 <a href="https://domain-a.com/">https://domain-a.com</a> 的 JavaScript 代码使用 XMLHttpRequest 来发起一个到 <a href="https://domain-b.com/data.json">https://domain-b.com/data.json</a> 的请求。出于安全性，浏览器限制脚本内发起的跨源HTTP请求,这就返回了CORS错误。</p>
-</blockquote>
-<p><img src="http://img.qylh.xyz/blog/1650890683308.png" alt="示意图" loading="lazy"></p>
-<p>跨源域资源共享（CORS）机制允许 Web 应用服务器进行跨源访问控制，从而使跨源数据传输得以安全进行。</p>
-<p>有些请求（非简单请求）会出发CORS预检，浏览器使用OPTIONS方法发起，获得此服务端是否允许该跨源请求，服务器确认允许后才发送实际的HTTP请求。</p>
-<h2 id="如何应对跨域问题"><a href="#如何应对跨域问题" class="headerlink" title="如何应对跨域问题"></a>如何应对跨域问题</h2><h3 id="后端解决"><a href="#后端解决" class="headerlink" title="后端解决"></a>后端解决</h3><p>注：待实践后完善</p>
-<p>利用预检获知服务端对跨源请求支持的HTTP方法。再以实际的HTTP请求方法发送那个真正的请求</p>
-<p>优点：</p>
-<ol>
-<li>前端方便</li>
-<li>一劳永逸</li>
-<li>开发环境和正式环境都可以使用</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>后端稍麻烦</li>
-</ol>
-<h3 id="前端解决"><a href="#前端解决" class="headerlink" title="前端解决"></a>前端解决</h3><p>开发环境使用webpack的proxy解决，正式环境使用Nginx反向代理</p>
-<p>参考资料</p>
-<p><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/cors.html#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98">vue-element-admin 文档</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">MDN</a></p>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>WEB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>人月神话读书笔记</title>
     <url>/posts/f5cf8999/</url>
     <content><![CDATA[<h3 id="焦油坑"><a href="#焦油坑" class="headerlink" title="焦油坑"></a>焦油坑</h3><blockquote>
@@ -4725,42 +4690,38 @@ custom_domains &#x3D; 自己的域名</code></pre></li>
       </tags>
   </entry>
   <entry>
-    <title>设计模式的目的</title>
-    <url>/posts/56fec824/</url>
-    <content><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>为了让软件具有更好的<code>重用性</code>、<code>可读性</code>、<code>可扩展性</code>、<code>可靠性</code>（更改功能后，对原有功能几乎没印象）、<code>低耦合，高内聚</code>（模块间关联性低，内部关联性强）</p>
-<h2 id="需要遵守的七大原则"><a href="#需要遵守的七大原则" class="headerlink" title="需要遵守的七大原则"></a>需要遵守的七大原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>一个类只负责一项职责，或者在方法上遵守上述原则</p>
-<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>客户端不应该以来它不需要的接口，即一个类对另一个类的以来应该建立在最小的接口上</p>
-<h3 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h3><ol>
-<li>高层模块不应该依赖底层模块，二者都应该依赖其抽象</li>
-<li>抽象不应该以来细节，细节应该以来抽象</li>
-<li>中心思想是面向接口编程</li>
-<li>相对于细节的多变性，抽象的东西要稳定得多</li>
-<li>java中抽象值得是接口或者抽象类，细节就是值具体的实现类</li>
-<li>是有接口或者抽象类的目的是<code>制定好规范</code>,在于设计</li>
+    <title>跨源资源共享CORS</title>
+    <url>/posts/299e0af6/</url>
+    <content><![CDATA[<p>跨源资源共享 (CORS)（或通俗地译为跨域资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其它 origin（域，协议和端口），使得浏览器允许这些 origin 访问加载自己的资源。</p>
+<span id="more"></span>
+
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><blockquote>
+<p>运行在 <a href="https://domain-a.com/">https://domain-a.com</a> 的 JavaScript 代码使用 XMLHttpRequest 来发起一个到 <a href="https://domain-b.com/data.json">https://domain-b.com/data.json</a> 的请求。出于安全性，浏览器限制脚本内发起的跨源HTTP请求,这就返回了CORS错误。</p>
+</blockquote>
+<p><img src="http://img.qylh.xyz/blog/1650890683308.png" alt="示意图" loading="lazy"></p>
+<p>跨源域资源共享（CORS）机制允许 Web 应用服务器进行跨源访问控制，从而使跨源数据传输得以安全进行。</p>
+<p>有些请求（非简单请求）会出发CORS预检，浏览器使用OPTIONS方法发起，获得此服务端是否允许该跨源请求，服务器确认允许后才发送实际的HTTP请求。</p>
+<h2 id="如何应对跨域问题"><a href="#如何应对跨域问题" class="headerlink" title="如何应对跨域问题"></a>如何应对跨域问题</h2><h3 id="后端解决"><a href="#后端解决" class="headerlink" title="后端解决"></a>后端解决</h3><p>注：待实践后完善</p>
+<p>利用预检获知服务端对跨源请求支持的HTTP方法。再以实际的HTTP请求方法发送那个真正的请求</p>
+<p>优点：</p>
+<ol>
+<li>前端方便</li>
+<li>一劳永逸</li>
+<li>开发环境和正式环境都可以使用</li>
 </ol>
-<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><ol>
-<li>集成包含的一个含义：父类中凡是已经实现好的方法，实际上是在设定规范和契约（虽然子类不一定遵守）</li>
-<li>一个类被其他类所继承，如果该类的方法需要改变，必须考虑到其他所有子类是否会受到影响。</li>
+<p>缺点：</p>
+<ol>
+<li>后端稍麻烦</li>
 </ol>
-<p>要求：<br>尽量不要重写父类的方法</p>
-<h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><ol>
-<li>模块和函数应该对扩展开放（对提供方而言），对修改关闭（对使用放而言）。</li>
-<li>软件需要变化时，尽量通过扩展软件实体来实现，而不是通过修改已有的代码来实现的。</li>
-<li>其他原则的目的就是遵循开闭原则</li>
-</ol>
-<h3 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h3><ol>
-<li>一个对象应该对其他对象保持最少的了解</li>
-<li>类之间的关系越密切，耦合度越大</li>
-<li>对于被依赖的类不管多么复杂，都应该尽量将逻辑封装在类的内部。对外除了提供public方法外不泄露任何信息。</li>
-<li>陌生的类最好不要以局部变量的形式出现在方法中</li>
-</ol>
-<h3 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h3><p>尽量使用依赖&#x2F;合成&#x2F;聚合的方式，而不是使用继承</p>
+<h3 id="前端解决"><a href="#前端解决" class="headerlink" title="前端解决"></a>前端解决</h3><p>开发环境使用webpack的proxy解决，正式环境使用Nginx反向代理</p>
+<p>参考资料</p>
+<p><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/cors.html#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98">vue-element-admin 文档</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">MDN</a></p>
 ]]></content>
       <categories>
-        <category>软件工程</category>
+        <category>计算机网络</category>
       </categories>
       <tags>
-        <tag>设计模式</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -4882,6 +4843,45 @@ void fun2()
       </categories>
       <tags>
         <tag>软件工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式的目的</title>
+    <url>/posts/56fec824/</url>
+    <content><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>为了让软件具有更好的<code>重用性</code>、<code>可读性</code>、<code>可扩展性</code>、<code>可靠性</code>（更改功能后，对原有功能几乎没印象）、<code>低耦合，高内聚</code>（模块间关联性低，内部关联性强）</p>
+<h2 id="需要遵守的七大原则"><a href="#需要遵守的七大原则" class="headerlink" title="需要遵守的七大原则"></a>需要遵守的七大原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>一个类只负责一项职责，或者在方法上遵守上述原则</p>
+<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>客户端不应该以来它不需要的接口，即一个类对另一个类的以来应该建立在最小的接口上</p>
+<h3 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h3><ol>
+<li>高层模块不应该依赖底层模块，二者都应该依赖其抽象</li>
+<li>抽象不应该以来细节，细节应该以来抽象</li>
+<li>中心思想是面向接口编程</li>
+<li>相对于细节的多变性，抽象的东西要稳定得多</li>
+<li>java中抽象值得是接口或者抽象类，细节就是值具体的实现类</li>
+<li>是有接口或者抽象类的目的是<code>制定好规范</code>,在于设计</li>
+</ol>
+<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><ol>
+<li>集成包含的一个含义：父类中凡是已经实现好的方法，实际上是在设定规范和契约（虽然子类不一定遵守）</li>
+<li>一个类被其他类所继承，如果该类的方法需要改变，必须考虑到其他所有子类是否会受到影响。</li>
+</ol>
+<p>要求：<br>尽量不要重写父类的方法</p>
+<h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><ol>
+<li>模块和函数应该对扩展开放（对提供方而言），对修改关闭（对使用放而言）。</li>
+<li>软件需要变化时，尽量通过扩展软件实体来实现，而不是通过修改已有的代码来实现的。</li>
+<li>其他原则的目的就是遵循开闭原则</li>
+</ol>
+<h3 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h3><ol>
+<li>一个对象应该对其他对象保持最少的了解</li>
+<li>类之间的关系越密切，耦合度越大</li>
+<li>对于被依赖的类不管多么复杂，都应该尽量将逻辑封装在类的内部。对外除了提供public方法外不泄露任何信息。</li>
+<li>陌生的类最好不要以局部变量的形式出现在方法中</li>
+</ol>
+<h3 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h3><p>尽量使用依赖&#x2F;合成&#x2F;聚合的方式，而不是使用继承</p>
+]]></content>
+      <categories>
+        <category>软件工程</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
       </tags>
   </entry>
   <entry>
@@ -5037,62 +5037,6 @@ void fun2()
       </tags>
   </entry>
   <entry>
-    <title>软件工程总结_2 可行性研究</title>
-    <url>/posts/d3012a97/</url>
-    <content><![CDATA[<h2 id="可行性研究"><a href="#可行性研究" class="headerlink" title="可行性研究"></a>可行性研究</h2><details>
-  <summary>可行性研究的目的</summary>
-用最小的代价在尽可能短的时间内确定问题是否能够并且值得解决
-</details>
-
-<details>
-  <summary>可行性研究的根本任务</summary>
-对以后的行动方针提出建议
-</details>
-
-<h3 id="可行性研究的三个组成："><a href="#可行性研究的三个组成：" class="headerlink" title="可行性研究的三个组成："></a>可行性研究的三个组成：</h3><ol>
-<li>技术可行性 现有技术能否实现</li>
-<li>经济可行性 经济效益能否超过开发成本</li>
-<li>操作可行性 系统的操作方式在用户组织内行的通吗<br>此外还应在法律、社会、管理等其他方面分析</li>
-</ol>
-<h3 id="可行性研究的过程"><a href="#可行性研究的过程" class="headerlink" title="可行性研究的过程"></a>可行性研究的过程</h3><ol>
-<li>复查系统规模和目标</li>
-<li>研究目前正在使用的系统</li>
-<li>导出新系统的高层逻辑模型</li>
-<li>进一步定义问题</li>
-<li>导出并评价共选择的方案</li>
-<li>推荐行动方针</li>
-<li>草拟开发计划</li>
-<li>书写文档提交审查</li>
-</ol>
-<h3 id="系统流程图"><a href="#系统流程图" class="headerlink" title="系统流程图"></a>系统流程图</h3><blockquote>
-<p>是概括描述<em>物理系统</em>的传统工具,表达数据在系统各部件之间流动的情况</p>
-</blockquote>
-<blockquote>
-<p>用于分析现有系统！！！</p>
-</blockquote>
-<p><img src="https://img.qylh.xyz/blog/1653186497818.png" loading="lazy"></p>
-<p>复杂系统时应该分层画</p>
-<h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3><blockquote>
-<p>数据流图描绘系统的逻辑模型，无具体的物理元素，值描绘信息在系统中流动处理的情况</p>
-</blockquote>
-<p><img src="https://img.qylh.xyz/blog/1653186643064.png" loading="lazy"></p>
-<p><img src="https://img.qylh.xyz/blog/1653186702057.png" loading="lazy"></p>
-<h3 id="成本效益分析"><a href="#成本效益分析" class="headerlink" title="成本效益分析"></a>成本效益分析</h3><h4 id="成本估计"><a href="#成本估计" class="headerlink" title="成本估计"></a>成本估计</h4><h5 id="代码行技术"><a href="#代码行技术" class="headerlink" title="代码行技术"></a>代码行技术</h5><blockquote>
-<p>2Xf2E6aEU7n685eHEbXGYHrmWn2y7a62UWBrtZzodVdD</p>
-</blockquote>
-<h5 id="任务分解技术"><a href="#任务分解技术" class="headerlink" title="任务分解技术"></a>任务分解技术</h5><blockquote>
-<p>将软件开发工程分解成若干个相对独立的任务，分别估算，累加得到总成本</p>
-</blockquote>
-<h5 id="开发成本估计技术"><a href="#开发成本估计技术" class="headerlink" title="开发成本估计技术"></a>开发成本估计技术</h5><blockquote>
-<p>需要软件和数据的支撑</p>
-</blockquote>
-<h3 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h3><p><img src="https://img.qylh.xyz/blog/1653187770938.png" loading="lazy"></p>
-]]></content>
-      <tags>
-        <tag>软件工程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>软件工程总结_3 需求分析</title>
     <url>/posts/281be91d/</url>
     <content><![CDATA[<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><blockquote>
@@ -5178,29 +5122,60 @@ void fun2()
       </tags>
   </entry>
   <entry>
-    <title>软件工程调研报告</title>
-    <url>/posts/54f61860/</url>
-    <content><![CDATA[<p>软件工程课小组作业——软件与编程语言调研报告计划实施方案</p>
-<span id="more"></span>
-<h2 id="软件与编程语言"><a href="#软件与编程语言" class="headerlink" title="软件与编程语言"></a>软件与编程语言</h2><blockquote>
-<p>目前已经有超过700种的编程语言，50种比较流行的。TIOBE编程语言排行榜</p>
-<p><a href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a>  编程社区指数</p>
-</blockquote>
-<h3 id="查找文献"><a href="#查找文献" class="headerlink" title="查找文献"></a>查找文献</h3><p>[1]丁建邦,张美娜,李政蓬.计算机应用软件开发中编程语言的选择[J].计算机产品与流通,2020(10):64.</p>
-<p>[1]戈健.计算机应用软件开发过程中不同编程语言的影响[J].现代工业经济和信息化,2019,9(02):94-95.DOI:10.16525&#x2F;j.cnki.14-1362&#x2F;n.2019.02.39.</p>
-<p>DEFINING AND MEASURING THE PRODUCTIVITY OF PROGRAMMING<br>LANGUAGES (定义和衡量编程语言的生产力)</p>
-<p>On the Impact of Programming Languages on Code Quality:<br>A Reproduction Study （编程语言对代码质量的影响）</p>
-<p>An Empirical Comparison of Seven Programming Languages(针对同一个需求分别用七种语言进行编码，比较了代码量，代码质量，内存占用，执行速度等)</p>
-<p>Popularity, Interoperability, and Impact of Programming Languages<br>in 100,000 Open Source Projects（通过对github开源项目的分析解决以下三个问题 1. 使用的编程语言与项目成功之间是否存在相关性？2. 使用的编程语言与问题报告的数量之间有什么关联？3. 编程语言如何与开发团队的规模相关联）</p>
-<br/>
+    <title>软件工程总结_2 可行性研究</title>
+    <url>/posts/d3012a97/</url>
+    <content><![CDATA[<h2 id="可行性研究"><a href="#可行性研究" class="headerlink" title="可行性研究"></a>可行性研究</h2><details>
+  <summary>可行性研究的目的</summary>
+用最小的代价在尽可能短的时间内确定问题是否能够并且值得解决
+</details>
 
-<h3 id="做什么"><a href="#做什么" class="headerlink" title="做什么"></a>做什么</h3><ol>
-<li>从几个指标分析编程语言如编写效率 ，代码质量，代码安全性，性能等特性。</li>
-<li>不同软件类型和团队规模下如何选择编程语言。</li>
-<li>目前就业环境下开发语言岗位需求情况</li>
-<li>根据编程语言排行榜的历史变化，分析造成变动的原因</li>
+<details>
+  <summary>可行性研究的根本任务</summary>
+对以后的行动方针提出建议
+</details>
+
+<h3 id="可行性研究的三个组成："><a href="#可行性研究的三个组成：" class="headerlink" title="可行性研究的三个组成："></a>可行性研究的三个组成：</h3><ol>
+<li>技术可行性 现有技术能否实现</li>
+<li>经济可行性 经济效益能否超过开发成本</li>
+<li>操作可行性 系统的操作方式在用户组织内行的通吗<br>此外还应在法律、社会、管理等其他方面分析</li>
 </ol>
+<h3 id="可行性研究的过程"><a href="#可行性研究的过程" class="headerlink" title="可行性研究的过程"></a>可行性研究的过程</h3><ol>
+<li>复查系统规模和目标</li>
+<li>研究目前正在使用的系统</li>
+<li>导出新系统的高层逻辑模型</li>
+<li>进一步定义问题</li>
+<li>导出并评价共选择的方案</li>
+<li>推荐行动方针</li>
+<li>草拟开发计划</li>
+<li>书写文档提交审查</li>
+</ol>
+<h3 id="系统流程图"><a href="#系统流程图" class="headerlink" title="系统流程图"></a>系统流程图</h3><blockquote>
+<p>是概括描述<em>物理系统</em>的传统工具,表达数据在系统各部件之间流动的情况</p>
+</blockquote>
+<blockquote>
+<p>用于分析现有系统！！！</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1653186497818.png" loading="lazy"></p>
+<p>复杂系统时应该分层画</p>
+<h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3><blockquote>
+<p>数据流图描绘系统的逻辑模型，无具体的物理元素，值描绘信息在系统中流动处理的情况</p>
+</blockquote>
+<p><img src="https://img.qylh.xyz/blog/1653186643064.png" loading="lazy"></p>
+<p><img src="https://img.qylh.xyz/blog/1653186702057.png" loading="lazy"></p>
+<h3 id="成本效益分析"><a href="#成本效益分析" class="headerlink" title="成本效益分析"></a>成本效益分析</h3><h4 id="成本估计"><a href="#成本估计" class="headerlink" title="成本估计"></a>成本估计</h4><h5 id="代码行技术"><a href="#代码行技术" class="headerlink" title="代码行技术"></a>代码行技术</h5><blockquote>
+<p>2Xf2E6aEU7n685eHEbXGYHrmWn2y7a62UWBrtZzodVdD</p>
+</blockquote>
+<h5 id="任务分解技术"><a href="#任务分解技术" class="headerlink" title="任务分解技术"></a>任务分解技术</h5><blockquote>
+<p>将软件开发工程分解成若干个相对独立的任务，分别估算，累加得到总成本</p>
+</blockquote>
+<h5 id="开发成本估计技术"><a href="#开发成本估计技术" class="headerlink" title="开发成本估计技术"></a>开发成本估计技术</h5><blockquote>
+<p>需要软件和数据的支撑</p>
+</blockquote>
+<h3 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h3><p><img src="https://img.qylh.xyz/blog/1653187770938.png" loading="lazy"></p>
 ]]></content>
+      <tags>
+        <tag>软件工程</tag>
+      </tags>
   </entry>
   <entry>
     <title>软件工程总结_4 总体设计</title>
@@ -5290,5 +5265,30 @@ void fun2()
       <tags>
         <tag>软件工程</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>软件工程调研报告</title>
+    <url>/posts/54f61860/</url>
+    <content><![CDATA[<p>软件工程课小组作业——软件与编程语言调研报告计划实施方案</p>
+<span id="more"></span>
+<h2 id="软件与编程语言"><a href="#软件与编程语言" class="headerlink" title="软件与编程语言"></a>软件与编程语言</h2><blockquote>
+<p>目前已经有超过700种的编程语言，50种比较流行的。TIOBE编程语言排行榜</p>
+<p><a href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a>  编程社区指数</p>
+</blockquote>
+<h3 id="查找文献"><a href="#查找文献" class="headerlink" title="查找文献"></a>查找文献</h3><p>[1]丁建邦,张美娜,李政蓬.计算机应用软件开发中编程语言的选择[J].计算机产品与流通,2020(10):64.</p>
+<p>[1]戈健.计算机应用软件开发过程中不同编程语言的影响[J].现代工业经济和信息化,2019,9(02):94-95.DOI:10.16525&#x2F;j.cnki.14-1362&#x2F;n.2019.02.39.</p>
+<p>DEFINING AND MEASURING THE PRODUCTIVITY OF PROGRAMMING<br>LANGUAGES (定义和衡量编程语言的生产力)</p>
+<p>On the Impact of Programming Languages on Code Quality:<br>A Reproduction Study （编程语言对代码质量的影响）</p>
+<p>An Empirical Comparison of Seven Programming Languages(针对同一个需求分别用七种语言进行编码，比较了代码量，代码质量，内存占用，执行速度等)</p>
+<p>Popularity, Interoperability, and Impact of Programming Languages<br>in 100,000 Open Source Projects（通过对github开源项目的分析解决以下三个问题 1. 使用的编程语言与项目成功之间是否存在相关性？2. 使用的编程语言与问题报告的数量之间有什么关联？3. 编程语言如何与开发团队的规模相关联）</p>
+<br/>
+
+<h3 id="做什么"><a href="#做什么" class="headerlink" title="做什么"></a>做什么</h3><ol>
+<li>从几个指标分析编程语言如编写效率 ，代码质量，代码安全性，性能等特性。</li>
+<li>不同软件类型和团队规模下如何选择编程语言。</li>
+<li>目前就业环境下开发语言岗位需求情况</li>
+<li>根据编程语言排行榜的历史变化，分析造成变动的原因</li>
+</ol>
+]]></content>
   </entry>
 </search>
